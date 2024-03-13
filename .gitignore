@@ -1,0 +1,15 @@
+logs/
+output/
+.vscode/
+coverage.txt
+.DS_Store
+*.log
+*.out
+*.txt
+*.gok
+*.key
+*.enc
+*.sss
+UTC--*
+*/build/
+go.sum
