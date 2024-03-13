@@ -6,8 +6,8 @@ import (
 )
 
 type EventWithdraw struct {
-	Owner  common.Address `json:"_owner"`
-	Token  common.Address `json:"_token"`
-	Amount *big.Int       `json:"_amount"`
-	Meca   *big.Int       `json:"_meca"`
+	Owner  common.Address
+	Token  common.Address
+	Amount *big.Int
+	Meca   *big.Int
 }
