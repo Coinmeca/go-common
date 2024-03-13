@@ -11,3 +11,10 @@ type EventWithdraw struct {
 	Amount *big.Int
 	Meca   *big.Int
 }
+
+type EventDeposit struct {
+	Owner  common.Address
+	Token  common.Address
+	Amount *big.Int
+	Meca   *big.Int
+}
