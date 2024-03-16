@@ -9,6 +9,26 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+type OutputGetAll struct {
+	Key      bool           `abi:"key"`
+	Address  common.Address `abi:"addr"`
+	Name     string         `abi:"name"`
+	Symbol   string         `abi:"symbol"`
+	Decimals uint8          `abi:"decimals"`
+	Treasury *big.Int       `abi:"treasury"`
+	Rate     *big.Int       `abi:"rate"`
+	Weight   *big.Int       `abi:"weight"`
+	Need     *big.Int       `abi:"need"`
+}
+
+//// Assuming this function is supposed to fill a slice of OutputGetAll from packed ABI data
+//func UnmarshalTuple(data []byte, contractAbi abi.ABI, methodName string, output interface{}) error {
+//	if method, exists := contractAbi.Methods[methodName]; exists {
+//		return method.Outputs.UnpackIntoInterface(output, data)
+//	}
+//	return fmt.Errorf("method %s not found in ABI", methodName)
+//}
+
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
 	methodAbi, ok := contractAbi.Methods[method]
 	if !ok {
