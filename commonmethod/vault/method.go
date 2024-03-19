@@ -2,12 +2,38 @@ package vault
 
 import (
 	"fmt"
-	"math/big"
-	"reflect"
-
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
+	"math/big"
+	"reflect"
+	"strings"
 )
+
+const (
+	MethodGetAll       = "getAll"
+	MethodGetKeyTokens = "getKeyTokens"
+)
+
+const (
+	TradeTypeDeposit = iota
+	TradeTypeWithdraw
+)
+
+type TokenInfo struct {
+	Key      bool           `abi:"key"`
+	Address  common.Address `abi:"addr"`
+	Name     string         `abi:"name"`
+	Symbol   string         `abi:"symbol"`
+	Decimals uint8          `abi:"decimals"`
+	Treasury *big.Int       `abi:"treasury"`
+	Rate     *big.Int       `abi:"rate"`
+	Weight   *big.Int       `abi:"weight"`
+	Need     *big.Int       `abi:"need"`
+}
+
+type OutputGetAll struct {
+	Tokens []TokenInfo `abi:""`
+}
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
 	methodAbi, ok := contractAbi.Methods[method]
@@ -32,6 +58,127 @@ func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method str
 		if err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func UnmarshalV3(abiData *abi.ABI, methodName string, data []byte, output interface{}) error {
+	method, exists := abiData.Methods[methodName]
+	if !exists {
+		return fmt.Errorf("%s method not found in ABI", methodName)
+	}
+
+	rawOutput, err := method.Outputs.Unpack(data)
+	if err != nil {
+		return fmt.Errorf("failed to unpack output: %v", err)
+	}
+
+	fmt.Printf("Raw output: %+v\n", rawOutput)
+
+	val := reflect.ValueOf(output).Elem()
+	if len(rawOutput) != val.NumField() {
+		return fmt.Errorf("field count mismatch:expected %d, got %d", val.NumField(), len(rawOutput))
+	}
+
+	for i, rawVal := range rawOutput {
+		field := val.Field(i)
+		if !field.CanSet() {
+			continue
+		}
+
+		fieldValue := reflect.ValueOf(rawVal)
+		if field.Type() != fieldValue.Type() {
+			return fmt.Errorf("type mismatch for field %d: expected %s, got %s", i, field.Type(), fieldValue.Type())
+		}
+
+		field.Set(fieldValue)
+	}
+
+	return nil
+}
+func UnmarshalABI(contractABI *abi.ABI, methodName string, data []byte, output interface{}) error {
+	method, exists := contractABI.Methods[methodName]
+	if !exists {
+		return fmt.Errorf("method %s not found in ABI", methodName)
+	}
+
+	unpackedData, err := method.Outputs.Unpack(data)
+	if err != nil {
+		return fmt.Errorf("unpacking data failed: %v", err)
+	}
+
+	if err := mapToStruct(method.Outputs, unpackedData, output); err != nil {
+		return fmt.Errorf("mapping unpacked data to struct failed: %v", err)
+	}
+
+	return nil
+}
+
+func mapToStruct(outputs abi.Arguments, unpackedData []interface{}, output interface{}) error {
+	val := reflect.ValueOf(output).Elem()
+	if !val.IsValid() {
+		return fmt.Errorf("invalid output interface")
+	}
+
+	for i, arg := range outputs {
+		fieldName := strings.Title(arg.Name)
+		structField := val.FieldByName(fieldName)
+		if !structField.IsValid() {
+			fmt.Printf("Field %s not found in output struct\n", fieldName)
+			continue
+		}
+
+		fmt.Printf("Mapping field: %s, Value: %v\n", fieldName, unpackedData[i])
+		err := setField(structField, unpackedData[i])
+		if err != nil {
+			return fmt.Errorf("setting field %s failed: %v", fieldName, err)
+		}
+	}
+	return nil
+}
+
+func setField(field reflect.Value, value interface{}) error {
+	if !field.CanSet() {
+		return fmt.Errorf("cannot set field: %v", field.Type())
+	}
+
+	fieldValue := reflect.ValueOf(value)
+	if fieldValue.Type().AssignableTo(field.Type()) {
+		field.Set(fieldValue)
+	} else if fieldValue.Type().ConvertibleTo(field.Type()) {
+		field.Set(fieldValue.Convert(field.Type()))
+	} else {
+		return fmt.Errorf("type mismatch: cannot convert or assign %v to %v", fieldValue.Type(), field.Type())
+	}
+
+	return nil
+}
+
+func UnmarshalV2(data []byte, contractAbi *abi.ABI, methodName string, output interface{}) error {
+	method, exists := contractAbi.Methods[methodName]
+	if !exists {
+		return fmt.Errorf("%s method not found", methodName)
+	}
+
+	values, err := method.Outputs.Unpack(data)
+	if err != nil {
+		return err
+	}
+
+	outputValue := reflect.ValueOf(output).Elem()
+	if len(values) != outputValue.NumField() {
+		return fmt.Errorf("expected %d values, got %d", outputValue.NumField(), len(values))
+	}
+
+	for i, value := range values {
+		fieldValue := outputValue.Field(i)
+
+		if !fieldValue.Type().AssignableTo(reflect.TypeOf(value)) {
+			return fmt.Errorf("type mismatch for field %d", i)
+		}
+
+		fieldValue.Set(reflect.ValueOf(value))
 	}
 
 	return nil
