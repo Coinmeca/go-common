@@ -44,3 +44,14 @@ type GrpcTxData struct {
 	Input       string `json:"input"`
 	Cate        string `json:"cate"`
 }
+
+type BatchInfo struct {
+	Id              primitive.ObjectID `json:"id" bson:"_id"`
+	BatchId         int                `json:"batchId" bson:"batchId"`
+	Term            string             `json:"term" bson:"term"`
+	Cate            string             `json:"cate" bson:"cate"`
+	Title           string             `json:"title" bson:"title"`
+	ContractAddress string             `json:"contractAddress" bson:"contractAddress"`
+	Chain           string             `json:"chain" bson:"chain"`
+	Description     string             `json:"description" bson:"description"`
+}

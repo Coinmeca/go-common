@@ -20,15 +20,16 @@ const (
 )
 
 type TokenInfo struct {
-	Key      bool           `abi:"key"`
-	Address  common.Address `abi:"addr"`
-	Name     string         `abi:"name"`
-	Symbol   string         `abi:"symbol"`
-	Decimals uint8          `abi:"decimals"`
-	Treasury *big.Int       `abi:"treasury"`
-	Rate     *big.Int       `abi:"rate"`
-	Weight   *big.Int       `abi:"weight"`
-	Need     *big.Int       `abi:"need"`
+	Key      bool           `abi:"key" bson:"key"`
+	Address  common.Address `abi:"addr" bson:"address"`
+	Name     string         `abi:"name" bson:"name"`
+	Symbol   string         `abi:"symbol" bson:"symbol"`
+	Decimals uint8          `abi:"decimals" bson:"decimals"`
+	Locked   *big.Int       `abi:"locked" bson:"locked"`
+	Exchange *big.Int       `abi:"exchange" bson:"exchange"`
+	Rate     *big.Int       `abi:"rate" bson:"rate"`
+	Weight   *big.Int       `abi:"weight" bson:"weight"`
+	Need     *big.Int       `abi:"need" bson:"need"`
 }
 
 type OutputGetAll struct {
