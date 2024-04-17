@@ -9,6 +9,19 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+const (
+	MethodGetBids    = "getBids"
+	MethodGetAsks	 = "getAsks"
+)
+
+const (
+	TradeTypeSell = iota
+	TradeTypeBuy
+	TradeTypeBid
+	TradeTypeAsk
+
+)
+
 type OutputCheckAccess struct {
 	Check bool `abi:""`
 }
