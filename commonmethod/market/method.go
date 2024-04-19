@@ -10,8 +10,7 @@ import (
 )
 
 const (
-	MethodGetBids    = "getBids"
-	MethodGetAsks	 = "getAsks"
+	MethodGetOrderbook = "getOrderbook"
 )
 
 const (
@@ -21,6 +20,21 @@ const (
 	TradeTypeAsk
 
 )
+
+type Orderbook struct {
+	Asks []struct {
+		Price   *big.Int `abi:"price" bson:"price"`
+		Balance *big.Int `abi:"balance" bson:"balance"`
+	} `abi:"asks" bson:"asks"`
+	Bids []struct {
+		Price   *big.Int `abi:"price" bson:"price"`
+		Balance *big.Int `abi:"balance" bson:"balance"`
+	} `abi:"bids" bson:"bids"`
+}
+
+type OutputOrderbook struct {
+	Orderbook Orderbook `abi:""`
+}
 
 type OutputCheckAccess struct {
 	Check bool `abi:""`
