@@ -48,3 +48,25 @@ type EventClaim struct {
 	Buy  		common.Address
 	Quantity	*big.Int
 }
+
+type EventLong struct {
+	Owner  		common.Address
+	Pay			common.Address
+	Price  		*big.Int
+	Size 		*big.Int
+	Leverage	*big.Int
+	Threshold	*big.Int
+	Item  		common.Address
+	Quantity	*big.Int
+}
+
+type EventShort struct {
+	Owner  		common.Address
+	Pay			common.Address
+	Price  		*big.Int
+	Size 		*big.Int
+	Leverage	*big.Int
+	Threshold	*big.Int
+	Item  		common.Address
+	Quantity	*big.Int
+}
