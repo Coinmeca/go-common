@@ -67,6 +67,34 @@ type EventShort struct {
 	Size 		*big.Int
 	Leverage	*big.Int
 	Threshold	*big.Int
-	Item  		common.Address
-	Quantity	*big.Int
+}
+
+type EventOpen struct {
+	Category	*big.Int
+	Owner  		common.Address
+	Pay			common.Address
+	Price  		*big.Int
+	Size 		*big.Int
+	Leverage	*big.Int
+	Threshold	*big.Int
+}
+
+type EventClose struct {
+	Category	*big.Int
+	Owner  		common.Address
+	Pay			common.Address
+	Price  		*big.Int
+	Size 		*big.Int
+	Leverage	*big.Int
+	Threshold	*big.Int
+}
+
+type EventLiquidation struct {
+	Category	*big.Int
+	Owner  		common.Address
+	Pay			common.Address
+	Price  		*big.Int
+	Size 		*big.Int
+	Leverage	*big.Int
+	Threshold	*big.Int
 }
