@@ -18,7 +18,8 @@ const (
 	TradeTypeBuy
 	TradeTypeBid
 	TradeTypeAsk
-
+	TradeTypeLong
+	TradeTypeShort
 )
 
 type Orderbook struct {
