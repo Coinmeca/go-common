@@ -39,3 +39,12 @@ type EventBid struct {
 	Price  		*big.Int
 	Buy  		common.Address
 }
+
+type EventClaim struct {
+	Owner  		common.Address
+	Sell		common.Address
+	Amount 		*big.Int
+	Price  		*big.Int
+	Buy  		common.Address
+	Quantity	*big.Int
+}
