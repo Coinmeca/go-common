@@ -26,6 +26,17 @@ type Recent struct {
 }
 
 type Tick struct {
-	Price  		string  `json:"symbol" bson:"symbol"`
+	Price  		string  `json:"price" bson:"price"`
 	Amount  	string  `json:"amount" bson:"amount"`
+}
+
+type ChartInfo struct {
+	From	string	`json:"from" bson:"from"`
+	Sell	string	`json:"sell" bson:"sell"`
+	Buy		string	`json:"buy" bson:"buy"`
+	Time	string	`json:"time" bson:"time"`
+	Open	string	`json:"open" bson:"open"`
+	High	string	`json:"high" bson:"high"`
+	Low		string	`json:"low" bson:"low"`
+	Close	string	`json:"close" bson:"close"`
 }
