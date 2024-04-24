@@ -11,6 +11,7 @@ import (
 
 const (
 	MethodGetOrderbook = "getOrderbook"
+	MethodGetInfo = "getInfo"
 )
 
 const (
@@ -29,6 +30,19 @@ type Orderbook struct {
 		Price   *big.Int `abi:"price" bson:"price"`
 		Balance *big.Int `abi:"balance" bson:"balance"`
 	} `abi:"bids" bson:"bids"`
+}
+
+type Market struct {
+	Name      string         `abi:"name" bson:"name"`
+	Market	  common.Address `abi:"market" bson:"market"`
+	Nft		  common.Address `abi:"nft", bson:"nft"`
+	Base	  common.Address `abi:"base" bson:"base"`
+	Quote	  common.Address `abi:"quote" bson:"quote"`
+	Price	  *big.Int		`abi:"price" bson:"price"`
+	Tick	  *big.Int		`abi:"tick" bson:"tick"`
+	Fee		  uint8			`abi:"fee" bson:"fee"`
+	Threshold uint8			`abi:"threshold" bson:"threshold"`
+	Lock	  bool			`abi:"lock" bson:"lock"`
 }
 
 type OutputOrderbook struct {
