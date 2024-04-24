@@ -5,9 +5,14 @@ import (
 	"math/big"
 	"reflect"
 
+	"github.com/Coinmeca/go-common/commonmethod/market"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 )
+
+type OutputMarkets struct {
+	Markets []market.Market `abi:""`
+}
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
 	methodAbi, ok := contractAbi.Methods[method]
