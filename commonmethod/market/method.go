@@ -35,7 +35,7 @@ type Orderbook struct {
 type Market struct {
 	Name      string         `abi:"name" bson:"name"`
 	Market	  common.Address `abi:"market" bson:"market"`
-	Nft		  common.Address `abi:"nft", bson:"nft"`
+	Nft		  common.Address `abi:"nft" bson:"nft"`
 	Base	  common.Address `abi:"base" bson:"base"`
 	Quote	  common.Address `abi:"quote" bson:"quote"`
 	Price	  *big.Int		`abi:"price" bson:"price"`
