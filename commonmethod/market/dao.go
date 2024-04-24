@@ -1,5 +1,17 @@
 package market
 
+type MarketInfo struct {
+	Address 	string		`json:"address" bson:"address"`
+	Base 		string		`json:"base" bson:"base"`
+	Quote 		string		`json:"quote" bson:"quote"`
+	Price  		float64		`json:"price" bson:"price"`
+	Tick  		float64		`json:"tick" bson:"tick"`
+	Fee		  	float64		`json:"fee" bson:"fee"`
+	Threshold	string		`json:"threshold" bson:"threshold"`
+	Lock		bool		`json:"lock" bson:"lock"`
+	Orderbook	Orderbook	`json:"orderbook" bson:"orderbook"`
+}
+
 type Recent struct {
 	Type    	int     `json:"type" bson:"type"`
 	From    	string  `json:"from" bson:"from"`
@@ -14,6 +26,17 @@ type Recent struct {
 }
 
 type Tick struct {
-	Price  		string  `json:"symbol" bson:"symbol"`
+	Price  		string  `json:"price" bson:"price"`
 	Amount  	string  `json:"amount" bson:"amount"`
+}
+
+type ChartInfo struct {
+	From	string	`json:"from" bson:"from"`
+	Sell	string	`json:"sell" bson:"sell"`
+	Buy		string	`json:"buy" bson:"buy"`
+	Time	string	`json:"time" bson:"time"`
+	Open	string	`json:"open" bson:"open"`
+	High	string	`json:"high" bson:"high"`
+	Low		string	`json:"low" bson:"low"`
+	Close	string	`json:"close" bson:"close"`
 }
