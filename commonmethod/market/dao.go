@@ -14,7 +14,7 @@ type Recent struct {
 }
 
 type Tick struct {
-	Price  		string  `json:"symbol" bson:"symbol"`
+	Price  		string  `json:"price" bson:"price"`
 	Amount  	string  `json:"amount" bson:"amount"`
 }
 
