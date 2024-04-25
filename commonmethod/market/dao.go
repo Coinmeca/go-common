@@ -1,17 +1,5 @@
 package market
 
-type MarketInfo struct {
-	Address 	string		`json:"address" bson:"address"`
-	Base 		string		`json:"base" bson:"base"`
-	Quote 		string		`json:"quote" bson:"quote"`
-	Price  		float64		`json:"price" bson:"price"`
-	Tick  		float64		`json:"tick" bson:"tick"`
-	Fee		  	float64		`json:"fee" bson:"fee"`
-	Threshold	string		`json:"threshold" bson:"threshold"`
-	Lock		bool		`json:"lock" bson:"lock"`
-	Orderbook	Orderbook	`json:"orderbook" bson:"orderbook"`
-}
-
 type Recent struct {
 	Type    	int     `json:"type" bson:"type"`
 	From    	string  `json:"from" bson:"from"`
