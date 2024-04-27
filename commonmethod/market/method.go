@@ -47,8 +47,8 @@ type Market struct {
 }
 
 type Volume struct {
-	Base	string `json:"base" bson:"base"`
-	Quote	string `json:"quote" bson:"quote"`
+	Base	*big.Int `json:"base" bson:"base"`
+	Quote	*big.Int `json:"quote" bson:"quote"`
 }
 
 type OutputOrderbook struct {
