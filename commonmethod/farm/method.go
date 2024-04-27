@@ -9,6 +9,21 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+type Farm struct{
+	Id			string
+	Name		string
+	Farm		common.Address
+	Stake		common.Address
+	Earn		common.Address
+	Start		float64
+	Period		int
+	Duration	int
+	Goal		float64
+	Locked		float64
+	Rewards		float64
+	Total		float64
+}
+
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
 	methodAbi, ok := contractAbi.Methods[method]
 	if !ok {
