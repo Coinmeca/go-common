@@ -9,6 +9,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+const (
+	TradeTypeStake = iota
+	TradeTypeUnstake
+)
+
 type FarmToken struct {
 	Decimals  uint8
 	Address   common.Address // TODO: abi -> addr
