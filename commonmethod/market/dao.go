@@ -29,8 +29,3 @@ type ChartInfo struct {
 	Close	string	`json:"close" bson:"close"`
 	Volume	Volume	`json:"volume" bson:"volume"`
 }
-
-type Volume struct {
-	Base	string `json:"base" bson:"base"`
-	Quote	string `json:"quote" bson:"quote"`
-}
