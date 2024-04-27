@@ -33,11 +33,11 @@ type Orderbook struct {
 }
 
 type MarketToken struct {
-	Decimals  uint8
-	Address   common.Address // TODO: abi -> addr
-	Liquidity *big.Int
-	Symbol    string
-	Name      string
+	Decimals  uint8          `json:"decimals" bson:"decimals"`
+	Address   common.Address `json:"address" bson:"address"` // TODO: abi -> addr
+	Liquidity *big.Int       `json:"liquidity" bson:"liquidity"`
+	Symbol    string         `json:"symbol" bson:"symbol"`
+	Name      string         `json:"name" bson:"name"`
 }
 
 type Market struct {
