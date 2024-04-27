@@ -9,19 +9,36 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+const (
+	TradeTypeStake = iota
+	TradeTypeUnstake
+)
+
+type FarmToken struct {
+	Decimals  uint8
+	Address   common.Address // TODO: abi -> addr
+	Symbol    string
+	Name      string
+}
+
 type Farm struct{
-	Id			string
+	Id			*big.Int
 	Name		string
+	Master		common.Address
 	Farm		common.Address
 	Stake		common.Address
 	Earn		common.Address
-	Start		float64
-	Period		int
-	Duration	int
-	Goal		float64
-	Locked		float64
-	Rewards		float64
-	Total		float64
+	Start		*big.Int
+	Period		*big.Int
+	Duration	*big.Int
+	Goal		*big.Int
+	Locked		*big.Int
+	Rewards		*big.Int
+	Total		*big.Int
+}
+
+type OutputFarms struct {
+	Farms []Farm `abi:""`
 }
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
