@@ -12,6 +12,7 @@ import (
 type Farm struct{
 	Id			string
 	Name		string
+	Master		common.Address
 	Farm		common.Address
 	Stake		common.Address
 	Earn		common.Address
