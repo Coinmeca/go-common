@@ -37,6 +37,10 @@ type Farm struct{
 	Total		*big.Int
 }
 
+type OutputFarms struct {
+	Farms []Farm `abi:""`
+}
+
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
 	methodAbi, ok := contractAbi.Methods[method]
 	if !ok {
