@@ -34,7 +34,7 @@ type Orderbook struct {
 
 type MarketToken struct {
 	Decimals  uint8
-	Addr      common.Address
+	Address   common.Address // TODO: abi -> addr
 	Liquidity *big.Int
 	Symbol    string
 	Name      string
