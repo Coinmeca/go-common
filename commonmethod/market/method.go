@@ -15,8 +15,8 @@ const (
 )
 
 const (
-	TradeTypeSell = iota
-	TradeTypeBuy
+	TradeTypeBuy = iota
+	TradeTypeSell
 	TradeTypeBid
 	TradeTypeAsk
 )
