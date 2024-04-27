@@ -11,7 +11,7 @@ import (
 
 const (
 	MethodGetOrderbook = "getOrderbook"
-	MethodGetInfo = "getInfo"
+	MethodGetInfo      = "getInfo"
 )
 
 const (
@@ -32,23 +32,31 @@ type Orderbook struct {
 	} `abi:"bids" bson:"bids"`
 }
 
+type MarketToken struct {
+	Decimals  uint8
+	Address   common.Address // TODO: abi -> addr
+	Liquidity *big.Int
+	Symbol    string
+	Name      string
+}
+
 type Market struct {
-	Name		string         `abi:"name" bson:"name"`
-	Market		common.Address `abi:"market" bson:"market"`
-	Nft			common.Address `abi:"nft" bson:"nft"`
-	Base		common.Address `abi:"base" bson:"base"`
-	Quote		common.Address `abi:"quote" bson:"quote"`
-	Price		*big.Int		`abi:"price" bson:"price"`
-	Tick		*big.Int		`abi:"tick" bson:"tick"`
-	Fee			uint8			`abi:"fee" bson:"fee"`
-	Threshold	uint8			`abi:"threshold" bson:"threshold"`
-	Lock		bool			`abi:"lock" bson:"lock"`
-	Volume		Volume			`abi:"volume" bson:"volume"`
+	//Name      string         `abi:"name" bson:"name"`
+	Market    common.Address `abi:"market" bson:"market"`
+	Nft       common.Address `abi:"nft" bson:"nft"`
+	Base      MarketToken    `abi:"base" bson:"base"`
+	Quote     MarketToken    `abi:"quote" bson:"quote"`
+	Price     *big.Int       `abi:"price" bson:"price"`
+	Tick      *big.Int       `abi:"tick" bson:"tick"`
+	Fee       uint8          `abi:"fee" bson:"fee"`
+	Threshold uint8          `abi:"threshold" bson:"threshold"`
+	Lock      bool           `abi:"lock" bson:"lock"`
+	Volume    Volume         `abi:"volume" bson:"volume"`
 }
 
 type Volume struct {
-	Base	string `json:"base" bson:"base"`
-	Quote	string `json:"quote" bson:"quote"`
+	Base  string `json:"base" bson:"base"`
+	Quote string `json:"quote" bson:"quote"`
 }
 
 type OutputOrderbook struct {
