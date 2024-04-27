@@ -9,12 +9,12 @@ type EventWithdraw struct {
 	Owner  common.Address
 	Token  common.Address
 	Amount *big.Int
-	Meca   *big.Int
+	Burn   *big.Int
 }
 
 type EventDeposit struct {
 	Owner  common.Address
 	Token  common.Address
 	Amount *big.Int
-	Meca   *big.Int
+	Mint   *big.Int
 }

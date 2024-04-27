@@ -1,15 +1,18 @@
 package vault
 
+import "time"
+
 type Recent struct {
-	Type    int     `json:"type" bson:"type"`
-	Symbol  string  `json:"symbol" bson:"symbol"`
-	From    string  `json:"from" bson:"from"`
-	Address string  `json:"address" bson:"address"`
-	Time    string  `json:"time" bson:"time"`
-	Volume  string  `json:"volume" bson:"volume"`
-	Meca    string  `json:"meca" bson:"meca"`
-	Share   float64 `json:"share" bson:"share"`
-	TxHash  string  `json:"txHash" bson:"txHash"`
+	Type     int       `json:"type" bson:"type"`
+	Symbol   string    `json:"symbol" bson:"symbol"`
+	From     string    `json:"from" bson:"from"`
+	Address  string    `json:"address" bson:"address"`
+	Time     string    `json:"time" bson:"time"`
+	Volume   string    `json:"volume" bson:"volume"`
+	Meca     string    `json:"meca" bson:"meca"`
+	Share    float64   `json:"share" bson:"share"`
+	TxHash   string    `json:"txHash" bson:"txHash"`
+	UpdateAt time.Time `json:"updateAt" bson:"updateAt"`
 }
 
 type Vault struct {
