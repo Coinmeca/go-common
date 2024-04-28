@@ -12,29 +12,31 @@ import (
 const (
 	TradeTypeStake = iota
 	TradeTypeUnstake
+	TradeTypeHarvest
+	TradeTypeClaim
 )
 
 type FarmToken struct {
-	Decimals  uint8
-	Address   common.Address // TODO: abi -> addr
-	Symbol    string
-	Name      string
+	Address  common.Address // TODO: abi -> addr
+	Name     string
+	Symbol   string
+	Decimals uint8
 }
 
-type Farm struct{
-	Id			*big.Int
-	Name		string
-	Master		common.Address
-	Farm		common.Address
-	Stake		common.Address
-	Earn		common.Address
-	Start		*big.Int
-	Period		*big.Int
-	Duration	*big.Int
-	Goal		*big.Int
-	Locked		*big.Int
-	Rewards		*big.Int
-	Total		*big.Int
+type Farm struct {
+	Id       *big.Int
+	Farm     common.Address
+	Master   common.Address
+	Name     string
+	Stake    FarmToken
+	Earn     FarmToken
+	Start    *big.Int
+	Period   *big.Int
+	Duration *big.Int
+	Goal     *big.Int
+	Locked   *big.Int
+	Rewards  *big.Int
+	Total    *big.Int
 }
 
 type OutputFarms struct {
