@@ -1,8 +1,8 @@
 package farm
 
 type Recent struct {
-	Type    	int     `json:"type" bson:"type"`
 	Time		string	`json:"time" bson:"time"`
+	Type    	int     `json:"type" bson:"type"`
 	Farm		string	`json:"farm" bson:"farm"`
 	User    	string  `json:"owner" bson:"owner"`
 	Amount		string	`json:"amount" bson:"amount"`
