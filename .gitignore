@@ -10,5 +10,6 @@ coverage.txt
 *.key
 *.enc
 *.sss
+*.bazel
 UTC--*
 */build/

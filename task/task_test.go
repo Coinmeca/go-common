@@ -3,9 +3,9 @@ package task
 import (
 	"context"
 	//"dex-server/internal/model"
-	"coinmeca-go_common/model"
+	"github.com/coinmeca/go-common/model"
 	//repo "dex-server/repository"
-	repo "coinmeca-go_common/repository"
+	repo "github.com/coinmeca/go-common/repository"
 	"fmt"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"

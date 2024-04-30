@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"coinmeca-go_common/logger"
+	"github.com/coinmeca/go-common/logger"
 	"context"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"

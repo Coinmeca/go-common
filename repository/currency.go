@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"coinmeca-go_common/logger"
-	"coinmeca-go_common/model"
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
 	"context"
 	"fmt"
 	"time"

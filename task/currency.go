@@ -1,11 +1,11 @@
 package task
 
 import (
-	"coinmeca-go_common/chain"
-	"coinmeca-go_common/logger"
-	"coinmeca-go_common/model"
-	repo "coinmeca-go_common/repository"
-	"coinmeca-go_common/utils"
+	"github.com/coinmeca/go-common/chain"
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
+	repo "github.com/coinmeca/go-common/repository"
+	"github.com/coinmeca/go-common/utils"
 	"encoding/json"
 	"fmt"
 	"github.com/shopspring/decimal"
