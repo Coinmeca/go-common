@@ -1,4 +1,4 @@
-module github.com/Coinmeca/go-common
+module github.com/coinmeca/go-common
 
 go 1.19
 
