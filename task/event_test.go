@@ -2,9 +2,9 @@ package task
 
 import (
 	//ABI "dex-server/internal/abi"
-	ABI "coinmeca-go_common/abi"
+	ABI "github.com/coinmeca/go-common/abi"
 	//cv "dex-server/internal/configs"
-	cv "coinmeca-go_common/utils"
+	cv "github.com/coinmeca/go-common/utils"
 	"fmt"
 	"math/big"
 	"strings"

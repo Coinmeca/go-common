@@ -3,9 +3,9 @@ package repository
 import (
 	"context"
 
-	common "coinmeca-go_common/chain"
-	logger "coinmeca-go_common/logger"
-	"coinmeca-go_common/model"
+	common "github.com/coinmeca/go-common/chain"
+	logger "github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
 	"fmt"
 	"github.com/jackc/pgtype"
 	"github.com/shopspring/decimal"

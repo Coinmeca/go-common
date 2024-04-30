@@ -1,12 +1,12 @@
 package task
 
 import (
-	ABI "coinmeca-go_common/abi"
+	ABI "github.com/coinmeca/go-common/abi"
 	"context"
 	//ABI "dex-server/internal/abi"
-	etherchain "coinmeca-go_common/chain"
-	repo "coinmeca-go_common/repository"
-	etherrpc "coinmeca-go_common/rpc"
+	etherchain "github.com/coinmeca/go-common/chain"
+	repo "github.com/coinmeca/go-common/repository"
+	etherrpc "github.com/coinmeca/go-common/rpc"
 
 	"fmt"
 	"github.com/ethereum/go-ethereum/accounts/abi"
