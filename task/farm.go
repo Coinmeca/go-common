@@ -1,11 +1,11 @@
 package task
 
 import (
-	ABI "coinmeca-go_common/abi"
-	cv "coinmeca-go_common/chain"
-	"coinmeca-go_common/logger"
-	"coinmeca-go_common/model"
-	repo "coinmeca-go_common/repository"
+	ABI "github.com/coinmeca/go-common/abi"
+	cv "github.com/coinmeca/go-common/chain"
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
+	repo "github.com/coinmeca/go-common/repository"
 	"context"
 	"fmt"
 	"github.com/ethereum/go-ethereum"

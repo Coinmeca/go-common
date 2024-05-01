@@ -32,6 +32,7 @@ type Orderbook struct {
 	} `abi:"bids" bson:"bids"`
 }
 
+
 type MarketToken struct {
 	Decimals  uint8          `json:"decimals" bson:"decimals"`
 	Address   common.Address `json:"address" bson:"address"` // TODO: abi -> addr

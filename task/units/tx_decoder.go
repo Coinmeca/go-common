@@ -2,7 +2,7 @@ package units
 
 import (
 	//"dex-server/internal/logger"
-	"coinmeca-go_common/logger"
+	"github.com/coinmeca/go-common/logger"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"

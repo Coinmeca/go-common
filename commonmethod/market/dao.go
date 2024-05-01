@@ -1,14 +1,14 @@
 package market
 
 type Recent struct {
-	Type     int    `json:"type" bson:"type"`
-	Owner    string `json:"owner" bson:"owner"`
-	Market   string `json:"market" bson:"market"`
 	Time     string `json:"time" bson:"time"`
-	Buy      string `json:"buy" bson:"buy"`
+	Type     int    `json:"type" bson:"type"`
+	Market   string `json:"market" bson:"market"`
+	Owner    string `json:"owner" bson:"owner"`
+	Sell     string `json:"sell" bson:"sell"`
 	Price    string `json:"symbol" bson:"symbol"`
 	Amount   string `json:"amount" bson:"amount"`
-	Sell     string `json:"sell" bson:"sell"`
+	Buy      string `json:"buy" bson:"buy"`
 	Quantity string `json:"quantity" bson:"quantity"`
 	TxHash   string `json:"txHash" bson:"txHash"`
 }
@@ -19,21 +19,10 @@ type Tick struct {
 }
 
 type ChartInfo struct {
-	// From	string	`json:"from" bson:"from"`
-	// Buy		string	`json:"buy" bson:"buy"`
-	// Sell	string	`json:"sell" bson:"sell"`
 	Time   string `json:"time" bson:"time"`
 	Open   string `json:"open" bson:"open"`
 	High   string `json:"high" bson:"high"`
 	Low    string `json:"low" bson:"low"`
 	Close  string `json:"close" bson:"close"`
 	Volume Volume `json:"volume" bson:"volume"`
-}
-
-type MarketTokenInfo struct {
-	Decimals  int     `json:"decimals" bson:"decimals"`
-	Address   string  `json:"address" bson:"address"`
-	Liquidity float64 `json:"liquidity" bson:"liquidity"`
-	Symbol    string  `json:"symbol" bson:"symbol"`
-	Name      string  `json:"name" bson:"name"`
 }

@@ -1,7 +1,7 @@
 package repository
 
 import (
-	cv "coinmeca-go_common/chain"
+	cv "github.com/coinmeca/go-common/chain"
 	"context"
 	"fmt"
 	"net/url"

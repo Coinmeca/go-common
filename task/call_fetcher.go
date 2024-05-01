@@ -3,15 +3,15 @@ package task
 import (
 	"context"
 	//ABI "dex-server/internal/abi"
-	ABI "coinmeca-go_common/abi"
+	ABI "github.com/coinmeca/go-common/abi"
 	//cv "dex-server/internal/configs"
-	cv "coinmeca-go_common/chain"
+	cv "github.com/coinmeca/go-common/chain"
 
 	"github.com/ethereum/go-ethereum"
 
 	//"dex-server/internal/logger"
-	"coinmeca-go_common/logger"
-	"coinmeca-go_common/model"
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
 
 	//"dex-server/internal/model"
 	"fmt"

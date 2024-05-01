@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"coinmeca-go_common/logger"
+	"github.com/coinmeca/go-common/logger"
 	"os"
 	"os/user"
 

@@ -1,9 +1,9 @@
 package task
 
 import (
-	etherchain "coinmeca-go_common/chain"
-	"coinmeca-go_common/logger"
-	etherrpc "coinmeca-go_common/rpc"
+	etherchain "github.com/coinmeca/go-common/chain"
+	"github.com/coinmeca/go-common/logger"
+	etherrpc "github.com/coinmeca/go-common/rpc"
 	"context"
 	"fmt"
 	"math/big"

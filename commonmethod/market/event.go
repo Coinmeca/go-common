@@ -64,8 +64,6 @@ type EventLong struct {
 	Size 		*big.Int
 	Leverage	*big.Int
 	Threshold	*big.Int
-	Item  		common.Address
-	Quantity	*big.Int
 }
 
 type EventShort struct {

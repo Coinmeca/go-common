@@ -5,7 +5,7 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/Coinmeca/go-common/commonmethod/market"
+	"github.com/coinmeca/go-common/commonmethod/market"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 )

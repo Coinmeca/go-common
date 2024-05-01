@@ -1,7 +1,7 @@
 package chain
 
 import (
-	ABI "coinmeca-go_common/abi"
+	ABI "github.com/coinmeca/go-common/abi"
 	"context"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
