@@ -17,7 +17,7 @@ func AddDailyVolume() {
 	wg := sync.WaitGroup{}
 
 	// vault
-	tokens, err := repo.VaultTokenInfo(CTX)
+	tokens, err := repo.VaultInfo(CTX)
 	if err == nil {
 		vr := model.VaultVolumeRow{
 			Amount: decimal.Zero, MecaQuantity: decimal.Zero,
