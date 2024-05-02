@@ -91,7 +91,7 @@ func loadContractAddresses(id int) {
 		CAxBOOKS = append(CAxBOOKS, common.HexToAddress(b.Address))
 	}
 
-	tokens, err := repo.VaultTokenInfo(CTX)
+	tokens, err := repo.VaultInfo(CTX)
 	if err != nil {
 		panic(err)
 	}

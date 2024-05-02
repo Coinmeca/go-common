@@ -70,7 +70,7 @@ func setVaultData(isPreset bool) {
 		//fmt.Printf("[%s-%d] %+v \n", token.Symbol, i+1, token)
 		go func(c context.Context, v model.VaultAbiInfo) {
 			if isPreset {
-				setVaultTokenInfo(c, v)
+				setVaultInfo(c, v)
 			} else {
 				setVaultPrice(c, v)
 			}
@@ -166,7 +166,7 @@ func setVaultPrice(ctx context.Context, v model.VaultAbiInfo) {
 	repo.SetVaultPrice(ctx, priceRow)
 }
 
-func setVaultTokenInfo(ctx context.Context, t model.VaultAbiInfo) {
+func setVaultInfo(ctx context.Context, t model.VaultAbiInfo) {
 	tokenRow := model.VaultTokenRow{
 		IsKey:    t.Key,
 		Address:  strings.ToLower(t.Addr.Hex()),
@@ -175,5 +175,5 @@ func setVaultTokenInfo(ctx context.Context, t model.VaultAbiInfo) {
 		Decimals: t.Decimals,
 	}
 	//fmt.Printf("(vault token) %+v\n", tokenRow)
-	repo.SetVaultTokenInfo(ctx, tokenRow)
+	repo.SetVaultInfo(ctx, tokenRow)
 }

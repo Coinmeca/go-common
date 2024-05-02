@@ -43,7 +43,7 @@ ON CONFLICT ON CONSTRAINT pk_vault_price_24h DO UPDATE SET treasury=$3,price=$4,
 	}
 }
 
-func SetVaultTokenInfo(ctx context.Context, t model.VaultTokenRow) {
+func SetVaultInfo(ctx context.Context, t model.VaultTokenRow) {
 	query := `insert into %s.vault_tokens(is_key,address,symbol,name,decimals,updated_at)
 values($1,$2,$3,$4,$5,$6) ON CONFLICT ON CONSTRAINT pk_vault_tokens
 DO UPDATE SET is_key=$1,name=$4,decimals=$5,updated_at=$6`
@@ -52,18 +52,18 @@ DO UPDATE SET is_key=$1,name=$4,decimals=$5,updated_at=$6`
 	now := time.Now().UTC()
 	_, err := POOL.Exec(ctx, query, t.IsKey, t.Address, t.Symbol, t.Name, t.Decimals, now)
 	if err != nil {
-		logger.Error("SetVaultTokenInfo", "err", err)
+		logger.Error("SetVaultInfo", "err", err)
 	} else {
-		logger.Debug("SetVaultTokenInfo", "vaultTokenRow", t)
+		logger.Debug("SetVaultInfo", "vaultTokenRow", t)
 	}
 }
 
-func VaultTokenInfo(ctx context.Context) ([]*model.TokenInfo, error) {
+func VaultInfo(ctx context.Context) ([]*model.TokenInfo, error) {
 	query := `select address, symbol, decimals from %s.vault_tokens`
 	query = fmt.Sprintf(query, SCHEMA)
 	rows, err := Rows(ctx, query)
 	if err != nil {
-		logger.Error("VaultTokenInfo", "err", err)
+		logger.Error("VaultInfo", "err", err)
 		return nil, err
 	}
 
