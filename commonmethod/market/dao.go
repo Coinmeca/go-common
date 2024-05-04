@@ -15,10 +15,15 @@ type Recent struct {
 
 type Tick struct {
 	Price				string			`json:"price" bson:"price"`
-	Amount				string			`json:"amount" bson:"amount"`
+	Balance				string			`json:"amount" bson:"amount"`
 }
 
-type ChartInfo struct {
+type Volume struct {
+	Base				float64			`json:"base" bson:"base"`
+	Quote				float64			`json:"quote" bson:"quote"`
+}
+
+type Chart struct {
 	Time				string			`json:"time" bson:"time"`
 	Open				string			`json:"open" bson:"open"`
 	High				string			`json:"high" bson:"high"`
@@ -27,30 +32,25 @@ type ChartInfo struct {
 	Volume				Volume			`json:"volume" bson:"volume"`
 }
 
-type MarketOrderbook struct {
+type Orderbook struct {
 	Asks				[]Tick			`json:"asks" bson:"asks"`
 	Bids				[]Tick			`json:"bids" bson:"bids"`
 }
 
-type MarketVolume struct {
-	Base				float64			`json:"base" bson:"base"`
-	Quote				float64			`json:"quote" bson:"quote"`
-}
-
 type MarketLast struct {
 	Price				float64			`json:"price" bson:"price"`
-	Chart				ChartInfo		`json:"chart" bson:"chart"`
+	Chart				Chart			`json:"chart" bson:"chart"`
 }
 
-type Vault struct {
+type Market struct {
 	Address				string			`json:"address" bson:"address"`
 	Base				string			`json:"symbol" bson:"symbol"`
 	Quote				string			`json:"name" bson:"name"`
 	Price				float64			`json:"price" bson:"price"`
-	Volume				MarketVolume	`json:"volume" bson:"volume"`
+	Volume				Volume			`json:"volume" bson:"volume"`
 	Tick				float64			`json:"tick" bson:"tick"`
 	Fee					float64			`json:"fee" bson:"fee"`
 	Threshold			float64			`json:"threshold" bson:"threshold"`
-	Orderbook			float64			`json:"orderbook" bson:"orderbook"`
+	Orderbook			Orderbook		`json:"orderbook" bson:"orderbook"`
 	Last				MarketLast		`json:"last" bson:"last"`
 }

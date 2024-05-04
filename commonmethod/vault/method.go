@@ -2,11 +2,12 @@ package vault
 
 import (
 	"fmt"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/common"
 	"math/big"
 	"reflect"
 	"strings"
+
+	"github.com/ethereum/go-ethereum/accounts/abi"
+	"github.com/ethereum/go-ethereum/common"
 )
 
 const (
@@ -19,7 +20,7 @@ const (
 	TradeTypeWithdraw
 )
 
-type TokenInfo struct {
+type OutputVault struct {
 	Key      bool           `abi:"key" bson:"key"`
 	Address  common.Address `abi:"addr" bson:"address"`
 	Name     string         `abi:"name" bson:"name"`
@@ -32,8 +33,8 @@ type TokenInfo struct {
 	Need     *big.Int       `abi:"need" bson:"need"`
 }
 
-type OutputGetAll struct {
-	Tokens []TokenInfo `abi:""`
+type OutputVaults struct {
+	Vaults []OutputVault `abi:""`
 }
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {

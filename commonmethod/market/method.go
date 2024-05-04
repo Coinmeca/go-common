@@ -21,7 +21,7 @@ const (
 	TradeTypeAsk
 )
 
-type Orderbook struct {
+type OutputOrderbook struct {
 	Asks []struct {
 		Price   *big.Int `abi:"price" bson:"price"`
 		Balance *big.Int `abi:"balance" bson:"balance"`
@@ -32,8 +32,7 @@ type Orderbook struct {
 	} `abi:"bids" bson:"bids"`
 }
 
-
-type MarketToken struct {
+type OutputToken struct {
 	Decimals  uint8          `json:"decimals" bson:"decimals"`
 	Address   common.Address `json:"address" bson:"address"` // TODO: abi -> addr
 	Liquidity *big.Int       `json:"liquidity" bson:"liquidity"`
@@ -41,27 +40,20 @@ type MarketToken struct {
 	Name      string         `json:"name" bson:"name"`
 }
 
-type Market struct {
-	//Name      string         `abi:"name" bson:"name"`
-	Market    common.Address `abi:"market" bson:"market"`
+type OutputMarket struct {
+	Address    common.Address `abi:"market" bson:"market"`
 	Nft       common.Address `abi:"nft" bson:"nft"`
-	Base      MarketToken    `abi:"base" bson:"base"`
-	Quote     MarketToken    `abi:"quote" bson:"quote"`
+	Base      OutputToken    `abi:"base" bson:"base"`
+	Quote     OutputToken    `abi:"quote" bson:"quote"`
 	Price     *big.Int       `abi:"price" bson:"price"`
 	Tick      *big.Int       `abi:"tick" bson:"tick"`
 	Fee       uint8          `abi:"fee" bson:"fee"`
 	Threshold uint8          `abi:"threshold" bson:"threshold"`
 	Lock      bool           `abi:"lock" bson:"lock"`
-	Volume    Volume         `abi:"volume" bson:"volume"`
 }
 
-type Volume struct {
-	Base  string `json:"base" bson:"base"`
-	Quote string `json:"quote" bson:"quote"`
-}
-
-type OutputOrderbook struct {
-	Orderbook Orderbook `abi:""`
+type OutputOrderbookResult struct {
+	Orderbook OutputOrderbook `abi:""`
 }
 
 type OutputCheckAccess struct {

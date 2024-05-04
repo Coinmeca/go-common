@@ -16,27 +16,27 @@ const (
 	TradeTypeClaim
 )
 
-type FarmToken struct {
+type OutputToken struct {
 	Address  common.Address // TODO: abi -> addr
 	Name     string
 	Symbol   string
 	Decimals uint8
 }
 
-type Farm struct {
+type OutputFarm struct {
 	Id       *big.Int
-	Farm     common.Address
-	Master   common.Address
-	Name     string
-	Stake    FarmToken
-	Earn     FarmToken
-	Start    *big.Int
-	Period   *big.Int
-	Duration *big.Int
-	Goal     *big.Int
-	Locked   *big.Int
-	Rewards  *big.Int
-	Total    *big.Int
+	Farm     common.Address	`json:"farm" bson:"farm"`
+	Master   common.Address	`json:"master" bson:"master"`
+	Name     string			`json:"name" bson:"name"`
+	Stake    OutputToken	`json:"stake" bson:"stake"`
+	Earn     OutputToken	`json:"earn" bson:"earn"`
+	Start    *big.Int		`json:"start" bson:"start"`
+	Period   *big.Int		`json:"period" bson:"period"`
+	Duration *big.Int		`json:"duration" bson"duration"`
+	Goal     *big.Int		`json:"goal" bson:"goal"`
+	Locked   *big.Int		`json:"locked" bson:"locked"`
+	Rewards  *big.Int		`json:"rewards" bson:"rewards"`
+	Total    *big.Int		`json:"total" bson:"total"`
 }
 
 type OutputFarms struct {
