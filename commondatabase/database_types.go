@@ -58,7 +58,7 @@ type BatchInfo struct {
 
 type ChainInfo struct {
 	Id        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	ChainId   string             `json:"chainId" bson:"chainId"`
+	ChainId   int32              `json:"chainId" bson:"chainId"`
 	ChainName string             `json:"chainName" bson:"chainName"`
 	Currency  string             `json:"currency" bson:"currency"`
 	Base      string             `json:"base" bson:"base"`
