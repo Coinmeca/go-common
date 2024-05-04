@@ -46,11 +46,11 @@ type Market struct {
 	Address				string			`json:"address" bson:"address"`
 	Base				string			`json:"symbol" bson:"symbol"`
 	Quote				string			`json:"name" bson:"name"`
-	Price				float64			`json:"price" bson:"price"`
+	Price				string			`json:"price" bson:"price"`
 	Volume				Volume			`json:"volume" bson:"volume"`
-	Tick				float64			`json:"tick" bson:"tick"`
-	Fee					float64			`json:"fee" bson:"fee"`
-	Threshold			float64			`json:"threshold" bson:"threshold"`
+	Tick				string			`json:"tick" bson:"tick"`
+	Fee					string			`json:"fee" bson:"fee"`
+	Threshold			string			`json:"threshold" bson:"threshold"`
 	Orderbook			Orderbook		`json:"orderbook" bson:"orderbook"`
 	Last				MarketLast		`json:"last" bson:"last"`
 }

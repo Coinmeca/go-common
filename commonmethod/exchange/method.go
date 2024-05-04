@@ -11,7 +11,7 @@ import (
 )
 
 type OutputMarkets struct {
-	Markets []market.Market `abi:""`
+	Markets []market.OutputMarket `abi:""`
 }
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {

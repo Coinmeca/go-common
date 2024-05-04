@@ -40,7 +40,7 @@ type OutputFarm struct {
 }
 
 type OutputFarms struct {
-	Farms []Farm `abi:""`
+	Farms []OutputFarm `abi:""`
 }
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
