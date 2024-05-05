@@ -10,6 +10,10 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+const (
+	MethodGetAll	= "getAll"
+)
+
 type OutputMarkets struct {
 	Markets []market.OutputMarket `abi:""`
 }

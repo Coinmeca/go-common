@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	MethodGetOrderbook = "getOrderbook"
+	MethodExchangeGetOrderbook = "getOrderbook"
 	MethodGetInfo      = "getInfo"
 )
 
