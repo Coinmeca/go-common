@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	MethodExchangeGetOrderbook = "getOrderbook"
+	MethodGetOrderbook = "getOrderbook"
 	MethodGetInfo      = "getInfo"
 )
 
@@ -41,7 +41,7 @@ type OutputToken struct {
 }
 
 type OutputMarket struct {
-	Address    common.Address `abi:"market" bson:"market"`
+	Address   common.Address `abi:"market" bson:"market"`
 	Nft       common.Address `abi:"nft" bson:"nft"`
 	Base      OutputToken    `abi:"base" bson:"base"`
 	Quote     OutputToken    `abi:"quote" bson:"quote"`
