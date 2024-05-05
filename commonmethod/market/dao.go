@@ -18,6 +18,11 @@ type Tick struct {
 	Balance				string			`json:"amount" bson:"amount"`
 }
 
+type Liquidity struct {
+	Base				string			`json:"base" bson:"base"`
+	Quote				string			`json:"quote" bson:"quote"`
+}
+
 type Volume struct {
 	Base				string			`json:"base" bson:"base"`
 	Quote				string			`json:"quote" bson:"quote"`
@@ -37,7 +42,7 @@ type Orderbook struct {
 	Bids				[]Tick			`json:"bids" bson:"bids"`
 }
 
-type MarketLast struct {
+type Last struct {
 	Price				float64			`json:"price" bson:"price"`
 	Chart				Chart			`json:"chart" bson:"chart"`
 }
@@ -47,10 +52,11 @@ type Market struct {
 	Base				string			`json:"symbol" bson:"symbol"`
 	Quote				string			`json:"name" bson:"name"`
 	Price				string			`json:"price" bson:"price"`
+	Liquidty			Liquidity		`json:"liquidity" bson:"liquidity"`
 	Volume				Volume			`json:"volume" bson:"volume"`
 	Tick				string			`json:"tick" bson:"tick"`
 	Fee					string			`json:"fee" bson:"fee"`
 	Threshold			string			`json:"threshold" bson:"threshold"`
 	Orderbook			Orderbook		`json:"orderbook" bson:"orderbook"`
-	Last				MarketLast		`json:"last" bson:"last"`
+	Last				Last		`json:"last" bson:"last"`
 }

@@ -15,7 +15,7 @@ type Recent struct {
 	UpdateAt			time.Time		`json:"updateAt" bson:"updateAt"`
 }
 
-type VaultLast struct {
+type Last struct {
 	Exchange			string			`json:"exchange" bson:"exchange"`
 	Weight				string			`json:"weight" bson:"weight"`
 	Tl					string			`json:"tl" bson:"tl"`
@@ -45,5 +45,5 @@ type Vault struct {
 	Burn				string			`json:"burn" bson:"burn"`
 	Value				string			`json:"value" bson:"value"`
 	Recents				[]Recent		`json:"recents" bson:"recents"`
-	Last				VaultLast		`json:"last" bson:"last"`
+	Last				Last			`json:"last" bson:"last"`
 }
