@@ -33,6 +33,6 @@ type Farm struct {
 	Staking24h			string			`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		string			`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			string			`json:"interest24h" bson:"interest24h"`
-	Recents				Recent			`json:"recents" bson:"recents"`
+	Recents				[]Recent		`json:"recents" bson:"recents"`
 	Last				Last			`json:"last" bson:"bson"`
 }
