@@ -43,7 +43,10 @@ type Orderbook struct {
 }
 
 type Last struct {
-	Price				float64			`json:"price" bson:"price"`
+	Price				string			`json:"price" bson:"price"`
+	High				string			`json:"high" bson:"high"`
+	Low					string			`json:"low" bson:"low"`
+	Volume				Volume			`json:"volume" bson:"volume"`
 	Chart				Chart			`json:"chart" bson:"chart"`
 }
 
