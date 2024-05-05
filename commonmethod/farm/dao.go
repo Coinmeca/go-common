@@ -29,7 +29,7 @@ type Farm struct {
 	Earn				string			`json:"earn" bson:"earn"`
 	Tvl					string			`json:"tvl" bson:"tvl"`
 	Staking				string			`json:"staking" bson:"staking"`
-	interest			string			`json:"interest" bson:"interest"`
+	Interest			string			`json:"interest" bson:"interest"`
 	Staking24h			string			`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		string			`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			string			`json:"interest24h" bson:"interest24h"`
