@@ -4,7 +4,7 @@ type Recent struct {
 	Time				string			`json:"time" bson:"time"`
 	Type				int				`json:"type" bson:"type"`
 	Market				string			`json:"market" bson:"market"`
-	Owner				string			`json:"owner" bson:"owner"`
+	User				string			`json:"user" bson:"user"`
 	Sell				string			`json:"sell" bson:"sell"`
 	Price				string			`json:"symbol" bson:"symbol"`
 	Amount				string			`json:"amount" bson:"amount"`
