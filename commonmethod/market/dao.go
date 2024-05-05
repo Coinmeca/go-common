@@ -63,5 +63,6 @@ type Market struct {
 	Fee					string			`json:"fee" bson:"fee"`
 	Threshold			string			`json:"threshold" bson:"threshold"`
 	Orderbook			Orderbook		`json:"orderbook" bson:"orderbook"`
-	Last				Last		`json:"last" bson:"last"`
+	Recents				[]Recent		`json:"recents" bson:"recents"`
+	Last				Last			`json:"last" bson:"last"`
 }
