@@ -17,9 +17,10 @@ type Recent struct {
 
 type VaultLast struct {
 	Exchange			string			`json:"exchange" bson:"exchange"`
+	Weight				string			`json:"weight" bson:"weight"`
 	Tl					string			`json:"tl" bson:"tl"`
 	Tvl					string			`json:"tvl" bson:"tvl"`
-	Weight				string			`json:"weight" bson:"weight"`
+	Value				string			`json:"value" bson:"value"`
 	Recent				Recent			`json:"recent" bson:"Recent"`
 }
 
