@@ -62,6 +62,7 @@ type Market struct {
 	Volume				Volume			`json:"volume" bson:"volume"`
 	Tick				string			`json:"tick" bson:"tick"`
 	Fee					string			`json:"fee" bson:"fee"`
+	Lock				bool			`json:"lock" bson:"lock"`
 	Threshold			string			`json:"threshold" bson:"threshold"`
 	Orderbook			Orderbook		`json:"orderbook" bson:"orderbook"`
 	Recents				[]Recent		`json:"recents" bson:"recents"`
