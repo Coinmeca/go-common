@@ -19,8 +19,8 @@ type Tick struct {
 }
 
 type Volume struct {
-	Base				float64			`json:"base" bson:"base"`
-	Quote				float64			`json:"quote" bson:"quote"`
+	Base				string			`json:"base" bson:"base"`
+	Quote				string			`json:"quote" bson:"quote"`
 }
 
 type Chart struct {
