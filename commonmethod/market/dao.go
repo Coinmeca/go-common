@@ -52,6 +52,7 @@ type Last struct {
 
 type Market struct {
 	Address				string			`json:"address" bson:"address"`
+	Name				string			`json:"name" bson:"name"`
 	Base				string			`json:"symbol" bson:"symbol"`
 	Quote				string			`json:"name" bson:"name"`
 	Price				string			`json:"price" bson:"price"`
