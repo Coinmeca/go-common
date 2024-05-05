@@ -53,8 +53,9 @@ type Last struct {
 type Market struct {
 	Address				string			`json:"address" bson:"address"`
 	Name				string			`json:"name" bson:"name"`
-	Base				string			`json:"symbol" bson:"symbol"`
-	Quote				string			`json:"name" bson:"name"`
+	Symbol				string			`json:"symbol" bson:"symbol"`
+	Base				string			`json:"base" bson:"base"`
+	Quote				string			`json:"quote" bson:"quote"`
 	Price				string			`json:"price" bson:"price"`
 	Liquidty			Liquidity		`json:"liquidity" bson:"liquidity"`
 	Volume				Volume			`json:"volume" bson:"volume"`
