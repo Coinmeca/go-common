@@ -42,6 +42,7 @@ type Vault struct {
 	TokenPer			string			`json:"tokenPer" bson:"tokenPer"`
 	Mint				string			`json:"mint" bson:"mint"`
 	Burn				string			`json:"burn" bson:"burn"`
+	Value				string			`json:"value" bson:"value"`
 	Recents				[]Recent		`json:"recents" bson:"recents"`
 	Last				VaultLast		`json:"last" bson:"last"`
 }
