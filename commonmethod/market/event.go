@@ -30,6 +30,7 @@ type EventBid struct {
 	Amount 		*big.Int
 	Price  		*big.Int
 	Buy  		common.Address
+	Quantity	*big.Int
 }
 
 type EventAsk struct {
@@ -38,6 +39,7 @@ type EventAsk struct {
 	Amount 		*big.Int
 	Price  		*big.Int
 	Buy  		common.Address
+	Quantity	*big.Int
 }
 
 type EventModify struct {
