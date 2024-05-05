@@ -48,6 +48,7 @@ type Last struct {
 	Low					string			`json:"low" bson:"low"`
 	Volume				Volume			`json:"volume" bson:"volume"`
 	Chart				Chart			`json:"chart" bson:"chart"`
+	Recent				Recent			`json:"recent" bson:"recent"`
 }
 
 type Market struct {
