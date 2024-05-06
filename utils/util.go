@@ -157,7 +157,7 @@ func ExternalData(url, key string) ([]byte, error) {
 	return data, nil
 }
 
-func decimal128ToBigInt(decimal primitive.Decimal128) *big.Int {
+func Decimal128ToBigInt(decimal primitive.Decimal128) *big.Int {
     // Extract the low part of the Decimal128
     _, low := decimal.GetBytes()
 
@@ -173,7 +173,7 @@ func decimal128ToBigInt(decimal primitive.Decimal128) *big.Int {
     return bigIntValue
 }
 
-func bigIntToDecimal128(bigInt *big.Int) (primitive.Decimal128, error) {
+func BigIntToDecimal128(bigInt *big.Int) (primitive.Decimal128, error) {
     // Convert the big.Int to a string
     stringValue := bigInt.String()
 
