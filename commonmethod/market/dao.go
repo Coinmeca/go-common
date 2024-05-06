@@ -58,7 +58,7 @@ type Market struct {
 	Base				string			`json:"base" bson:"base"`
 	Quote				string			`json:"quote" bson:"quote"`
 	Price				string			`json:"price" bson:"price"`
-	Liquidty			Liquidity		`json:"liquidity" bson:"liquidity"`
+	Liquidity			Liquidity		`json:"liquidity" bson:"liquidity"`
 	Volume				Volume			`json:"volume" bson:"volume"`
 	Tick				string			`json:"tick" bson:"tick"`
 	Fee					string			`json:"fee" bson:"fee"`
