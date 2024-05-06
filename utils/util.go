@@ -1,24 +1,28 @@
 package utils
 
 import (
-	"github.com/coinmeca/go-common/logger"
 	"os"
 	"os/user"
 
+	"github.com/coinmeca/go-common/logger"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"context"
+	"encoding/binary"
 	"encoding/hex"
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"golang.org/x/crypto/sha3"
 	"io"
 	"math/big"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/common/hexutil"
+	"golang.org/x/crypto/sha3"
 )
 
 func HomeDir() string {
@@ -151,4 +155,33 @@ func ExternalData(url, key string) ([]byte, error) {
 	}
 
 	return data, nil
+}
+
+func decimal128ToBigInt(decimal primitive.Decimal128) *big.Int {
+    // Extract the low part of the Decimal128
+    _, low := decimal.GetBytes()
+
+    // Encode the low part into a byte slice
+    lowBytes := make([]byte, binary.MaxVarintLen64)
+    numBytes := binary.PutUvarint(lowBytes, uint64(low))
+    lowBytes = lowBytes[:numBytes]
+
+    // Combine the low part into a BigInt
+    bigIntValue := new(big.Int)
+    bigIntValue.SetBytes(lowBytes)
+
+    return bigIntValue
+}
+
+func bigIntToDecimal128(bigInt *big.Int) (primitive.Decimal128, error) {
+    // Convert the big.Int to a string
+    stringValue := bigInt.String()
+
+    // Create a Decimal128 from the string representation of the big.Int
+    decimal128Value, err := primitive.ParseDecimal128(stringValue)
+    if err != nil {
+        return primitive.Decimal128{}, err
+    }
+
+    return decimal128Value, nil
 }
