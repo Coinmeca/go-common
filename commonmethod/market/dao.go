@@ -14,7 +14,7 @@ type Recent struct {
 	Sell				string					`json:"sell" bson:"sell"`
 	Price				primitive.Decimal128	`json:"symbol" bson:"symbol"`
 	Amount				primitive.Decimal128	`json:"amount" bson:"amount"`
-	Buy					primitive.Decimal128	`json:"buy" bson:"buy"`
+	Buy					string					`json:"buy" bson:"buy"`
 	Quantity			primitive.Decimal128	`json:"quantity" bson:"quantity"`
 	TxHash				string					`json:"txHash" bson:"txHash"`
 }
