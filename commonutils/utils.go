@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"math/big"
 
+	"github.com/shopspring/decimal"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -34,4 +35,10 @@ func Decimal128FromBigInt(bigInt *big.Int) (primitive.Decimal128, error) {
 	}
 
 	return decimal128Value, nil
+}
+
+func Decimal128FromFloat64(float *float64) primitive.Decimal128 {
+	decimal := decimal.NewFromFloat(float)
+	high, low := decimalValue.BigParts()
+	return primitive.NewDecimal128(high, low)
 }
