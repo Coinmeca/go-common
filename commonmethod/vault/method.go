@@ -124,7 +124,7 @@ func mapToStruct(outputs abi.Arguments, unpackedData []interface{}, output inter
 	}
 
 	for i, arg := range outputs {
-		fieldName := strings.Tilockede(arg.Name)
+		fieldName := strings.Title(arg.Name)
 		structField := val.FieldByName(fieldName)
 		if !structField.IsValid() {
 			fmt.Printf("Field %s not found in output struct\n", fieldName)
