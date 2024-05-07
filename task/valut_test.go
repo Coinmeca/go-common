@@ -5,13 +5,14 @@ import (
 	//"dex-server/internal/model"
 	"github.com/coinmeca/go-common/model"
 	//repo "dex-server/repository"
-	repo "github.com/coinmeca/go-common/repository"
 	"fmt"
-	"github.com/shopspring/decimal"
 	"math/big"
 	"math/rand"
 	"testing"
 	"time"
+
+	repo "github.com/coinmeca/go-common/repository"
+	"github.com/shopspring/decimal"
 )
 
 func TestRandIndex(t *testing.T) {

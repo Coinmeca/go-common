@@ -1,11 +1,12 @@
 package repository
 
 import (
-	cv "github.com/coinmeca/go-common/chain"
 	"context"
 	"fmt"
 	"net/url"
 	"os"
+
+	cv "github.com/coinmeca/go-common/chain"
 
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/joho/godotenv"

@@ -88,8 +88,8 @@ func OverviewInfo(ctx context.Context) (*model.OverviewApi, error) {
 		info.TotalVolume, _ = decimal.NewFromBigInt(v.Int, v.Exp).Float64()
 	}
 
-	// value (tvl)
-	query = `select sum(tvl) from %s.vault_price_daily group by day order by day desc limit 1`
+	// value (valueLocked)
+	query = `select sum(valueLocked) from %s.vault_price_daily group by day order by day desc limit 1`
 	query = fmt.Sprintf(query, SCHEMA)
 	row, err = Row(ctx, query)
 	if err != nil {
@@ -104,7 +104,7 @@ func OverviewInfo(ctx context.Context) (*model.OverviewApi, error) {
 }
 
 func OverviewChartForValue(ctx context.Context) ([]model.BarChartApi, error) {
-	query := `select day, sum(tvl) from %s.vault_price_daily group by day order by day limit 30`
+	query := `select day, sum(valueLocked) from %s.vault_price_daily group by day order by day limit 30`
 	query = fmt.Sprintf(query, SCHEMA)
 	rows, err := Rows(ctx, query)
 	if err != nil {

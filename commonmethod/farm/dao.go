@@ -18,7 +18,7 @@ type Recent struct {
 
 
 type Last struct {
-	Tvl					primitive.Decimal128	`json:"tvl" bson:"tvl"`
+	ValueLocked					primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
@@ -34,7 +34,7 @@ type Farm struct {
 	Master				string					`json:"master" bson:"master"`
 	Stake				token.Token				`json:"stake" bson:"stake"`
 	Earn				token.Token				`json:"earn" bson:"earn"`
-	Tvl					primitive.Decimal128	`json:"tvl" bson:"tvl"`
+	ValueLocked					primitive.Decimal128valueLockedson:"valueLockedvalueLockedson:"valueLocked"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`

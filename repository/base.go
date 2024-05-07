@@ -1,9 +1,10 @@
 package repository
 
 import (
-	"github.com/coinmeca/go-common/logger"
 	"context"
 	"fmt"
+
+	"github.com/coinmeca/go-common/logger"
 )
 
 func Rows(ctx context.Context, query string) ([][]interface{}, error) {

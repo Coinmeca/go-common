@@ -32,7 +32,7 @@ ON CONFLICT ON CONSTRAINT pk_vault_price_24h DO UPDATE SET treasury=$3,price=$4,
 
 	// update daily
 	today := nowUTC.Format("2006-01-02")
-	query = `select treasury_open,weight_open,price_open,price_high,price_low,tvl_open from %s.vault_price_daily where symbol='%s' and day = '%s' limit 1`
+	query = `select treasury_open,weight_open,price_open,price_high,price_low,valueLocked_open from %s.vault_price_daily where symbol='%s' and day = '%s' limit 1`
 	query = fmt.Sprintf(query, SCHEMA, v.Symbol, today)
 	row, _ := Row(ctx, query)
 
@@ -107,11 +107,11 @@ values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`
 }
 
 func AddDailyVaultPrice(ctx context.Context, v model.VaultPriceRow, date string) {
-	insertQuery := `insert into %s.vault_price_daily(symbol,day,treasury,treasury_open,price,price_open,price_high,price_low,weight,weight_open,tvl,tvl_open,address) 
+	insertQuery := `insert into %s.vault_price_daily(symbol,day,treasury,treasury_open,price,price_open,price_high,price_low,weight,weight_open,valueLocked,valueLocked_open,address) 
 values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13)`
 	insertQuery = fmt.Sprintf(insertQuery, SCHEMA)
 
-	_, err := POOL.Exec(ctx, insertQuery, v.Symbol, date, v.Treasury, v.Treasury, v.Price, v.Price, v.Price, v.Price, v.Weight, v.Weight, v.Tvl, v.Tvl, v.Address)
+	_, err := POOL.Exec(ctx, insertQuery, v.Symbol, date, v.Treasury, v.Treasury, v.Price, v.Price, v.Price, v.Price, v.Weight, v.Weight, v.ValueLocked, v.ValueLocked, v.Address)
 	if err != nil {
 		logger.Error("AddDailyVaultPrice", "err", err, "query", insertQuery)
 	} else {
@@ -142,16 +142,16 @@ func UpdateDailyVaultPrice(ctx context.Context, v model.VaultPriceRow, row []int
 	}
 	// weight change
 	wtc := v.Weight.Sub(wt)
-	// tvl change
-	tvc, tvcr := v.Tvl.Sub(tv), decimal.Zero
+	// valueLocked change
+	tvc, tvcr := v.ValueLocked.Sub(tv), decimal.Zero
 	if !tv.IsZero() {
-		tvcr = v.Tvl.Div(tv).Sub(decimal.NewFromInt(1)).Mul(decimal.NewFromInt(100))
+		tvcr = v.ValueLocked.Div(tv).Sub(decimal.NewFromInt(1)).Mul(decimal.NewFromInt(100))
 	}
 
 	updateQuery := `update %s.vault_price_daily set treasury=$1,treasury_change=$2,price=$3,price_change=$4,price_rate=$5,price_high=$6,price_low=$7,
-weight=$8,weight_change=$9,tvl=$10,tvl_change=$11,treasury_rate=$12,tvl_rate=$13,updated_at=$14 where symbol='%s' and day = '%s'`
+weight=$8,weight_change=$9,valueLocked=$10,valueLocked_change=$11,treasury_rate=$12,valueLocked_rate=$13,updated_at=$14 where symbol='%s' and day = '%s'`
 	updateQuery = fmt.Sprintf(updateQuery, SCHEMA, v.Symbol, date)
-	_, err := POOL.Exec(ctx, updateQuery, v.Treasury, trc, v.Price, rpc, rpcr, hp, lp, v.Weight, wtc, v.Tvl, tvc, trcr, tvcr, time.Now().UTC())
+	_, err := POOL.Exec(ctx, updateQuery, v.Treasury, trc, v.Price, rpc, rpcr, hp, lp, v.Weight, wtc, v.ValueLocked, tvc, trcr, tvcr, time.Now().UTC())
 	if err != nil {
 		logger.Error("UpdateDailyVaultPrice", "err", err)
 	} else {
@@ -249,7 +249,7 @@ func LatestUsdPrice(ctx context.Context, symbol string) (decimal.Decimal, error)
 // for API
 
 func VaultTokenList(ctx context.Context) ([]model.VaultOverviewApi, error) {
-	query := `select is_key,name,vt.symbol,decimals,vt.address,price,price_rate,treasury,treasury_rate,tvl,tvl_rate
+	query := `select is_key,name,vt.symbol,decimals,vt.address,price,price_rate,treasury,treasury_rate,valueLocked,valueLocked_rate
 from %s.vault_tokens vt left join %s.vault_price_daily vp on vt.address = vp.address where vp.day='%s'`
 	query = fmt.Sprintf(query, SCHEMA, SCHEMA, time.Now().UTC().Format("2006-01-02"))
 	rows, err := Rows(ctx, query)
@@ -439,7 +439,7 @@ func VaultChartDataForVolume(ctx context.Context, address string) ([]model.BarCh
 }
 
 func VaultChartDataForValue(ctx context.Context, address string) ([]model.BarChartApi, error) {
-	query := `select day,tvl from %s.vault_price_daily where address='%s' order by day limit 30`
+	query := `select day,valueLocked from %s.vault_price_daily where address='%s' order by day limit 30`
 	query = fmt.Sprintf(query, SCHEMA, address)
 	rows, err := Rows(ctx, query)
 	if err != nil {

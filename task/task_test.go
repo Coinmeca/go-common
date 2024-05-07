@@ -5,12 +5,13 @@ import (
 	//"dex-server/internal/model"
 	"github.com/coinmeca/go-common/model"
 	//repo "dex-server/repository"
-	repo "github.com/coinmeca/go-common/repository"
 	"fmt"
-	"github.com/shopspring/decimal"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	repo "github.com/coinmeca/go-common/repository"
+	"github.com/shopspring/decimal"
+	"github.com/stretchr/testify/assert"
 )
 
 const (
@@ -41,14 +42,14 @@ func TestVaultTask(t *testing.T) {
 		vpr.Price = decimal.NewFromInt(2000)
 		vpr.Treasury = decimal.NewFromInt(7500000)
 		vpr.Weight = decimal.NewFromInt(400000)
-		vpr.Tvl = vpr.Treasury.Mul(decimal.NewFromFloat32(0.9998))
+		vpr.ValueLocked = vpr.Treasury.Mul(decimal.NewFromFloat32(0.9998))
 		repo.SetVaultPrice(ctx, vpr)
 
 		vpr.Time = fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", ts.Year(), ts.Month(), ts.Day(), ts.Hour(), 31)
 		vpr.Price = decimal.NewFromInt(2100)
 		vpr.Treasury = decimal.NewFromInt(7600000)
 		vpr.Weight = decimal.NewFromInt(420000)
-		vpr.Tvl = vpr.Treasury.Mul(decimal.NewFromFloat32(0.9997))
+		vpr.ValueLocked = vpr.Treasury.Mul(decimal.NewFromFloat32(0.9997))
 		repo.SetVaultPrice(ctx, vpr)
 
 		vvr := model.VaultVolumeRow{

@@ -21,8 +21,8 @@ type Recent struct {
 type Last struct {
 	Exchange			primitive.Decimal128	`json:"exchange" bson:"exchange"`
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
-	Tl					primitive.Decimal128	`json:"tl" bson:"tl"`
-	Tvl					primitive.Decimal128	`json:"tvl" bson:"tvl"`
+	Locked					primitive.Decimal128	`json:"locked" bson:"locked"`
+	ValueLocked					primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Value				primitive.Decimal128	`json:"value" bson:"value"`
 	Recent				Recent					`json:"recent" bson:"Recent"`
 }
@@ -35,8 +35,8 @@ type Vault struct {
 	Decimals			int						`json:"decimals" bson:"decimals"`
 	Exchange			primitive.Decimal128	`json:"exchange" bson:"exchange"`
 	Rate				primitive.Decimal128	`json:"rate" bson:"rate"`
-	Tl					primitive.Decimal128	`json:"tl" bson:"tl"`
-	Tvl					primitive.Decimal128	`json:"tvl" bson:"tvl"`
+	Locked					primitive.Decimal128	`jslocked:"locked" bslocked:"locked"`
+	ValueLocked					primitive.Decimal128valueLockedson:"valueLockedvalueLockedson:"valueLocked"`
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
 	Deposit				primitive.Decimal128	`json:"deposit" bson:"deposit"`
 	Deposit24h			primitive.Decimal128	`json:"deposit24h" bson:"deposit24h"`
@@ -49,4 +49,14 @@ type Vault struct {
 	Value				primitive.Decimal128	`json:"value" bson:"value"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"last"`
+}
+
+type ValueLocked struct {
+	Symbol      string `json:"symbol" bson:"symbol"`
+	Address     string `json:"address" bson:"address"`
+	Time        int64  `json:"time" bson:"time"`
+	Weight      string `json:"weight" bson:"weight"`
+	Locked      string `json:"locked" bson:"locked"`
+	Value       string `json:"value" bson:"value"`
+	LockedValue string `json:"lockedValue" bson:"lockedValue"`
 }

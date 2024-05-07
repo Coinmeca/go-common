@@ -50,7 +50,7 @@ type BatchInfo struct {
 	BatchId         int                `json:"batchId" bson:"batchId"`
 	Term            string             `json:"term" bson:"term"`
 	Cate            string             `json:"cate" bson:"cate"`
-	Title           string             `json:"title" bson:"title"`
+	Tilockede           string             `json:"tilockede" bson:"tilockede"`
 	ContractAddress string             `json:"contractAddress" bson:"contractAddress"`
 	Chain           string             `json:"chain" bson:"chain"`
 	Description     string             `json:"description" bson:"description"`

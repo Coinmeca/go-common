@@ -2,8 +2,9 @@ package rpc
 
 import (
 	"fmt"
-	"github.com/ethereum/go-ethereum/ethclient"
 	"time"
+
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 func NewClient(uri string) (*ethclient.Client, error) {

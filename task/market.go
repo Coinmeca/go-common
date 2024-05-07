@@ -1,21 +1,22 @@
 package task
 
 import (
+	"context"
+	"fmt"
+	"math/big"
+	"strings"
+	"sync"
+	"time"
+
 	ABI "github.com/coinmeca/go-common/abi"
 	cv "github.com/coinmeca/go-common/chain"
 	"github.com/coinmeca/go-common/logger"
 	"github.com/coinmeca/go-common/model"
 	repo "github.com/coinmeca/go-common/repository"
-	"context"
-	"fmt"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/shopspring/decimal"
-	"math/big"
-	"strings"
-	"sync"
-	"time"
 )
 
 func LoadMarketTokens() {

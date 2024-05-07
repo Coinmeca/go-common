@@ -38,6 +38,6 @@ type BarChartApi struct {
 }
 
 type OverviewApi struct {
-	TotalValue  float64 `json:"total_tvl"`
-	TotalVolume float64 `json:"total_volume"`
+	TotalValue  float64 `json:"totalValueLocked"`
+	TotalVolume float64 `json:"TotalVolume"`
 }

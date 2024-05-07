@@ -56,7 +56,7 @@ type VaultPriceRow struct {
 	Price    decimal.Decimal // rate to exchange
 	Weight   decimal.Decimal // token slot has meca
 	Need     decimal.Decimal
-	Tvl      decimal.Decimal // by usd
+	ValueLocked      decimal.Decimal // by usd
 }
 
 type VaultHistoryApi struct {
@@ -73,7 +73,7 @@ type VaultDashboardApi struct {
 	TotalLocked      float64 `json:"total_locked"`
 	TotalChange      float64 `json:"total_change"`
 	TotalValueLocked float64 `json:"total_value_locked"`
-	TvlChange        float64 `json:"tvl_change"`
+	ValueLockedChange        float64 `json:"valueLocked_change"`
 	Weight           float64 `json:"weight"`
 	WeightChange     float64 `json:"weight_change"`
 	Deposit          float64 `json:"deposit"`
@@ -92,8 +92,8 @@ type VaultOverviewApi struct {
 	Address        string  `json:"address"`
 	Exchange       float64 `json:"exchange_rate"`
 	ExchangeChange float64 `json:"exchange_rate_change"`
-	TVL            float64 `json:"tvl"`
-	TVLChange      float64 `json:"tvl_change"`
+	TVL            float64 `json:"valueLocked"`
+	TVLChange      float64 `json:"valueLocked_change"`
 	Volume         float64 `json:"total_volume"`
 	VolumeChange   float64 `json:"total_volume_change"`
 }

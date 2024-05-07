@@ -7,11 +7,12 @@ import (
 	//"dex-server/internal/model"
 	"github.com/coinmeca/go-common/model"
 	//repo "dex-server/repository"
-	repo "github.com/coinmeca/go-common/repository"
 	"fmt"
 	"math/rand"
 	"testing"
 	"time"
+
+	repo "github.com/coinmeca/go-common/repository"
 
 	"github.com/shopspring/decimal"
 )
