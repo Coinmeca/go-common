@@ -18,12 +18,12 @@ type Recent struct {
 
 
 type Last struct {
-	ValueLocked					primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
+	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Recent				Recent					`json:"recent" bson:"recent"`
 }
 
@@ -34,12 +34,12 @@ type Farm struct {
 	Master				string					`json:"master" bson:"master"`
 	Stake				token.Token				`json:"stake" bson:"stake"`
 	Earn				token.Token				`json:"earn" bson:"earn"`
-	ValueLocked					primitive.Decimal128valueLockedson:"valueLockedvalueLockedson:"valueLocked"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
+	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"bson"`
 }
