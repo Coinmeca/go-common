@@ -52,11 +52,11 @@ type Vault struct {
 }
 
 type ValueLocked struct {
-	Symbol      string `json:"symbol" bson:"symbol"`
-	Address     string `json:"address" bson:"address"`
-	Time        int64  `json:"time" bson:"time"`
-	Weight      string `json:"weight" bson:"weight"`
-	Locked      string `json:"locked" bson:"locked"`
-	Value       string `json:"value" bson:"value"`
-	ValueLocked string `json:"ValueLocked" bson:"ValueLocked"`
+	Time				int64					`json:"time" bson:"time"`
+	Symbol				string					`json:"symbol" bson:"symbol"`
+	Address				string					`json:"address" bson:"address"`
+	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
+	Locked				primitive.Decimal128	`json:"locked" bson:"locked"`
+	Value				primitive.Decimal128	`json:"value" bson:"value"`
+	ValueLocked			primitive.Decimal128	`json:"ValueLocked" bson:"ValueLocked"`
 }
