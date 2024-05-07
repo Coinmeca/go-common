@@ -58,5 +58,5 @@ type ValueLocked struct {
 	Weight      string `json:"weight" bson:"weight"`
 	Locked      string `json:"locked" bson:"locked"`
 	Value       string `json:"value" bson:"value"`
-	LockedValue string `json:"lockedValue" bson:"lockedValue"`
+	ValueLocked string `json:"ValueLocked" bson:"ValueLocked"`
 }
