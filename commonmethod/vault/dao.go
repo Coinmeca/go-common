@@ -20,10 +20,12 @@ type Recent struct {
 
 type Last struct {
 	Exchange			primitive.Decimal128	`json:"exchange" bson:"exchange"`
-	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
+	Deposit				primitive.Decimal128	`json:"deposit" bson:"deposit"`
+	Withdraw			primitive.Decimal128	`json:"withdraw" bson:"withdraw"`
 	Locked				primitive.Decimal128	`json:"locked" bson:"locked"`
 	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Value				primitive.Decimal128	`json:"value" bson:"value"`
+	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
 	Recent				Recent					`json:"recent" bson:"Recent"`
 }
 
