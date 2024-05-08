@@ -3,8 +3,8 @@ package commonutils
 import (
 	"encoding/binary"
 	"math/big"
+	"math"
 
-	"github.com/shopspring/decimal"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -37,8 +37,19 @@ func Decimal128FromBigInt(bigInt *big.Int) (primitive.Decimal128, error) {
 	return decimal128, nil
 }
 
-func Decimal128FromFloat64(float *float64) primitive.Decimal128 {
-	decimal := decimal.NewFromFloat(float)
-	high, low := decimal.BigParts()
-	return primitive.NewDecimal128(high, low)
+func Float64ToDecimal128(float float64) (primitive.Decimal128, error) {
+    intValue, frac := math.Modf(float)
+    intPart := big.NewInt(int64(intValue))
+    fracPart := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
+
+    if float < 0 {
+        intPart = intPart.Neg(intPart)
+    }
+
+	decimal128, err := Decimal128FromBigInt(intPart.Add(intPart, fracPart))
+	if err != nil {
+		return primitive.Decimal128{}, err
+	}
+
+	return decimal128, nil
 }
