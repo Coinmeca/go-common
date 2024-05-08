@@ -53,7 +53,8 @@ type OutputMarket struct {
 }
 
 type OutputOrderbookResult struct {
-	Orderbook OutputOrderbook `abi:""`
+	Address		common.Address
+	Orderbook	OutputOrderbook `abi:""`
 }
 
 type OutputCheckAccess struct {

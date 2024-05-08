@@ -53,9 +53,8 @@ type Vault struct {
 	Last				Last					`json:"last" bson:"last"`
 }
 
-type ValueLocked struct {
+type ChartSub struct {
 	Time				int64					`json:"time" bson:"time"`
-	Symbol				string					`json:"symbol" bson:"symbol"`
 	Address				string					`json:"address" bson:"address"`
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
 	Locked				primitive.Decimal128	`json:"locked" bson:"locked"`
