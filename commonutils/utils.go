@@ -26,19 +26,19 @@ func BigIntFromDecimal128(decimal primitive.Decimal128) *big.Int {
 
 func Decimal128FromBigInt(bigInt *big.Int) (primitive.Decimal128, error) {
 	// Convert the big.Int to a string
-	stringValue := bigInt.String()
+	value := bigInt.String()
 
 	// Create a Decimal128 from the string representation of the big.Int
-	decimal128Value, err := primitive.ParseDecimal128(stringValue)
+	decimal128, err := primitive.ParseDecimal128(value)
 	if err != nil {
 		return primitive.Decimal128{}, err
 	}
 
-	return decimal128Value, nil
+	return decimal128, nil
 }
 
 func Decimal128FromFloat64(float *float64) primitive.Decimal128 {
 	decimal := decimal.NewFromFloat(float)
-	high, low := decimalValue.BigParts()
+	high, low := decimal.BigParts()
 	return primitive.NewDecimal128(high, low)
 }
