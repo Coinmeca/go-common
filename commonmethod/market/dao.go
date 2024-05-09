@@ -67,9 +67,9 @@ type Market struct {
 	Liquidity			Liquidity				`json:"liquidity" bson:"liquidity"`
 	Volume				Volume					`json:"volume" bson:"volume"`
 	Tick				primitive.Decimal128	`json:"tick" bson:"tick"`
-	Fee					primitive.Decimal128	`json:"fee" bson:"fee"`
+	Fee					int8					`json:"fee" bson:"fee"`
+	Threshold			int8					`json:"threshold" bson:"threshold"`
 	Lock				bool					`json:"lock" bson:"lock"`
-	Threshold			primitive.Decimal128	`json:"threshold" bson:"threshold"`
 	Orderbook			Orderbook				`json:"orderbook" bson:"orderbook"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"last"`
