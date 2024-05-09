@@ -5,6 +5,7 @@ import (
 	"math/big"
 	"reflect"
 
+	"github.com/coinmeca/go-common/commonmethod/token"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -16,27 +17,20 @@ const (
 	TradeTypeClaim
 )
 
-type OutputToken struct {
-	Address  common.Address // TODO: abi -> addr
-	Name     string
-	Symbol   string
-	Decimals uint8
-}
-
 type OutputFarm struct {
-	Id       *big.Int
-	Farm     common.Address	`json:"farm" bson:"farm"`
-	Master   common.Address	`json:"master" bson:"master"`
-	Name     string			`json:"name" bson:"name"`
-	Stake    OutputToken	`json:"stake" bson:"stake"`
-	Earn     OutputToken	`json:"earn" bson:"earn"`
-	Start    *big.Int		`json:"start" bson:"start"`
-	Period   *big.Int		`json:"period" bson:"period"`
-	Duration *big.Int		`json:"duration" bson"duration"`
-	Goal     *big.Int		`json:"goal" bson:"goal"`
-	Locked   *big.Int		`json:"locked" bson:"locked"`
-	Rewards  *big.Int		`json:"rewards" bson:"rewards"`
-	Total    *big.Int		`json:"total" bson:"total"`
+	Address		common.Address		`json:"farm" bson:"farm"`
+	Id			*big.Int
+	Master		common.Address		`json:"master" bson:"master"`
+	Name		string				`json:"name" bson:"name"`
+	Stake		token.OutputToken	`json:"stake" bson:"stake"`
+	Earn		token.OutputToken	`json:"earn" bson:"earn"`
+	Start		*big.Int			`json:"start" bson:"start"`
+	Period		*big.Int			`json:"period" bson:"period"`
+	Duration	*big.Int			`json:"duration" bson"duration"`
+	Goal		*big.Int			`json:"goal" bson:"goal"`
+	Locked		*big.Int			`json:"locked" bson:"locked"`
+	Rewards		*big.Int			`json:"rewards" bson:"rewards"`
+	Total		*big.Int			`json:"total" bson:"total"`
 }
 
 type OutputFarms struct {

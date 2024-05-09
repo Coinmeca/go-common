@@ -34,7 +34,7 @@ type Vault struct {
 	Address				string					`json:"address" bson:"address"`
 	Name				string					`json:"name" bson:"name"`
 	Symbol				string					`json:"symbol" bson:"symbol"`
-	Decimals			int						`json:"decimals" bson:"decimals"`
+	Decimals			int8					`json:"decimals" bson:"decimals"`
 	Exchange			primitive.Decimal128	`json:"exchange" bson:"exchange"`
 	Rate				primitive.Decimal128	`json:"rate" bson:"rate"`
 	Locked				primitive.Decimal128	`json:"locked" bson:"locked"`

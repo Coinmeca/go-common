@@ -9,6 +9,14 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+type OutputToken struct {
+	Address   common.Address `json:"address" bson:"address"` // TODO: abi -> addr
+	Name      string         `json:"name" bson:"name"`
+	Symbol    string         `json:"symbol" bson:"symbol"`
+	Decimals  uint8          `json:"decimals" bson:"decimals"`
+	Liquidity *big.Int       `json:"liquidity" bson:"liquidity"`
+}
+
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {
 	methodAbi, ok := contractAbi.Methods[method]
 	if !ok {

@@ -2,13 +2,13 @@ package commonutils
 
 import (
 	"encoding/binary"
-	"math/big"
 	"math"
+	"math/big"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-func BigIntFromDecimal128(decimal primitive.Decimal128) *big.Int {
+func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 	// Extract the low part of the Decimal128
 	_, low := decimal.GetBytes()
 
@@ -24,38 +24,34 @@ func BigIntFromDecimal128(decimal primitive.Decimal128) *big.Int {
 	return bigIntValue
 }
 
-func Decimal128FromBigInt(bigInt *big.Int) (primitive.Decimal128, error) {
-	// Convert the big.Int to a string
-	value := bigInt.String()
-
+func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 	// Create a Decimal128 from the string representation of the big.Int
-	decimal128, err := primitive.ParseDecimal128(value)
+	decimal128, err := primitive.ParseDecimal128(bigInt.String())
 	if err != nil {
-		return primitive.Decimal128{}, err
+		return &primitive.Decimal128{}, err
 	}
-
-	return decimal128, nil
+	return &decimal128, nil
 }
 
-func Float64ToDecimal128(float float64) (primitive.Decimal128, error) {
+func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
     intValue, frac := math.Modf(float)
     intPart := big.NewInt(int64(intValue))
     fracPart := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
 
-    if float < 0 {
+	var zero float64
+    if float < zero {
         intPart = intPart.Neg(intPart)
     }
 
 	decimal128, err := Decimal128FromBigInt(intPart.Add(intPart, fracPart))
 	if err != nil {
-		return primitive.Decimal128{}, err
+		return &primitive.Decimal128{}, err
 	}
 
 	return decimal128, nil
 }
 
-
-func MulDecimal128(decimal1, decimal2 primitive.Decimal128) (primitive.Decimal128, error) {
+func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
 
@@ -65,7 +61,7 @@ func MulDecimal128(decimal1, decimal2 primitive.Decimal128) (primitive.Decimal12
     // Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(value)
 	if err != nil {
-        return primitive.Decimal128{}, err
+        return &primitive.Decimal128{}, err
 	}
 
     return result, nil

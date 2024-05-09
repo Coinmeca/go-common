@@ -9,7 +9,7 @@ import (
 type Recent struct {
 	Time				int64					`json:"time" bson:"time"`
 	Type				int						`json:"type" bson:"type"`
-	Market				string					`json:"market" bson:"market"`
+	Address				string					`json:"market" bson:"market"`
 	User				string					`json:"user" bson:"user"`
 	Sell				string					`json:"sell" bson:"sell"`
 	Price				primitive.Decimal128	`json:"symbol" bson:"symbol"`
@@ -35,6 +35,8 @@ type Volume struct {
 }
 
 type Chart struct {
+	ChainId				int64					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"market" bson:"market"`
 	Time				int64					`json:"time" bson:"time"`
 	Open				primitive.Decimal128	`json:"open" bson:"open"`
 	High				primitive.Decimal128	`json:"high" bson:"high"`
@@ -58,7 +60,7 @@ type Last struct {
 }
 
 type Market struct {
-	Address				string					`json:"address" bson:"address"`
+	Address				string					`json:"market" bson:"market"`
 	Name				string					`json:"name" bson:"name"`
 	Symbol				string					`json:"symbol" bson:"symbol"`
 	Base				token.Token				`json:"base" bson:"base"`
@@ -67,8 +69,8 @@ type Market struct {
 	Liquidity			Liquidity				`json:"liquidity" bson:"liquidity"`
 	Volume				Volume					`json:"volume" bson:"volume"`
 	Tick				primitive.Decimal128	`json:"tick" bson:"tick"`
-	Fee					int8					`json:"fee" bson:"fee"`
-	Threshold			int8					`json:"threshold" bson:"threshold"`
+	Fee					uint8					`json:"fee" bson:"fee"`
+	Threshold			uint8					`json:"threshold" bson:"threshold"`
 	Lock				bool					`json:"lock" bson:"lock"`
 	Orderbook			Orderbook				`json:"orderbook" bson:"orderbook"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`

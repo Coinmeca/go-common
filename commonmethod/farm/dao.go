@@ -9,7 +9,7 @@ import (
 type Recent struct {
 	Time				int64					`json:"time" bson:"time"`
 	Type				int						`json:"type" bson:"type"`
-	Farm				string					`json:"farm" bson:"farm"`
+	Address				string					`json:"farm" bson:"farm"`
 	User				string					`json:"owner" bson:"owner"`
 	Amount				primitive.Decimal128	`json:"amount" bson:"amount"`
 	Share				primitive.Decimal128	`json:"share" bson:"share"`
