@@ -4,9 +4,22 @@ import (
 	"encoding/binary"
 	"math"
 	"math/big"
+	"time"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
+
+func GetCurrentDate() *string {
+	currentTime := time.Now()
+    formattedDate := currentTime.Format("2006-01-02 15:04:05")
+	return &formattedDate
+}
+
+func FormattedDate(t *int64) *string {
+	unixTime := time.Unix(t, 0)
+    formattedDate := unixTime.Format("2006-01-02 15:04:05")
+	return &formattedDate
+}
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 	// Extract the low part of the Decimal128
