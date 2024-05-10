@@ -2,7 +2,7 @@ package treasury
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
-type Info struct {
+type Treasury struct {
 	ChainId				int64					`json:"chainId" bson:"chainId"`
 	TVL					primitive.Decimal128	`json:"tvl" bson:"tvl"`
 	TV					primitive.Decimal128	`json:"tv" bson:"tv"`
