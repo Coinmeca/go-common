@@ -34,15 +34,15 @@ type OutputOrderbook struct {
 }
 
 type OutputMarket struct {
-	Address   common.Address `abi:"market" bson:"market"`
-	Nft       common.Address `abi:"nft" bson:"nft"`
-	Base      token.OutputToken    `abi:"base" bson:"base"`
-	Quote     token.OutputToken    `abi:"quote" bson:"quote"`
-	Price     *big.Int       `abi:"price" bson:"price"`
-	Tick      *big.Int       `abi:"tick" bson:"tick"`
-	Fee       uint8          `abi:"fee" bson:"fee"`
-	Threshold uint8          `abi:"threshold" bson:"threshold"`
-	Lock      bool           `abi:"lock" bson:"lock"`
+	Address   common.Address	`abi:"market" bson:"market"`
+	Nft       common.Address	`abi:"nft" bson:"nft"`
+	Base      token.OutputToken	`abi:"base" bson:"base"`
+	Quote     token.OutputToken	`abi:"quote" bson:"quote"`
+	Price     *big.Int			`abi:"price" bson:"price"`
+	Tick      *big.Int			`abi:"tick" bson:"tick"`
+	Fee       int64				`abi:"fee" bson:"fee"`
+	Threshold int64				`abi:"threshold" bson:"threshold"`
+	Lock      bool				`abi:"lock" bson:"lock"`
 }
 
 type OutputOrderbookResult struct {

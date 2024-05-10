@@ -55,9 +55,21 @@ type Vault struct {
 	Last				Last					`json:"last" bson:"last"`
 }
 
-type ChartSub struct {
+type Chart struct {
+	ChainId				int64					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"market" bson:"market"`
 	Time				int64					`json:"time" bson:"time"`
+	Open				primitive.Decimal128	`json:"open" bson:"open"`
+	High				primitive.Decimal128	`json:"high" bson:"high"`
+	Low					primitive.Decimal128	`json:"low" bson:"low"`
+	Close				primitive.Decimal128	`json:"close" bson:"close"`
+	Volume				primitive.Decimal128	`json:"volume" bson:"volume"`
+}
+
+type ChartSub struct {
+	ChainId				int64					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
+	Time				int64					`json:"time" bson:"time"`
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
 	Locked				primitive.Decimal128	`json:"locked" bson:"locked"`
 	Value				primitive.Decimal128	`json:"value" bson:"value"`

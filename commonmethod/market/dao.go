@@ -8,7 +8,7 @@ import (
 
 type Recent struct {
 	Time				int64					`json:"time" bson:"time"`
-	Type				int						`json:"type" bson:"type"`
+	Type				int64					`json:"type" bson:"type"`
 	Address				string					`json:"market" bson:"market"`
 	User				string					`json:"user" bson:"user"`
 	Sell				string					`json:"sell" bson:"sell"`
@@ -69,8 +69,8 @@ type Market struct {
 	Liquidity			Liquidity				`json:"liquidity" bson:"liquidity"`
 	Volume				Volume					`json:"volume" bson:"volume"`
 	Tick				primitive.Decimal128	`json:"tick" bson:"tick"`
-	Fee					uint8					`json:"fee" bson:"fee"`
-	Threshold			uint8					`json:"threshold" bson:"threshold"`
+	Threshold			int64					`json:"threshold" bson:"threshold"`
+	Fee					int64					`json:"fee" bson:"fee"`
 	Lock				bool					`json:"lock" bson:"lock"`
 	Orderbook			Orderbook				`json:"orderbook" bson:"orderbook"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
