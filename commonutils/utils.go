@@ -11,13 +11,13 @@ import (
 
 func GetCurrentDate() *string {
 	currentTime := time.Now()
-    formattedDate := currentTime.Format("2006-01-02 15:04:05")
+	formattedDate := currentTime.Format("2006-01-02 15:04:05")
 	return &formattedDate
 }
 
 func FormattedDate(t *int64) *string {
-	unixTime := time.Unix(t, 0)
-    formattedDate := unixTime.Format("2006-01-02 15:04:05")
+	unixTime := time.Unix(*t, 0)
+	formattedDate := unixTime.Format("2006-01-02 15:04:05")
 	return &formattedDate
 }
 
@@ -47,14 +47,14 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 }
 
 func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
-    intValue, frac := math.Modf(float)
-    intPart := big.NewInt(int64(intValue))
-    fracPart := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
+	intValue, frac := math.Modf(float)
+	intPart := big.NewInt(int64(intValue))
+	fracPart := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
 
 	var zero float64
-    if float < zero {
-        intPart = intPart.Neg(intPart)
-    }
+	if float < zero {
+		intPart = intPart.Neg(intPart)
+	}
 
 	decimal128, err := Decimal128FromBigInt(intPart.Add(intPart, fracPart))
 	if err != nil {
@@ -68,14 +68,14 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
 
-    // Perform multiplication
-    value := new(big.Int).Mul(value1, value2)
+	// Perform multiplication
+	value := new(big.Int).Mul(value1, value2)
 
-    // Convert the result back to primitive.Decimal128
+	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(value)
 	if err != nil {
-        return &primitive.Decimal128{}, err
+		return &primitive.Decimal128{}, err
 	}
 
-    return result, nil
+	return result, nil
 }
