@@ -8,7 +8,7 @@ import (
 
 type Recent struct {
 	Time				int64					`json:"time" bson:"time"`
-	Type				int						`json:"type" bson:"type"`
+	Type				int64					`json:"type" bson:"type"`
 	User				string					`json:"user" bson:"user"`
 	Token				string					`json:"token" bson:"token"`
 	Amount				primitive.Decimal128	`json:"volume" bson:"volume"`
@@ -26,6 +26,8 @@ type Last struct {
 	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Value				primitive.Decimal128	`json:"value" bson:"value"`
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
+	Mint				primitive.Decimal128	`json:"mint" bson:"mint"`
+	Burn				primitive.Decimal128	`json:"burn" bson:"burn"`
 	Recent				Recent					`json:"recent" bson:"Recent"`
 }
 
@@ -34,7 +36,7 @@ type Vault struct {
 	Address				string					`json:"address" bson:"address"`
 	Name				string					`json:"name" bson:"name"`
 	Symbol				string					`json:"symbol" bson:"symbol"`
-	Decimals			int8					`json:"decimals" bson:"decimals"`
+	Decimals			int64					`json:"decimals" bson:"decimals"`
 	Exchange			primitive.Decimal128	`json:"exchange" bson:"exchange"`
 	Rate				primitive.Decimal128	`json:"rate" bson:"rate"`
 	Locked				primitive.Decimal128	`json:"locked" bson:"locked"`

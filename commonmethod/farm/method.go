@@ -10,6 +10,11 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+
+const (
+	MethodFarmGetAll = "getAll"
+)
+
 const (
 	TradeTypeStake = iota
 	TradeTypeUnstake
@@ -26,7 +31,7 @@ type OutputFarm struct {
 	Earn		token.OutputToken	`json:"earn" bson:"earn"`
 	Start		*big.Int			`json:"start" bson:"start"`
 	Period		*big.Int			`json:"period" bson:"period"`
-	Duration	*big.Int			`json:"duration" bson"duration"`
+	Duration	*big.Int			`json:"duration" bson:"duration"`
 	Goal		*big.Int			`json:"goal" bson:"goal"`
 	Locked		*big.Int			`json:"locked" bson:"locked"`
 	Rewards		*big.Int			`json:"rewards" bson:"rewards"`

@@ -25,7 +25,7 @@ type OutputVault struct {
 	Address  common.Address `abi:"addr" bson:"address"`
 	Name     string         `abi:"name" bson:"name"`
 	Symbol   string         `abi:"symbol" bson:"symbol"`
-	Decimals uint8          `abi:"decimals" bson:"decimals"`
+	Decimals int64          `abi:"decimals" bson:"decimals"`
 	Locked   *big.Int       `abi:"locked" bson:"locked"`
 	Exchange *big.Int       `abi:"exchange" bson:"exchange"`
 	Rate     *big.Int       `abi:"rate" bson:"rate"`
