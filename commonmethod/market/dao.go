@@ -17,6 +17,7 @@ type Recent struct {
 	Buy					string					`json:"buy" bson:"buy"`
 	Quantity			primitive.Decimal128	`json:"quantity" bson:"quantity"`
 	TxHash				string					`json:"txHash" bson:"txHash"`
+	UpdateAt			string					`json:"updateAt" bson:"updateAt"`
 }
 
 type Tick struct {

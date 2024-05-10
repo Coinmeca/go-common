@@ -1,8 +1,6 @@
 package vault
 
 import (
-	"time"
-
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -15,7 +13,7 @@ type Recent struct {
 	Meca				primitive.Decimal128	`json:"meca" bson:"meca"`
 	Share				primitive.Decimal128	`json:"share" bson:"share"`
 	TxHash				string					`json:"txHash" bson:"txHash"`
-	UpdateAt			time.Time				`json:"updateAt" bson:"updateAt"`
+	UpdateAt			string					`json:"updateAt" bson:"updateAt"`
 }
 
 type Last struct {

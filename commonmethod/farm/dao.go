@@ -14,6 +14,7 @@ type Recent struct {
 	Amount				primitive.Decimal128	`json:"amount" bson:"amount"`
 	Share				primitive.Decimal128	`json:"share" bson:"share"`
 	TxHash				string					`json:"txHash" bson:"txHash"`
+	UpdateAt			string					`json:"updateAt" bson:"updateAt"`
 }
 
 
