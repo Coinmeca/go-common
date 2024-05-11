@@ -5,6 +5,10 @@ import (
 	"math/big"
 )
 
+const (
+	EventNameDeposit = "Deposit"
+)
+
 type EventWithdraw struct {
 	Owner  common.Address
 	Token  common.Address

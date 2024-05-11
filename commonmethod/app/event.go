@@ -1,13 +1,13 @@
 package app
 
 const (
-	EventAppInfo = "AppInfo"
+	EventNameAppInfo = "AppInfo"
 
-	EventAdmin      = "Admin"
-	EventPermission = "Permission"
+	EventNameAdmin      = "Admin"
+	EventNamePermission = "Permission"
 
-	EventNonceInvalidation = "NonceInvalidation"
-	EventApproval          = "Approval"
-	EventPermit            = "Permit"
-	EventLockdown          = "Lockdown"
+	EventNameNonceInvalidation = "NonceInvalidation"
+	EventNameApproval          = "Approval"
+	EventNamePermit            = "Permit"
+	EventNameLockdown          = "Lockdown"
 )

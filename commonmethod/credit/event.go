@@ -1,17 +1,17 @@
 package credit
 
 const (
-	EventSetUserName = "SetUserName"
-	EventSetUserImg  = "SetUserImg"
-	EventSetUser     = "SetUser"
-	EventAppAdd      = "AppAdd"
-	EventAppRemove   = "AppRemove"
+	EventNameSetUserName = "SetUserName"
+	EventNameSetUserImg  = "SetUserImg"
+	EventNameSetUser     = "SetUser"
+	EventNameAppAdd      = "AppAdd"
+	EventNameAppRemove   = "AppRemove"
 
-	EventIncreasePoint = "IncreasePoint"
-	EventDecreasePoint = "DecreasePoint"
-	EventIncreaseScore = "IncreaseScore"
-	EventDecreaseScore = "DecreaseScore"
+	EventNameIncreasePoint = "IncreasePoint"
+	EventNameDecreasePoint = "DecreasePoint"
+	EventNameIncreaseScore = "IncreaseScore"
+	EventNameDecreaseScore = "DecreaseScore"
 
-	EventSetPoint = "SetPoint"
-	EventSetScore = "SetScore"
+	EventNameSetPoint = "SetPoint"
+	EventNameSetScore = "SetScore"
 )
