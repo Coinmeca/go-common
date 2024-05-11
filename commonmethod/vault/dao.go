@@ -5,6 +5,8 @@ import (
 )
 
 type Recent struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Time				int64					`json:"time" bson:"time"`
 	Type				int64					`json:"type" bson:"type"`
 	User				string					`json:"user" bson:"user"`
@@ -17,6 +19,8 @@ type Recent struct {
 }
 
 type Last struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Exchange			primitive.Decimal128	`json:"exchange" bson:"exchange"`
 	Deposit				primitive.Decimal128	`json:"deposit" bson:"deposit"`
 	Withdraw			primitive.Decimal128	`json:"withdraw" bson:"withdraw"`
@@ -30,8 +34,9 @@ type Last struct {
 }
 
 type Vault struct {
-	Key					bool					`json:"key" bson:"key"`
+	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
+	Key					bool					`json:"key" bson:"key"`
 	Name				string					`json:"name" bson:"name"`
 	Symbol				string					`json:"symbol" bson:"symbol"`
 	Decimals			int64					`json:"decimals" bson:"decimals"`
@@ -54,7 +59,7 @@ type Vault struct {
 }
 
 type Chart struct {
-	ChainId				int64					`json:"chainId" bson:"chainId"`
+	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"market" bson:"market"`
 	Time				int64					`json:"time" bson:"time"`
 	Open				primitive.Decimal128	`json:"open" bson:"open"`
@@ -65,7 +70,7 @@ type Chart struct {
 }
 
 type ChartSub struct {
-	ChainId				int64					`json:"chainId" bson:"chainId"`
+	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
 	Time				int64					`json:"time" bson:"time"`
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`

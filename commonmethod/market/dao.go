@@ -7,9 +7,10 @@ import (
 )
 
 type Recent struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Time				int64					`json:"time" bson:"time"`
 	Type				int64					`json:"type" bson:"type"`
-	Address				string					`json:"market" bson:"market"`
 	User				string					`json:"user" bson:"user"`
 	Sell				string					`json:"sell" bson:"sell"`
 	Price				primitive.Decimal128	`json:"symbol" bson:"symbol"`
@@ -36,8 +37,8 @@ type Volume struct {
 }
 
 type Chart struct {
-	ChainId				int64					`json:"chainId" bson:"chainId"`
-	Address				string					`json:"market" bson:"market"`
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Time				int64					`json:"time" bson:"time"`
 	Open				primitive.Decimal128	`json:"open" bson:"open"`
 	High				primitive.Decimal128	`json:"high" bson:"high"`
@@ -52,6 +53,8 @@ type Orderbook struct {
 }
 
 type Last struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Price				primitive.Decimal128	`json:"price" bson:"price"`
 	High				primitive.Decimal128	`json:"high" bson:"high"`
 	Low					primitive.Decimal128	`json:"low" bson:"low"`
@@ -61,7 +64,8 @@ type Last struct {
 }
 
 type Market struct {
-	Address				string					`json:"market" bson:"market"`
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`s
 	Name				string					`json:"name" bson:"name"`
 	Symbol				string					`json:"symbol" bson:"symbol"`
 	Base				token.Token				`json:"base" bson:"base"`

@@ -7,9 +7,10 @@ import (
 )
 
 type Recent struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Time				int64					`json:"time" bson:"time"`
 	Type				int						`json:"type" bson:"type"`
-	Address				string					`json:"farm" bson:"farm"`
 	User				string					`json:"owner" bson:"owner"`
 	Amount				primitive.Decimal128	`json:"amount" bson:"amount"`
 	Share				primitive.Decimal128	`json:"share" bson:"share"`
@@ -19,6 +20,8 @@ type Recent struct {
 
 
 type Last struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
@@ -29,6 +32,7 @@ type Last struct {
 }
 
 type Farm struct {
+	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
 	Id					string					`json:"id" bson:"id"`
 	Name				string					`json:"name" bson:"name"`
