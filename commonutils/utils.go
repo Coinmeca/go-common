@@ -4,10 +4,50 @@ import (
 	"encoding/binary"
 	"math"
 	"math/big"
+	"reflect"
+	"strings"
 	"time"
 
+	"github.com/coinmeca/go-common/commonlog"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.uber.org/zap"
 )
+
+func JoinFromStructs(slice interface{}, fieldName, sep string) string {
+	sliceValue := reflect.ValueOf(slice)
+	if sliceValue.Kind() != reflect.Slice {
+		panic("JoinStructs: slice argument must be a slice")
+	}
+
+	var parts []string
+	for i := 0; i < sliceValue.Len(); i++ {
+		elem := sliceValue.Index(i)
+		if elem.Kind() == reflect.Struct {
+			field := elem.FieldByName(fieldName)
+			if !field.IsValid() {
+				commonlog.Logger.Error("JoinFromStructs",
+					zap.String("field '%s' not found in struct", fieldName),
+				)
+				continue
+			}
+
+			if field.Kind() != reflect.String {
+				commonlog.Logger.Error("JoinFromStructs",
+					zap.String("field '%s' must be of type string", fieldName),
+				)
+				continue
+			}
+			parts = append(parts, field.String())
+		} else {
+			commonlog.Logger.Error("JoinFromStructs",
+				zap.String("Not struct type", ""),
+			)
+			continue
+		}
+	}
+
+	return strings.Join(parts, sep)
+}
 
 func GetCurrentDate() *string {
 	currentTime := time.Now()
