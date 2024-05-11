@@ -119,3 +119,67 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 
 	return result, nil
 }
+
+func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
+	value1 := BigIntFromDecimal128(decimal1)
+	value2 := BigIntFromDecimal128(decimal2)
+
+	// Perform multiplication
+	value := new(big.Int).Add(value1, value2)
+
+	// Convert the result back to primitive.Decimal128
+	result, err := Decimal128FromBigInt(value)
+	if err != nil {
+		return &primitive.Decimal128{}, err
+	}
+
+	return result, nil
+}
+
+func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
+	value1 := BigIntFromDecimal128(decimal1)
+	value2 := BigIntFromDecimal128(decimal2)
+
+	// Perform multiplication
+	value := new(big.Int).Sub(value1, value2)
+
+	// Convert the result back to primitive.Decimal128
+	result, err := Decimal128FromBigInt(value)
+	if err != nil {
+		return &primitive.Decimal128{}, err
+	}
+
+	return result, nil
+}
+
+func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
+	value1 := BigIntFromDecimal128(decimal1)
+	value2 := BigIntFromDecimal128(decimal2)
+
+	// Perform multiplication
+	value := new(big.Int).Div(value1, value2)
+
+	// Convert the result back to primitive.Decimal128
+	result, err := Decimal128FromBigInt(value)
+	if err != nil {
+		return &primitive.Decimal128{}, err
+	}
+
+	return result, nil
+}
+
+func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
+	value1 := BigIntFromDecimal128(decimal1)
+	value2 := BigIntFromDecimal128(decimal2)
+
+	// Perform multiplication
+	value := new(big.Int).Quo(value1, value2)
+
+	// Convert the result back to primitive.Decimal128
+	result, err := Decimal128FromBigInt(value)
+	if err != nil {
+		return &primitive.Decimal128{}, err
+	}
+
+	return result, nil
+}
