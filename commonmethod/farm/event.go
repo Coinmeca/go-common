@@ -6,6 +6,15 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
+const (
+	EventNameStake   = "Stake"
+	EventNameUnStake = "Unstake"
+	EventNameHarvest = "Harvest"
+	EventNameClaim   = "Claim"
+	EventNameMain    = "Main"
+	EventNameDerive  = "Derive"
+)
+
 type EventStake struct {
 	User   common.Address
 	Amount *big.Int
