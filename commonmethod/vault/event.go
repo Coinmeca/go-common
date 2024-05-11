@@ -6,7 +6,15 @@ import (
 )
 
 const (
-	EventNameDeposit = "Deposit"
+	EventNameKeyToken = "KeyToken"
+	EventNameFee      = "Fee"
+	EventNameReward   = "Reward"
+
+	EventNameDeposit    = "Deposit"
+	EventNameWithdraw   = "Withdraw"
+	EventNameListing    = "Listing"
+	EventNameDelisting  = "Delisting"
+	EventNamePermission = "Permission"
 )
 
 type EventWithdraw struct {
