@@ -73,7 +73,7 @@ func UnmarshalV3(abiData *abi.ABI, methodName string, data []byte, output interf
 
 	rawOutput, err := method.Outputs.Unpack(data)
 	if err != nil {
-		return fmt.Errorf("failed to unpack output: %v", err)
+		return fmt.Errorf("Failed to unpack output: %v", err)
 	}
 
 	fmt.Printf("Raw output: %+v\n", rawOutput)
@@ -193,7 +193,7 @@ func assignField(inputValue reflect.Value, inputType reflect.Type, unpackedValue
 
 		if fieldType.Tag.Get("abi") == outputName {
 			if err := setFieldValue(fieldVal, unpackedValue); err != nil {
-				return fmt.Errorf("failed to set field %s: %v", outputName, err)
+				return fmt.Errorf("Failed to set field %s: %v", outputName, err)
 			}
 			break
 		}

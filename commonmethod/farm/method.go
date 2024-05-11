@@ -77,7 +77,7 @@ func assignField(inputValue reflect.Value, inputType reflect.Type, unpackedValue
 
 		if fieldType.Tag.Get("abi") == outputName {
 			if err := setFieldValue(fieldVal, unpackedValue); err != nil {
-				return fmt.Errorf("failed to set field %s: %v", outputName, err)
+				return fmt.Errorf("Failed to set field %s: %v", outputName, err)
 			}
 			break
 		}
