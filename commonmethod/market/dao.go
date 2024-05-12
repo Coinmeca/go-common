@@ -71,13 +71,14 @@ type Market struct {
 	Base      token.Token          `json:"base" bson:"base"`
 	Quote     token.Token          `json:"quote" bson:"quote"`
 	Price     primitive.Decimal128 `json:"price" bson:"price"`
-	Liquidity Liquidity            `json:"liquidity" bson:"liquidity"`
-	Volume    Volume               `json:"volume" bson:"volume"`
 	Tick      primitive.Decimal128 `json:"tick" bson:"tick"`
+	Volume    Volume               `json:"volume" bson:"volume"`
+	Liquidity Liquidity            `json:"liquidity" bson:"liquidity"`
+	Orderbook Orderbook            `json:"orderbook" bson:"orderbook"`
 	Threshold int64                `json:"threshold" bson:"threshold"`
 	Fee       int64                `json:"fee" bson:"fee"`
 	Lock      bool                 `json:"lock" bson:"lock"`
-	Orderbook Orderbook            `json:"orderbook" bson:"orderbook"`
+	Chart	  []Chart			   `json:"chart" bson:"chart"`
 	Recents   []Recent             `json:"recents" bson:"recents"`
 	Last      Last                 `json:"last" bson:"last"`
 }

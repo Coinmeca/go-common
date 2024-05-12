@@ -54,6 +54,8 @@ type Vault struct {
 	Mint				primitive.Decimal128	`json:"mint" bson:"mint"`
 	Burn				primitive.Decimal128	`json:"burn" bson:"burn"`
 	Value				primitive.Decimal128	`json:"value" bson:"value"`
+	Chart				[]Chart					`json:"chart" bson:"chart"`
+	ChartSub			[]ChartSub				`json:"chartSub" bson:"chartSub"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"last"`
 }

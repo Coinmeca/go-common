@@ -184,7 +184,7 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 	return result, nil
 }
 
-func FloatStringFromDecimal128(decimal primitive.Decimal128) string {
+func FloatStringFromDecimal128(decimal *primitive.Decimal128) *string {
 	// Convert Decimal128 to string
 	str := decimal.String()
 
@@ -209,5 +209,5 @@ func FloatStringFromDecimal128(decimal primitive.Decimal128) string {
 	// Concatenate integer and fractional parts
 	result := integerPart + "." + fractionalPart
 
-	return result
+	return &result
 }
