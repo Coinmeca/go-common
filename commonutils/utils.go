@@ -2,6 +2,7 @@ package commonutils
 
 import (
 	"encoding/binary"
+	"github.com/pkg/errors"
 	"math"
 	"math/big"
 	"reflect"
@@ -78,6 +79,10 @@ func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 }
 
 func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
+	if bigInt == nil {
+		return nil, errors.New("parameter value is nil")
+	}
+
 	// Create a Decimal128 from the string representation of the big.Int
 	decimal128, err := primitive.ParseDecimal128(bigInt.String())
 	if err != nil {
