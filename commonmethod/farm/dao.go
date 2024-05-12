@@ -35,8 +35,10 @@ type Farm struct {
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
 	Id					int64					`json:"id" bson:"id"`
-	Name				string					`json:"name" bson:"name"`
 	Master				string					`json:"master" bson:"master"`
+	Name				string					`json:"name" bson:"name"`
+	Symbol				string					`json:"symbol" bson:"symbol"`
+	Decimals			int64					`json:"decimals" bson:"decimals"`
 	Stake				token.Token				`json:"stake" bson:"stake"`
 	Earn				token.Token				`json:"earn" bson:"earn"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
