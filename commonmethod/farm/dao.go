@@ -34,7 +34,7 @@ type Last struct {
 type Farm struct {
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
-	Id					string					`json:"id" bson:"id"`
+	Id					int64					`json:"id" bson:"id"`
 	Name				string					`json:"name" bson:"name"`
 	Master				string					`json:"master" bson:"master"`
 	Stake				token.Token				`json:"stake" bson:"stake"`
