@@ -11,8 +11,13 @@ import (
 )
 
 const (
-	MethodGetAll	= "getAll"
+	MethodGetAll				= "getAll0"
+	MethodGetAllWithOrderbook	= "getAll1"
 )
+
+type OutputMarketsDetail struct {
+	Markets []market.OutputMarketDetail `abi:""`
+}
 
 type OutputMarkets struct {
 	Markets []market.OutputMarket `abi:""`
