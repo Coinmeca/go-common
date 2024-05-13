@@ -22,15 +22,14 @@ const (
 	TradeTypeAsk
 )
 
+type OutputTick struct{
+	Price   *big.Int `abi:"price" bson:"price"`
+	Balance *big.Int `abi:"balance" bson:"balance"`
+}
+
 type OutputOrderbook struct {
-	Asks []struct {
-		Price   *big.Int `abi:"price" bson:"price"`
-		Balance *big.Int `abi:"balance" bson:"balance"`
-	} `abi:"asks" bson:"asks"`
-	Bids []struct {
-		Price   *big.Int `abi:"price" bson:"price"`
-		Balance *big.Int `abi:"balance" bson:"balance"`
-	} `abi:"bids" bson:"bids"`
+	Asks []OutputTick `abi:"asks" bson:"asks"`
+	Bids []OutputTick `abi:"bids" bson:"bids"`
 }
 
 type OutputMarketDetail struct {
@@ -43,8 +42,8 @@ type OutputMarketDetail struct {
 	Price     *big.Int          `abi:"price" bson:"price"`
 	Tick      *big.Int          `abi:"tick" bson:"tick"`
 	Orderbook OutputOrderbook   `abi:"orderbook" bson:"orderbook"`
-	Fee       int64             `abi:"fee" bson:"fee"`
-	Threshold int64             `abi:"threshold" bson:"threshold"`
+	Fee       uint8             `abi:"fee" bson:"fee"`
+	Threshold uint8             `abi:"threshold" bson:"threshold"`
 	Lock      bool              `abi:"lock" bson:"lock"`
 }
 
@@ -147,10 +146,6 @@ type OutputPrice struct {
 
 type OutputQuote struct {
 	Quote common.Address `abi:""`
-}
-
-type OutputTick struct {
-	Tick *big.Int `abi:""`
 }
 
 type OutputGetMargin struct {
