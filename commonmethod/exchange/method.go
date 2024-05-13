@@ -11,8 +11,8 @@ import (
 )
 
 const (
-	MethodGetAll				= "getAll0"
-	MethodGetAllWithOrderbook	= "getAll1"
+	MethodGetAll              = "getAll0"
+	MethodGetAllWithOrderbook = "getAll"
 )
 
 type OutputMarketsDetail struct {
