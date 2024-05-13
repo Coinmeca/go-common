@@ -2,12 +2,14 @@ package commonutils
 
 import (
 	"encoding/binary"
-	"github.com/pkg/errors"
+	"fmt"
 	"math"
 	"math/big"
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/pkg/errors"
 
 	"github.com/coinmeca/go-common/commonlog"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -122,6 +124,7 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 		return &primitive.Decimal128{}, err
 	}
 
+	fmt.Println("decimal value: ", result)
 	return result, nil
 }
 
