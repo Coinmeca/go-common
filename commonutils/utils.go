@@ -2,7 +2,6 @@ package commonutils
 
 import (
 	"encoding/binary"
-	"fmt"
 	"math"
 	"math/big"
 	"reflect"
@@ -169,7 +168,6 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 		return nil, err
 	}
 
-	fmt.Println("decimal value: ", result)
 	return result, nil
 }
 
