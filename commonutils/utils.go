@@ -112,7 +112,7 @@ func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
 }
 
 func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	zero := new(big.Int)
+	var zero *primitive.Decimal128
 	if decimal1 == zero {
 		return decimal2, nil
 	} else if decimal2 == zero {
@@ -132,7 +132,7 @@ func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 }
 
 func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	zero := new(big.Int)
+	var zero *primitive.Decimal128
 	if decimal1 == zero {
 		return decimal2, nil
 	} else if decimal2 == zero {
