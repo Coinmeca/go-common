@@ -10,7 +10,7 @@ import (
 )
 
 type OutputToken struct {
-	Address   common.Address `json:"address" bson:"address"` // TODO: abi -> addr
+	Address   common.Address `json:"addr" bson:"address"`
 	Name      string         `json:"name" bson:"name"`
 	Symbol    string         `json:"symbol" bson:"symbol"`
 	Decimals  uint8          `json:"decimals" bson:"decimals"`

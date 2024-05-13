@@ -23,11 +23,11 @@ const (
 )
 
 type OutputFarm struct {
+	Id			*big.Int			`json:"id" bson:"id"`
 	Address		common.Address		`json:"farm" bson:"farm"`
-	Id			*big.Int
 	Master		common.Address		`json:"master" bson:"master"`
 	Name		string				`json:"name" bson:"name"`
-	Symbol		string				`json:"name" bson:"symbol"`
+	Symbol		string				`json:"symbol" bson:"symbol"`
 	Decimals	uint8				`json:"decimals" bson:"decimals"`
 	Stake		token.OutputToken	`json:"stake" bson:"stake"`
 	Earn		token.OutputToken	`json:"earn" bson:"earn"`
