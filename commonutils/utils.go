@@ -253,28 +253,29 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 
 func FloatStringFromDecimal128(decimal *primitive.Decimal128) *string {
 	// Convert Decimal128 to string
-	str := decimal.String()
+	zero := "0"
+	value := BigIntFromDecimal128(decimal)
+	valueString := value.String()
 
-	// Add '+' sign if positive
-	if str[0] != '-' {
-		str = "+" + str
+	if valueString == zero {
+		return &zero
 	}
 
 	// Split integer and fractional parts
-	parts := strings.SplitN(str, ".", 2)
-	integerPart := parts[0]
-	fractionalPart := ""
-	if len(parts) > 1 {
-		fractionalPart = parts[1]
+	number := strings.SplitN(valueString, ".", 2)
+	integer := number[0]
+	fractional := ""
+	if len(number) > 1 {
+		fractional = number[1]
 	}
 
 	// Pad fractional part with zeros if needed
-	for len(fractionalPart) < 18 {
-		fractionalPart += "0"
+	for len(fractional) < 18 {
+		fractional += "0"
 	}
 
 	// Concatenate integer and fractional parts
-	result := integerPart + "." + fractionalPart
+	result := integer + "." + fractional
 
 	return &result
 }
