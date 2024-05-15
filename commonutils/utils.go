@@ -13,6 +13,7 @@ import (
 	"github.com/coinmeca/go-common/commonlog"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
+	"fmt"
 )
 
 func JoinFromStructs(slice interface{}, fieldName, sep string) string {
@@ -64,19 +65,32 @@ func FormattedDate(t *int64) *string {
 }
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
-	// Extract the low part of the Decimal128
-	_, low := decimal.GetBytes()
+	// Extract the high and low parts of the Decimal128
+	high, low := decimal.GetBytes()
 
-	// Encode the low part into a byte slice
-	lowBytes := make([]byte, binary.MaxVarintLen64)
-	numBytes := binary.PutUvarint(lowBytes, uint64(low))
-	lowBytes = lowBytes[:numBytes]
+	// Determine the sign based on the high part
+	isNegative := (high & 0x8000000000000000) != 0
 
-	// Combine the low part into a BigInt
-	bigIntValue := new(big.Int)
-	bigIntValue.SetBytes(lowBytes)
+	// If the value is negative, flip all the bits
+	if isNegative {
+		high = ^high
+		low = ^low
+	}
 
-	return bigIntValue
+	// Combine the high and low parts into a single byte slice
+	bytes := make([]byte, 16)
+	binary.BigEndian.PutUint64(bytes[:8], high)
+	binary.BigEndian.PutUint64(bytes[8:], low)
+
+	// Convert the bytes to a big.Int
+	bigInt := new(big.Int).SetBytes(bytes)
+
+	// If the value is negative, negate the big.Int
+	if isNegative {
+		bigInt.Neg(bigInt)
+	}
+
+	return bigInt
 }
 
 func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
@@ -131,6 +145,9 @@ func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 }
 
 func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
+	fmt.Println("decimal1",decimal1.String())
+	fmt.Println("decimal2",decimal2.String())
+	
 	var zero *primitive.Decimal128
 	if decimal1 == zero {
 		return decimal2, nil
@@ -141,8 +158,14 @@ func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
 
+	fmt.Println("value1",value1.String())
+	fmt.Println("value2",value2.String())
+	fmt.Println("decimal1",decimal1.String())
+	fmt.Println("decimal2",decimal2.String())
+	fmt.Println("result",new(big.Int).Sub(value1, value2))
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(new(big.Int).Sub(value1, value2))
+	fmt.Println("result",result)
 	if err != nil {
 		return nil, err
 	}
@@ -150,11 +173,19 @@ func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 	return result, nil
 }
 
+// multiply
+// value1 4113330394745627368290515537823310743667146809332214747452850902849462206464
+// value2 64135250796622190867608690658526625892
+// result 4113330394745627368290515537823310743667146809332214747452
+
 func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
 	var zero *primitive.Decimal128
 	if decimal1 == zero || decimal2 == zero {
 		return zero, nil
 	}
+
+	fmt.Println("decimal1", decimal1.String())
+	fmt.Println("decimal2", decimal2.String())
 
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
@@ -163,6 +194,10 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 	value1 = value1.Mul(value1, value2)
 
 	// Convert the result back to primitive.Decimal128
+	fmt.Println("multiply")
+	fmt.Println("value1", value1.String())
+	fmt.Println("value2", value2.String())
+	fmt.Println("result", new(big.Int).Div(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil)))
 	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil)))
 	if err != nil {
 		return nil, err
@@ -183,8 +218,11 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal
 	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 	value2 := BigIntFromDecimal128(decimal2)
 
+	fmt.Println("value1",value1.String())
+	fmt.Println("value2",value2.String())
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, value2))
+	fmt.Println("result",result.String())
 	if err != nil {
 		return nil, err
 	}
