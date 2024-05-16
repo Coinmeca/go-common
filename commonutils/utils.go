@@ -1,7 +1,7 @@
 package commonutils
 
 import (
-	"encoding/binary"
+	"fmt"
 	"math"
 	"math/big"
 	"reflect"
@@ -13,7 +13,6 @@ import (
 	"github.com/coinmeca/go-common/commonlog"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"
-	"fmt"
 )
 
 func JoinFromStructs(slice interface{}, fieldName, sep string) string {
@@ -65,42 +64,36 @@ func FormattedDate(t *int64) *string {
 }
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
-	// Extract the high and low parts of the Decimal128
-	high, low := decimal.GetBytes()
-
-	// Determine the sign based on the high part
-	isNegative := (high & 0x8000000000000000) != 0
-
-	// If the value is negative, flip all the bits
-	if isNegative {
-		high = ^high
-		low = ^low
+    // Attempt to set string value to big.Int
+    value := new(big.Int)
+	if decimal == nil {
+		fmt.Println("[BigIntFromDecimal128] wrong decimal:", decimal)
+		return nil
 	}
-
-	// Combine the high and low parts into a single byte slice
-	bytes := make([]byte, 16)
-	binary.BigEndian.PutUint64(bytes[:8], high)
-	binary.BigEndian.PutUint64(bytes[8:], low)
-
-	// Convert the bytes to a big.Int
-	bigInt := new(big.Int).SetBytes(bytes)
-
-	// If the value is negative, negate the big.Int
-	if isNegative {
-		bigInt.Neg(bigInt)
+	if *decimal == primitive.NewDecimal128(0,0) {
+		return value
 	}
+	fmt.Println("BigIntFromDecimal128",decimal.String())
+	if _, ok := value.SetString(decimal.String(), 10); !ok {
+        // If SetString fails, handle the error here if needed
+        // For instance, log the error or return a default value
+        // In this example, I'm just setting it to zero
+        return nil
+    }
 
-	return bigInt
+    return value
 }
 
 func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 	if bigInt == nil {
-		return nil, errors.New("parameter value is nil")
+		fmt.Println("[Decimal128FromBigInt] wrong bigInt:", bigInt)
+		return nil, errors.New("bigInt is nil")
 	}
 
 	// Create a Decimal128 from the string representation of the big.Int
 	decimal128, err := primitive.ParseDecimal128(bigInt.String())
 	if err != nil {
+		fmt.Println("[Decimal128FromBigInt] failed to parse:", decimal128)
 		return nil, err
 	}
 	return &decimal128, nil
@@ -108,174 +101,280 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 
 func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
 	intValue, frac := math.Modf(float)
-	intPart := big.NewInt(int64(intValue))
-	fracPart := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
+	integer := big.NewInt(int64(intValue))
+	fraction := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
 
 	var zero float64
 	if float < zero {
-		intPart = intPart.Neg(intPart)
+		integer = integer.Neg(integer)
 	}
 
-	decimal128, err := Decimal128FromBigInt(intPart.Add(intPart, fracPart))
+	decimal128, err := Decimal128FromBigInt(integer.Add(integer, fraction))
 	if err != nil {
+		fmt.Println("[Decimal128FromFloat64] wrong value:", decimal128)
 		return nil, err
 	}
 
 	return decimal128, nil
 }
 
-func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	var zero *primitive.Decimal128
-	if decimal1 == zero {
-		return decimal2, nil
-	} else if decimal2 == zero {
-		return decimal1, nil
+func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
+	var zero primitive.Decimal128
+	if decimal1 == nil || decimal2 == nil {
+		commonlog.Logger.Warn("AddDecimal128",
+			zap.String("decimal1", decimal1.String()),
+			zap.String("decimal2", decimal2.String()),
+		)
+		return nil
+	} else if *decimal1 == zero {
+		return decimal2
+	} else if *decimal2 == zero {
+		return decimal1
 	}
 
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
+
+	if value1 == nil || value2 == nil {
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+		)
+		return nil
+	}
 
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(new(big.Int).Add(value1, value2))
 	if err != nil {
-		return nil, err
+		commonlog.Logger.Warn("AddDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+			zap.String("result", result.String()),
+		)
+		return nil
 	}
 
-	return result, nil
+	return result
 }
 
-func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	fmt.Println("decimal1",decimal1.String())
-	fmt.Println("decimal2",decimal2.String())
-	
-	var zero *primitive.Decimal128
-	if decimal1 == zero {
-		return decimal2, nil
-	} else if decimal2 == zero {
-		return decimal1, nil
+func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128  {
+	var zero primitive.Decimal128
+	if decimal1 == nil || decimal2 == nil {
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("decimal1", decimal1.String()),
+			zap.String("decimal2", decimal2.String()),
+		)
+		return nil
+	} else if *decimal1 == zero && *decimal2 == zero {
+		return &zero
+	} else if *decimal2 == zero {
+		return decimal1
 	}
-
+	
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
 
-	fmt.Println("value1",value1.String())
-	fmt.Println("value2",value2.String())
-	fmt.Println("decimal1",decimal1.String())
-	fmt.Println("decimal2",decimal2.String())
-	fmt.Println("result",new(big.Int).Sub(value1, value2))
+	if value1 == nil || value2 == nil {
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+		)
+		return nil
+	}
+
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(new(big.Int).Sub(value1, value2))
-	fmt.Println("result",result)
 	if err != nil {
-		return nil, err
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+			zap.String("result", result.String()),
+		)
+		return nil
 	}
 
-	return result, nil
+	return result
 }
 
-// multiply
-// value1 4113330394745627368290515537823310743667146809332214747452850902849462206464
-// value2 64135250796622190867608690658526625892
-// result 4113330394745627368290515537823310743667146809332214747452
-
-func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	var zero *primitive.Decimal128
-	if decimal1 == zero || decimal2 == zero {
-		return zero, nil
+func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
+	var zero primitive.Decimal128
+	if decimal1 == nil || decimal2 == nil {
+		commonlog.Logger.Warn("MulDecimal128",
+			zap.String("decimal1", decimal1.String()),
+			zap.String("decimal2", decimal2.String()),
+		)
+		return nil
+	} else if *decimal1 == zero || *decimal2 == zero {
+		return &zero
 	}
-
-	fmt.Println("decimal1", decimal1.String())
-	fmt.Println("decimal2", decimal2.String())
 
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
+
+	if value1 == nil || value2 == nil {
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+		)
+		return nil
+	}
 
 	// Perform multiplication
 	value1 = value1.Mul(value1, value2)
 
 	// Convert the result back to primitive.Decimal128
-	fmt.Println("multiply")
-	fmt.Println("value1", value1.String())
-	fmt.Println("value2", value2.String())
-	fmt.Println("result", new(big.Int).Div(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil)))
 	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil)))
 	if err != nil {
-		return nil, err
+		commonlog.Logger.Warn("MulDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+			zap.String("result", result.String()),
+		)
+		return nil
 	}
 
-	return result, nil
+	return result
 }
 
-func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	var zero *primitive.Decimal128
-	if decimal1 == zero {
-		return decimal2, nil
-	} else if decimal2 == zero {
-		return decimal1, nil
+func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
+	var zero primitive.Decimal128
+	if decimal1 == nil || decimal2 == nil {
+		commonlog.Logger.Warn("DivDecimal128",
+			zap.String("decimal1", decimal1.String()),
+			zap.String("decimal2", decimal2.String()),
+		)
+		return nil
+	} else if *decimal1 == zero || *decimal2 == zero {
+		return &zero
 	}
 
 	value1 := BigIntFromDecimal128(decimal1)
-	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 	value2 := BigIntFromDecimal128(decimal2)
+	
+	if value1 == nil || value2 == nil {
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+		)
+		return nil
+	}
 
-	fmt.Println("value1",value1.String())
-	fmt.Println("value2",value2.String())
+	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
+
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, value2))
-	fmt.Println("result",result.String())
 	if err != nil {
-		return nil, err
+		commonlog.Logger.Warn("DivDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+			zap.String("result", result.String()),
+		)
+		return nil
 	}
 
-	return result, nil
+	return result
 }
 
-func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) (*primitive.Decimal128, error) {
-	var zero *primitive.Decimal128
-	if decimal1 == zero {
-		return decimal2, nil
-	} else if decimal2 == zero {
-		return decimal1, nil
+func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
+	var zero primitive.Decimal128
+	if decimal1 == nil || decimal2 == nil {
+		commonlog.Logger.Warn("QuoDecimal128",
+			zap.String("decimal1", decimal1.String()),
+			zap.String("decimal2", decimal2.String()),
+		)
+		return nil
+		// return nil, errors.New("arguments are nil")
+	} else if *decimal1 == zero || *decimal2 == zero {
+		return &zero
 	}
 
 	value1 := BigIntFromDecimal128(decimal1)
-	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 	value2 := BigIntFromDecimal128(decimal2)
+	
+	if value1 == nil || value2 == nil {
+		commonlog.Logger.Warn("SubDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+		)
+		return nil
+		// return nil, errors.New("nil value")
+	}
+
+	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(new(big.Int).Quo(value1, value2))
 	if err != nil {
-		return nil, err
+		commonlog.Logger.Warn("QuoDecimal128",
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
+			zap.String("result", result.String()),
+		)
+		return nil
 	}
 
-	return result, nil
+	return result
 }
 
-func FloatStringFromDecimal128(decimal *primitive.Decimal128) *string {
-	// Convert Decimal128 to string
-	zero := "0"
-	value := BigIntFromDecimal128(decimal)
-	valueString := value.String()
-
-	if valueString == zero {
-		return &zero
+func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
+	// Convert the big.Int to a string
+	var result string
+	if decimal == nil {
+		return ""
 	}
 
-	// Split integer and fractional parts
-	number := strings.SplitN(valueString, ".", 2)
-	integer := number[0]
-	fractional := ""
-	if len(number) > 1 {
-		fractional = number[1]
+	var zero primitive.Decimal128
+	if *decimal == zero {
+		return "0"
 	}
 
-	// Pad fractional part with zeros if needed
-	for len(fractional) < 18 {
-		fractional += "0"
+
+	bigInt, _ := new(big.Int).SetString(decimal.String(), 10)
+	value := bigInt.String()
+
+	if value == "0" {
+		return value
 	}
 
-	// Concatenate integer and fractional parts
-	result := integer + "." + fractional
+	// Determine the length of the string
+	length := len(value)
 
-	return &result
+	// Check if the length is less than the number of decimal places
+	if length <= 18 {
+		// Pad the string with leading zeros if necessary
+		prefix := "0."
+		suffix := value
+		for i := 0; i < 18-length; i++ {
+			prefix += "0"
+		}
+		result = prefix + suffix
+		return result
+	}
+
+	// Insert the decimal point at the appropriate position
+	index := length - 18
+	integer := value[:index]
+	float := value[index:]
+
+	// Remove trailing zeros from the decimal part
+	float = strings.TrimRight(float, "0")
+
+	// If the decimal part is empty after removing trailing zeros,
+	// return only the integer part
+	if float == "" {
+		return integer
+	}
+
+	// Pad the decimal part with trailing zeros if necessary
+	for len(float) < 18 {
+		float += "0"
+	}
+
+	// Remove any trailing decimal point
+	if float[len(float)-1] == '.' {
+		float = float[:len(float)-1]
+	}
+
+	result = integer + "." + float
+	return result
 }
