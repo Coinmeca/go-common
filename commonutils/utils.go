@@ -73,7 +73,6 @@ func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 	if *decimal == primitive.NewDecimal128(0,0) {
 		return value
 	}
-	fmt.Println("BigIntFromDecimal128",decimal.String())
 	if _, ok := value.SetString(decimal.String(), 10); !ok {
         // If SetString fails, handle the error here if needed
         // For instance, log the error or return a default value
