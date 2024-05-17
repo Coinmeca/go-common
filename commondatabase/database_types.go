@@ -50,18 +50,19 @@ type BatchInfo struct {
 	BatchId         int                `json:"batchId" bson:"batchId"`
 	Term            string             `json:"term" bson:"term"`
 	Cate            string             `json:"cate" bson:"cate"`
-	Title       	string             `json:"title" bson:"title"`
+	Title           string             `json:"title" bson:"title"`
 	ContractAddress string             `json:"contractAddress" bson:"contractAddress"`
 	Chain           string             `json:"chain" bson:"chain"`
+	ChainId         string             `json:"chainId" bson:"chainId"`
 	Description     string             `json:"description" bson:"description"`
 }
 
 type ChainInfo struct {
-	Id        primitive.ObjectID	`json:"id" bson:"_id,omitempty"`
-	ChainId   string				`json:"chainId" bson:"chainId"`
-	ChainName string				`json:"chainName" bson:"chainName"`
-	Currency  string				`json:"currency" bson:"currency"`
-	Base      string				`json:"base" bson:"base"`
-	Type      string				`json:"type" bson:"type"`
-	Rpc       string				`json:"rpc" bson:"rpc"`
+	Id        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	ChainId   string             `json:"chainId" bson:"chainId"`
+	ChainName string             `json:"chainName" bson:"chainName"`
+	Currency  string             `json:"currency" bson:"currency"`
+	Base      string             `json:"base" bson:"base"`
+	Type      string             `json:"type" bson:"type"`
+	Rpc       string             `json:"rpc" bson:"rpc"`
 }
