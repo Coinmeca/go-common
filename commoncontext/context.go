@@ -3,6 +3,7 @@ package commoncontext
 import (
 	"context"
 	"github.com/coinmeca/go-common/commondefine"
+	"time"
 )
 
 type Context interface {
@@ -29,4 +30,27 @@ func NewCommonContext(ctx context.Context, userId string) Context {
 		Context: ctx,
 		userId:  userId,
 	}
+}
+
+func WithCancel(parent Context) (Context, context.CancelFunc) {
+	ctx, cancel := context.WithCancel(parent)
+	return NewCommonContext(ctx, parent.UserId()), cancel
+}
+
+func WithTimeout(parent Context, timeout time.Duration) (Context, context.CancelFunc) {
+	ctx, cancel := context.WithTimeout(parent, timeout)
+	return NewCommonContext(ctx, parent.UserId()), cancel
+}
+
+func WithValue(parent Context, key, val interface{}) Context {
+	ctx := context.WithValue(parent, key, val)
+	return NewCommonContext(ctx, parent.UserId())
+}
+
+func Background() Context {
+	return NewCommonContext(context.Background(), "")
+}
+
+func TODO() Context {
+	return NewCommonContext(context.TODO(), "")
 }
