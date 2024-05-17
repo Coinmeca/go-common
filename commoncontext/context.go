@@ -24,7 +24,7 @@ func (c *commonContext) UserId() string {
 	return c.userId
 }
 
-func NewCommonContext(ctx context.Context, userId string, chainIdMap map[string]string) Context {
+func NewCommonContext(ctx context.Context, userId string) Context {
 	return &commonContext{
 		Context: ctx,
 		userId:  userId,
