@@ -2,9 +2,9 @@ package commonutils
 
 import (
 	"fmt"
-	"math"
 	"math/big"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 
@@ -99,15 +99,15 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 }
 
 func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
-    floatString := strconv.FormatFloat(f, 'f', -1, 64)
+    floatString := strconv.FormatFloat(float, 'f', 18, 64)
 
     // Parse the string to Decimal128
     decimal128, err := primitive.ParseDecimal128(floatString)
     if err != nil {
-        return primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
+        return &primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
     }
 
-    return decimal128, nil
+    return &decimal128, nil
 }
 
 func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
