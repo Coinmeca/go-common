@@ -2,6 +2,7 @@ package commonutils
 
 import (
 	"fmt"
+	"math"
 	"math/big"
 	"reflect"
 	"strconv"
@@ -73,12 +74,7 @@ func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 	if *decimal == primitive.NewDecimal128(0, 0) {
 		return value
 	}
-	if _, ok := value.SetString(decimal.String(), 10); !ok {
-		// If SetString fails, handle the error here if needed
-		// For instance, log the error or return a default value
-		// In this example, I'm just setting it to zero
-		return nil
-	}
+	value.SetString(decimal.String(), 10)
 
 	return value
 }
@@ -99,15 +95,15 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 }
 
 func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
-    floatString := strconv.FormatFloat(float, 'f', 18, 64)
+	floatString := strconv.FormatFloat(float*math.Pow(10, 18), 'f', -1, 64)
 
-    // Parse the string to Decimal128
-    decimal128, err := primitive.ParseDecimal128(floatString)
-    if err != nil {
-        return &primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
-    }
+	// Parse the string to Decimal128
+	decimal128, err := primitive.ParseDecimal128(floatString)
+	if err != nil {
+		return &primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
+	}
 
-    return &decimal128, nil
+	return &decimal128, nil
 }
 
 func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
