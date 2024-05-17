@@ -2,9 +2,9 @@ package commonutils
 
 import (
 	"fmt"
-	"math"
 	"math/big"
 	"reflect"
+	"strconv"
 	"strings"
 	"time"
 
@@ -64,23 +64,23 @@ func FormattedDate(t *int64) *string {
 }
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
-    // Attempt to set string value to big.Int
-    value := new(big.Int)
+	// Attempt to set string value to big.Int
+	value := new(big.Int)
 	if decimal == nil {
 		fmt.Println("[BigIntFromDecimal128] wrong decimal:", decimal)
 		return nil
 	}
-	if *decimal == primitive.NewDecimal128(0,0) {
+	if *decimal == primitive.NewDecimal128(0, 0) {
 		return value
 	}
 	if _, ok := value.SetString(decimal.String(), 10); !ok {
-        // If SetString fails, handle the error here if needed
-        // For instance, log the error or return a default value
-        // In this example, I'm just setting it to zero
-        return nil
-    }
+		// If SetString fails, handle the error here if needed
+		// For instance, log the error or return a default value
+		// In this example, I'm just setting it to zero
+		return nil
+	}
 
-    return value
+	return value
 }
 
 func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
@@ -99,15 +99,15 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 }
 
 func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
-    floatString := strconv.FormatFloat(f, 'f', -1, 64)
+	floatString := strconv.FormatFloat(float, 'f', -1, 64)
 
-    // Parse the string to Decimal128
-    decimal128, err := primitive.ParseDecimal128(floatString)
-    if err != nil {
-        return primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
-    }
+	// Parse the string to Decimal128
+	decimal128, err := primitive.ParseDecimal128(floatString)
+	if err != nil {
+		return &primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
+	}
 
-    return decimal128, nil
+	return &decimal128, nil
 }
 
 func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
@@ -149,7 +149,7 @@ func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	return result
 }
 
-func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128  {
+func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
 	var zero primitive.Decimal128
 	if decimal1 == nil || decimal2 == nil {
 		commonlog.Logger.Warn("SubDecimal128",
@@ -162,7 +162,7 @@ func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	} else if *decimal2 == zero {
 		return decimal1
 	}
-	
+
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
 
@@ -242,7 +242,7 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
-	
+
 	if value1 == nil || value2 == nil {
 		commonlog.Logger.Warn("SubDecimal128",
 			zap.String("value1", value1.String()),
@@ -282,7 +282,7 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 
 	value1 := BigIntFromDecimal128(decimal1)
 	value2 := BigIntFromDecimal128(decimal2)
-	
+
 	if value1 == nil || value2 == nil {
 		commonlog.Logger.Warn("SubDecimal128",
 			zap.String("value1", value1.String()),
@@ -319,7 +319,6 @@ func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
 	if *decimal == zero {
 		return "0"
 	}
-
 
 	bigInt, _ := new(big.Int).SetString(decimal.String(), 10)
 	value := bigInt.String()
