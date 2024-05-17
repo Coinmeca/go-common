@@ -41,12 +41,17 @@ type Farm struct {
 	Decimals			int64					`json:"decimals" bson:"decimals"`
 	Stake				token.Token				`json:"stake" bson:"stake"`
 	Earn				token.Token				`json:"earn" bson:"earn"`
+	Start				int64					`json:"start" bson:"start"`
+	Period				int64					`json:"period" bson:"period"`
+	Duration			int64					`json:"duration" bson:"duration"`
+	Goal				int64					`json:"duration" bson:"duration"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
 	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
+	Total				primitive.Decimal128	`json:"total" bson:"total"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"bson"`
 }

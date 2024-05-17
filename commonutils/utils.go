@@ -99,22 +99,15 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 }
 
 func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
-	intValue, frac := math.Modf(float)
-	integer := big.NewInt(int64(intValue))
-	fraction := big.NewInt(int64(frac * math.Pow10(18))) // Assuming 18 decimal places
+    floatString := strconv.FormatFloat(f, 'f', -1, 64)
 
-	var zero float64
-	if float < zero {
-		integer = integer.Neg(integer)
-	}
+    // Parse the string to Decimal128
+    decimal128, err := primitive.ParseDecimal128(floatString)
+    if err != nil {
+        return primitive.Decimal128{}, fmt.Errorf("error parsing Decimal128: %v", err)
+    }
 
-	decimal128, err := Decimal128FromBigInt(integer.Add(integer, fraction))
-	if err != nil {
-		fmt.Println("[Decimal128FromFloat64] wrong value:", decimal128)
-		return nil, err
-	}
-
-	return decimal128, nil
+    return decimal128, nil
 }
 
 func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
