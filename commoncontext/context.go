@@ -1,31 +1,32 @@
 package commoncontext
 
-import "context"
+import (
+	"context"
+	"github.com/coinmeca/go-common/commondefine"
+)
 
 type Context interface {
 	context.Context
-	ChainId() string
+	ChainId(chainName string) string
 	UserId() string
 }
 
 type commonContext struct {
 	context.Context
-	chainId string
-	userId  string
+	userId string
 }
 
-func (c *commonContext) ChainId() string {
-	return c.chainId
+func (c *commonContext) ChainId(chainName string) string {
+	return commondefine.ChainIdMap[chainName]
 }
 
 func (c *commonContext) UserId() string {
 	return c.userId
 }
 
-func NewCommonContext(ctx context.Context, chainId, userId string) Context {
+func NewCommonContext(ctx context.Context, userId string, chainIdMap map[string]string) Context {
 	return &commonContext{
 		Context: ctx,
-		chainId: chainId,
 		userId:  userId,
 	}
 }
