@@ -13,6 +13,7 @@ import (
 
 const (
 	MethodFarmGetAll = "getAll"
+	MethodFarmgetAllFarms = "getAllFarms"
 )
 
 const (
