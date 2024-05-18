@@ -47,7 +47,7 @@ type GrpcTxData struct {
 
 type BatchInfo struct {
 	Id              primitive.ObjectID `json:"id" bson:"_id"`
-	BatchId         int                `json:"batchId" bson:"batchId"`
+	BatchId         int32              `json:"batchId" bson:"batchId"`
 	Term            string             `json:"term" bson:"term"`
 	Cate            string             `json:"cate" bson:"cate"`
 	Title           string             `json:"title" bson:"title"`
