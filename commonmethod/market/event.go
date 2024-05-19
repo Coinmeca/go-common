@@ -99,7 +99,7 @@ type EventShort struct {
 }
 
 type EventOpen struct {
-	Category  uint16
+	Category  uint8
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
@@ -109,7 +109,7 @@ type EventOpen struct {
 }
 
 type EventClose struct {
-	Category  uint16
+	Category  uint8
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
@@ -119,7 +119,7 @@ type EventClose struct {
 }
 
 type EventLiquidation struct {
-	Category  uint16
+	Category  uint8
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
