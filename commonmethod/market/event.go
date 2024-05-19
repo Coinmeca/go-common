@@ -103,7 +103,7 @@ type EventOpen struct {
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
-	Size      *big.Int
+	Amount    *big.Int
 	Leverage  *big.Int
 	Threshold *big.Int
 }
@@ -113,7 +113,7 @@ type EventClose struct {
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
-	Size      *big.Int
+	Amount    *big.Int
 	Leverage  *big.Int
 	Threshold *big.Int
 }
