@@ -30,6 +30,8 @@ type Last struct {
 	Weight				primitive.Decimal128	`json:"weight" bson:"weight"`
 	Mint				primitive.Decimal128	`json:"mint" bson:"mint"`
 	Burn				primitive.Decimal128	`json:"burn" bson:"burn"`
+	Chart				Chart					`json:"chart" bson:"chart"`
+	ChartSub			ChartSub				`json:"chartSub" bson:"chartSub"`
 	Recent				Recent					`json:"recent" bson:"Recent"`
 }
 
