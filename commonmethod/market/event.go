@@ -168,3 +168,22 @@ type EventCallLimit struct {
 	Old *big.Int
 	New *big.Int
 }
+
+type EventTransferOrder struct {
+	From     common.Address
+	To       common.Address
+	Sell     common.Address
+	Amount   *big.Int
+	Buy      common.Address
+	Quantity *big.Int
+}
+
+type EventTransferPosition struct {
+	From     common.Address
+	To       common.Address
+	Category uint8
+	State    uint8
+	Pay      common.Address
+	Amount   *big.Int
+	Leverage *big.Int
+}
