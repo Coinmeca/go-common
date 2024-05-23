@@ -18,7 +18,6 @@ type Recent struct {
 	UpdateAt			string					`json:"updateAt" bson:"updateAt"`
 }
 
-
 type Last struct {
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
@@ -59,10 +58,12 @@ type Farm struct {
 type Chart struct{
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
+	Time				int64					`json:"time" bson:"time"`
 	Staking				Volume					`json:"staking" bson:"staking"`
 	Interest			Volume					`json:"interest" bson:"interest"`
 	Value				Value					`json:"value" bson:"value"`
 	Apr					primitive.Decimal128	`json:"apr" bson:"apr"`
+	Sum					primitive.Decimal128	`json:"sum" bson:"sum"`					
 }
 
 type Volume struct {
