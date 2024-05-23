@@ -44,7 +44,7 @@ type Farm struct {
 	Start				int64					`json:"start" bson:"start"`
 	Period				int64					`json:"period" bson:"period"`
 	Duration			int64					`json:"duration" bson:"duration"`
-	Goal				int64					`json:"duration" bson:"duration"`
+	Goal				int64					`json:"goal" bson:"goal"`
 	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
@@ -54,4 +54,22 @@ type Farm struct {
 	Total				primitive.Decimal128	`json:"total" bson:"total"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"bson"`
+}
+
+type Chart struct{
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Staking				Volume					`json:"staking" bson:"staking"`
+	Interest			Volume					`json:"interest" bson:"interest"`
+	Value				Value					`json:"value" bson:"value"`
+	Apr					primitive.Decimal128	`json:"apr" bson:"apr"`
+}
+
+type Volume struct {
+	Amount				primitive.Decimal128	`json:"amount" bson:"amount"`
+	Value				primitive.Decimal128	`json:"value" bson:"value"`
+}
+
+type Value struct {
+	Stake				primitive.Decimal128	`json:"stake" bson:"stake"`
+	Earn				primitive.Decimal128	`json:"earn" bson:"earn"`
 }
