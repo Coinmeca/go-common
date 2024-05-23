@@ -58,6 +58,7 @@ type Farm struct {
 
 type Chart struct{
 	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
 	Staking				Volume					`json:"staking" bson:"staking"`
 	Interest			Volume					`json:"interest" bson:"interest"`
 	Value				Value					`json:"value" bson:"value"`
