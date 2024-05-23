@@ -63,7 +63,7 @@ type Chart struct{
 	Interest			Volume					`json:"interest" bson:"interest"`
 	Value				Value					`json:"value" bson:"value"`
 	Apr					primitive.Decimal128	`json:"apr" bson:"apr"`
-	Sum					primitive.Decimal128	`json:"sum" bson:"sum"`					
+	Earned				primitive.Decimal128	`json:"earned" bson:"earned"`					
 }
 
 type Volume struct {
