@@ -32,7 +32,7 @@ type Chart struct{
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
 	Time				int64					`json:"time" bson:"time"`
-	Staking				Volume					`json:"staking" bson:"staking"`
+	Staked				Volume					`json:"staked" bson:"staked"`
 	Interest			Volume					`json:"interest" bson:"interest"`
 	Value				Value					`json:"value" bson:"value"`
 	Apr					primitive.Decimal128	`json:"apr" bson:"apr"`
@@ -42,7 +42,7 @@ type Chart struct{
 type Last struct {
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
-	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
+	Staked				primitive.Decimal128	`json:"staked" bson:"staked"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
@@ -66,7 +66,7 @@ type Farm struct {
 	Period				int64					`json:"period" bson:"period"`
 	Duration			int64					`json:"duration" bson:"duration"`
 	Goal				int64					`json:"goal" bson:"goal"`
-	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
+	Staked				primitive.Decimal128	`json:"staked" bson:"staked"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
