@@ -18,16 +18,37 @@ type Recent struct {
 	UpdateAt			string					`json:"updateAt" bson:"updateAt"`
 }
 
+type Volume struct {
+	Amount				primitive.Decimal128	`json:"amount" bson:"amount"`
+	Value				primitive.Decimal128	`json:"value" bson:"value"`
+}
+
+type Value struct {
+	Stake				primitive.Decimal128	`json:"stake" bson:"stake"`
+	Earn				primitive.Decimal128	`json:"earn" bson:"earn"`
+}
+
+type Chart struct{
+	ChainId				string					`json:"chainId" bson:"chainId"`
+	Address				string					`json:"address" bson:"address"`
+	Time				int64					`json:"time" bson:"time"`
+	Staked				Volume					`json:"staked" bson:"staked"`
+	Interest			Volume					`json:"interest" bson:"interest"`
+	Value				Value					`json:"value" bson:"value"`
+	Apr					primitive.Decimal128	`json:"apr" bson:"apr"`
+	Earned				primitive.Decimal128	`json:"earned" bson:"earned"`					
+}
 
 type Last struct {
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
-	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
+	Staked				primitive.Decimal128	`json:"staked" bson:"staked"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
 	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
+	Chart				Chart					`json:"chart" bson:"chart"`
 	Recent				Recent					`json:"recent" bson:"recent"`
 }
 
@@ -44,14 +65,15 @@ type Farm struct {
 	Start				int64					`json:"start" bson:"start"`
 	Period				int64					`json:"period" bson:"period"`
 	Duration			int64					`json:"duration" bson:"duration"`
-	Goal				int64					`json:"duration" bson:"duration"`
-	Staking				primitive.Decimal128	`json:"staking" bson:"staking"`
+	Goal				int64					`json:"goal" bson:"goal"`
+	Staked				primitive.Decimal128	`json:"staked" bson:"staked"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
 	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Total				primitive.Decimal128	`json:"total" bson:"total"`
+	Chart	  			[]Chart					`json:"chart" bson:"chart"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
 	Last				Last					`json:"last" bson:"bson"`
 }

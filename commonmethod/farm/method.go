@@ -36,7 +36,7 @@ type OutputFarm struct {
 	Period		*big.Int			`json:"period" bson:"period"`
 	Duration	*big.Int			`json:"duration" bson:"duration"`
 	Goal		*big.Int			`json:"goal" bson:"goal"`
-	Locked		*big.Int			`json:"locked" bson:"locked"`
+	Locked		*big.Int			`json:"staked" bson:"staked"`
 	Rewards		*big.Int			`json:"rewards" bson:"rewards"`
 	Total		*big.Int			`json:"total" bson:"total"`
 }
