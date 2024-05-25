@@ -14,7 +14,6 @@ type OutputToken struct {
 	Name      string         `json:"name" bson:"name"`
 	Symbol    string         `json:"symbol" bson:"symbol"`
 	Decimals  uint8          `json:"decimals" bson:"decimals"`
-	Liquidity *big.Int       `json:"liquidity" bson:"liquidity"`
 }
 
 func Unmarshal(output interface{}, data []byte, contractAbi *abi.ABI, method string) error {

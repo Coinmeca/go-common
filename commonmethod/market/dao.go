@@ -1,8 +1,6 @@
 package market
 
 import (
-	"github.com/coinmeca/go-common/commonmethod/token"
-
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -63,13 +61,21 @@ type Last struct {
 	Recent  Recent               `json:"recent" bson:"recent"`
 }
 
+type Token struct {
+	Address		string					`json:"address" bson:"address"`
+	Name		string					`json:"name" bson:"name"`
+	Symbol		string					`json:"symbol" bson:"symbol"`
+	Decimals	int64					`json:"decimals" bson:"decimals"`
+	Liquidity	primitive.Decimal128	`json:"liquidity" bson:"liquidity"`
+}
+
 type Market struct {
 	ChainId   string               `json:"chainId" bson:"chainId"`
 	Address   string               `json:"address" bson:"address"`
 	Name      string               `json:"name" bson:"name"`
 	Symbol    string               `json:"symbol" bson:"symbol"`
-	Base      token.Token          `json:"base" bson:"base"`
-	Quote     token.Token          `json:"quote" bson:"quote"`
+	Base      Token				   `json:"base" bson:"base"`
+	Quote     Token				   `json:"quote" bson:"quote"`
 	Price     primitive.Decimal128 `json:"price" bson:"price"`
 	Tick      primitive.Decimal128 `json:"tick" bson:"tick"`
 	Volume    Volume               `json:"volume" bson:"volume"`

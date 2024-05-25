@@ -47,11 +47,19 @@ type OutputMarketDetail struct {
 	Lock      bool              `abi:"lock" bson:"lock"`
 }
 
+type OutputToken struct {
+	Address   common.Address `json:"addr" bson:"address"` // TODO: abi -> addr
+	Name      string         `json:"name" bson:"name"`
+	Symbol    string         `json:"symbol" bson:"symbol"`
+	Decimals  uint8          `json:"decimals" bson:"decimals"`
+	Liquidity *big.Int		 `json:"liquidity" bson:"liquidity"`
+}
+
 type OutputMarket struct {
 	Address   common.Address    `abi:"market" bson:"market"`
 	Nft       common.Address    `abi:"nft" bson:"nft"`
-	Base      token.OutputToken `abi:"base" bson:"base"`
-	Quote     token.OutputToken `abi:"quote" bson:"quote"`
+	Base      OutputToken		`abi:"base" bson:"base"`
+	Quote     OutputToken		`abi:"quote" bson:"quote"`
 	Price     *big.Int          `abi:"price" bson:"price"`
 	Tick      *big.Int          `abi:"tick" bson:"tick"`
 	Fee       uint8             `abi:"fee" bson:"fee"`
