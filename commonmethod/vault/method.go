@@ -21,8 +21,8 @@ const (
 )
 
 type OutputVault struct {
-	Key      bool           `abi:"key" bson:"key"`
 	Address  common.Address `abi:"addr" bson:"address"`
+	Key      bool           `abi:"key" bson:"key"`
 	Name     string         `abi:"name" bson:"name"`
 	Symbol   string         `abi:"symbol" bson:"symbol"`
 	Decimals uint8          `abi:"decimals" bson:"decimals"` // TODO: abi, DB parsing check

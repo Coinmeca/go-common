@@ -5,7 +5,6 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/coinmeca/go-common/commonmethod/token"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 )
@@ -37,8 +36,8 @@ type OutputMarketDetail struct {
 	Nft       common.Address    `abi:"nft" bson:"nft"`
 	Name      string            `abi:"name" bson:"name"`
 	Symbol    string            `abi:"symbol" bson:"symbol"`
-	Base      token.OutputToken `abi:"base" bson:"base"`
-	Quote     token.OutputToken `abi:"quote" bson:"quote"`
+	Base      OutputToken		`abi:"base" bson:"base"`
+	Quote     OutputToken		`abi:"quote" bson:"quote"`
 	Price     *big.Int          `abi:"price" bson:"price"`
 	Tick      *big.Int          `abi:"tick" bson:"tick"`
 	Orderbook OutputOrderbook   `abi:"orderbook" bson:"orderbook"`
