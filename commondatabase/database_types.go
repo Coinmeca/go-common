@@ -2,6 +2,7 @@ package commondatabase
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"time"
 )
 
 type ContractInfo struct {
@@ -65,4 +66,15 @@ type ChainInfo struct {
 	Base      string             `json:"base" bson:"base"`
 	Type      string             `json:"type" bson:"type"`
 	Rpc       string             `json:"rpc" bson:"rpc"`
+}
+
+type APIKey struct {
+	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	Type      string             `json:"type" bson:"type"`
+	Cate      string             `json:"cate" bson:"cate"`
+	Key       string             `json:"key" bson:"key"`
+	Active    bool               `json:"active" bson:"active"`
+	Expired   time.Time          `json:"expired" bson:"expired,omitempty"`
+	Retry     string             `json:"retry" bson:"retry"`
+	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
 }
