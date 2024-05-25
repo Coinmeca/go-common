@@ -31,6 +31,14 @@ type OutputOrderbook struct {
 	Bids []OutputTick `abi:"bids" bson:"bids"`
 }
 
+type OutputToken struct {
+	Address   common.Address `json:"addr" bson:"address"` // TODO: abi -> addr
+	Name      string         `json:"name" bson:"name"`
+	Symbol    string         `json:"symbol" bson:"symbol"`
+	Decimals  uint8          `json:"decimals" bson:"decimals"`
+	Liquidity *big.Int		 `json:"liquidity" bson:"liquidity"`
+}
+
 type OutputMarketDetail struct {
 	Address   common.Address    `abi:"market" bson:"market"`
 	Nft       common.Address    `abi:"nft" bson:"nft"`
@@ -44,14 +52,6 @@ type OutputMarketDetail struct {
 	Fee       uint8             `abi:"fee" bson:"fee"`
 	Threshold uint8             `abi:"threshold" bson:"threshold"`
 	Lock      bool              `abi:"lock" bson:"lock"`
-}
-
-type OutputToken struct {
-	Address   common.Address `json:"addr" bson:"address"` // TODO: abi -> addr
-	Name      string         `json:"name" bson:"name"`
-	Symbol    string         `json:"symbol" bson:"symbol"`
-	Decimals  uint8          `json:"decimals" bson:"decimals"`
-	Liquidity *big.Int		 `json:"liquidity" bson:"liquidity"`
 }
 
 type OutputMarket struct {
