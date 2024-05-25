@@ -86,9 +86,9 @@ func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 	}
 
 	// Create a Decimal128 from the string representation of the big.Int
-	fmt.Println("Decimal128FromBigInt",bigInt.String())
-	decimal128, err := primitive.ParseDecimal128(bigInt.String())
+	decimal128, err := primitive.ParseDecimal128((*bigInt).String())
 	if err != nil {
+		fmt.Println("[Decimal128FromBigInt]",bigInt, bigInt.String())
 		fmt.Println("[Decimal128FromBigInt] failed to parse:", bigInt.String())
 		return nil, err
 	}
@@ -254,9 +254,11 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	fmt.Println("Decimal128FromBigInt value2:", value2);
 	fmt.Println("Decimal128FromBigInt value2:", new(big.Int).Div(value1, value2));
 
+	resultValue := new(big.Int).Div(value1, value2)
+	fmt.Println("parsing div resultValue", resultValue)
 	// Convert the result back to primitive.Decimal128
-	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, value2))
-	fmt.Println("result", result)
+	result, err := Decimal128FromBigInt(resultValue)
+	fmt.Println("parsing div result", result)
 	if err != nil {
 		commonlog.Logger.Warn("DivDecimal128",
 		zap.String("value1", value1.String()),
@@ -266,7 +268,7 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 		return nil
 	}
 
-	fmt.Println("result", result)
+	fmt.Println("div result", result)
 	return result
 }
 
