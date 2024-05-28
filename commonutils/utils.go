@@ -68,7 +68,9 @@ func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 	// Attempt to set string value to big.Int
 	value := new(big.Int)
 	if decimal == nil {
-		fmt.Println("[BigIntFromDecimal128] wrong decimal:", decimal)
+		commonlog.Logger.Warn("BigIntFromDecimal128",
+			zap.String("wrong decimal128:", decimal.String()),
+		)
 		return nil
 	}
 	if *decimal == primitive.NewDecimal128(0, 0) {
@@ -81,14 +83,18 @@ func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
 
 func Decimal128FromBigInt(bigInt *big.Int) (*primitive.Decimal128, error) {
 	if bigInt == nil {
-		fmt.Println("[Decimal128FromBigInt] wrong bigInt:", bigInt)
+		commonlog.Logger.Warn("Decimal128FromBigInt",
+			zap.String("wrong bigInt:", bigInt.String()),
+		)
 		return nil, errors.New("bigInt is nil")
 	}
 
 	// Create a Decimal128 from the string representation of the big.Int
 	decimal128, err := primitive.ParseDecimal128(bigInt.String())
 	if err != nil {
-		fmt.Println("[Decimal128FromBigInt] failed to parse:", decimal128)
+		commonlog.Logger.Warn("Decimal128FromBigInt",
+			zap.String("failed to parse:", bigInt.String()),
+		)
 		return nil, err
 	}
 	return &decimal128, nil
@@ -253,8 +259,8 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, value2))
 	if err != nil {
 		commonlog.Logger.Warn("DivDecimal128",
-			zap.String("value1", value1.String()),
-			zap.String("value2", value2.String()),
+		zap.String("value1", value1.String()),
+		zap.String("value2", value2.String()),
 			zap.String("result", result.String()),
 		)
 		return nil

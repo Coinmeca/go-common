@@ -24,8 +24,9 @@ const (
 )
 
 type OutputFarm struct {
-	Id			*big.Int			`json:"id" bson:"id"`
 	Address		common.Address		`json:"farm" bson:"farm"`
+	Type		bool				`json:"type" bson:"type"`
+	Id			*big.Int			`json:"id" bson:"id"`
 	Master		common.Address		`json:"master" bson:"master"`
 	Name		string				`json:"name" bson:"name"`
 	Symbol		string				`json:"symbol" bson:"symbol"`
@@ -36,8 +37,8 @@ type OutputFarm struct {
 	Period		*big.Int			`json:"period" bson:"period"`
 	Duration	*big.Int			`json:"duration" bson:"duration"`
 	Goal		*big.Int			`json:"goal" bson:"goal"`
-	Locked		*big.Int			`json:"staked" bson:"staked"`
-	Rewards		*big.Int			`json:"rewards" bson:"rewards"`
+	Staked		*big.Int			`json:"staked" bson:"staked"`
+	Interest	*big.Int			`json:"interest" bson:"interest"`
 	Total		*big.Int			`json:"total" bson:"total"`
 }
 
