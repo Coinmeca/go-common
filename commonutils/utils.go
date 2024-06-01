@@ -259,8 +259,8 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	result, err := Decimal128FromBigInt(new(big.Int).Div(value1, value2))
 	if err != nil {
 		commonlog.Logger.Warn("DivDecimal128",
-		zap.String("value1", value1.String()),
-		zap.String("value2", value2.String()),
+			zap.String("value1", value1.String()),
+			zap.String("value2", value2.String()),
 			zap.String("result", result.String()),
 		)
 		return nil
@@ -370,4 +370,9 @@ func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
 
 	result = integer + "." + float
 	return result
+}
+
+func IsDecimal128Zero(d primitive.Decimal128) bool {
+	str, _, _ := d.BigInt()
+	return str.String() == "0"
 }
