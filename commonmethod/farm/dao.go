@@ -43,11 +43,14 @@ type Last struct {
 	ChainId				string					`json:"chainId" bson:"chainId"`
 	Address				string					`json:"address" bson:"address"`
 	Staked				primitive.Decimal128	`json:"staked" bson:"staked"`
+	ValueStaked			primitive.Decimal128	`json:"valueStaked" bson:"valueStaked"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
+	Staking24hChange	primitive.Decimal128	`json:"staking24hChange" bson:"staking24hChange"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
+	Unstaking24hChange	primitive.Decimal128	`json:"unstaking24hChange" bson:"unstaking24hChange"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
-	ValueLocked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
+	Interest24hChange	primitive.Decimal128	`json:"interest24hChange" bson:"interest24hChange"`
 	Chart				Chart					`json:"chart" bson:"chart"`
 	Recent				Recent					`json:"recent" bson:"recent"`
 }
@@ -68,11 +71,12 @@ type Farm struct {
 	Duration			int64					`json:"duration" bson:"duration"`
 	Goal				int64					`json:"goal" bson:"goal"`
 	Staked				primitive.Decimal128	`json:"staked" bson:"staked"`
+	ValueStaked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
 	Interest			primitive.Decimal128	`json:"interest" bson:"interest"`
 	Staking24h			primitive.Decimal128	`json:"staking24h" bson:"staking24h"`
 	Unstaking24h		primitive.Decimal128	`json:"unstaking24h" bson:"unstaking24h"`
 	Interest24h			primitive.Decimal128	`json:"interest24h" bson:"interest24h"`
-	ValueStaked			primitive.Decimal128	`json:"valueLocked" bson:"valueLocked"`
+	Yield				primitive.Decimal128	`json:"yield" bson:"yield"`
 	Total				primitive.Decimal128	`json:"total" bson:"total"`
 	Chart	  			[]Chart					`json:"chart" bson:"chart"`
 	Recents				[]Recent				`json:"recents" bson:"recents"`
