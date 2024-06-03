@@ -65,6 +65,7 @@ type EventAsk struct {
 
 type EventModify struct {
 	Owner        common.Address
+	Sell         common.Address
 	BeforeAmount *big.Int
 	AfterAmount  *big.Int
 	BeforePrice  *big.Int
@@ -84,6 +85,7 @@ type EventLong struct {
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
+	Amount    *big.Int
 	Size      *big.Int
 	Leverage  *big.Int
 	Threshold *big.Int
@@ -93,6 +95,7 @@ type EventShort struct {
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
+	Amount    *big.Int
 	Size      *big.Int
 	Leverage  *big.Int
 	Threshold *big.Int
@@ -105,6 +108,7 @@ type EventOpen struct {
 	Price     *big.Int
 	Amount    *big.Int
 	Leverage  *big.Int
+	Size      *big.Int
 	Threshold *big.Int
 }
 
@@ -115,6 +119,7 @@ type EventClose struct {
 	Price     *big.Int
 	Amount    *big.Int
 	Leverage  *big.Int
+	Size      *big.Int
 	Threshold *big.Int
 }
 
@@ -123,17 +128,22 @@ type EventLiquidation struct {
 	Owner     common.Address
 	Pay       common.Address
 	Price     *big.Int
-	Size      *big.Int
+	Amount    *big.Int
 	Leverage  *big.Int
+	Size      *big.Int
 	Threshold *big.Int
 }
 
 type EventMargin struct {
 	Owner        common.Address
+	Pay          common.Address
 	BeforeAmount *big.Int
 	AfterAmount  *big.Int
 	BeforeMargin *big.Int
 	AfterMargin  *big.Int
+	Item         common.Address
+	BeforeSize   *big.Int
+	AfterSize    *big.Int
 }
 
 type EventCancel struct {
@@ -186,4 +196,6 @@ type EventTransferPosition struct {
 	Pay      common.Address
 	Amount   *big.Int
 	Leverage *big.Int
+	Item     common.Address
+	Size     *big.Int
 }
