@@ -16,9 +16,8 @@ type Volume struct {
 }
 
 type Position struct {
-	Asset  string               `json:"asset" bson:"asset"`
-	Amount primitive.Decimal128 `json:"amount" bson:"amount"`
-	Size   primitive.Decimal128 `json:"size" bson:"size"`
+	Asset string               `json:"asset" bson:"asset"`
+	Size  primitive.Decimal128 `json:"size" bson:"size"`
 }
 
 type Asset struct {

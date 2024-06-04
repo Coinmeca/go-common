@@ -113,25 +113,23 @@ type EventOpen struct {
 }
 
 type EventClose struct {
-	Category  uint8
-	Owner     common.Address
-	Pay       common.Address
-	Price     *big.Int
-	Amount    *big.Int
-	Leverage  *big.Int
-	Size      *big.Int
-	Threshold *big.Int
+	Category     uint8
+	Owner        common.Address
+	Pay          common.Address
+	Price        *big.Int
+	BeforeAmount *big.Int
+	AfterAmount  *big.Int
+	Leverage     *big.Int
 }
 
 type EventLiquidation struct {
-	Category  uint8
-	Owner     common.Address
-	Pay       common.Address
-	Price     *big.Int
-	Amount    *big.Int
-	Leverage  *big.Int
-	Size      *big.Int
-	Threshold *big.Int
+	Category     uint8
+	Owner        common.Address
+	Pay          common.Address
+	Price        *big.Int
+	BeforeAmount *big.Int
+	AfterAmount  *big.Int
+	Leverage     *big.Int
 }
 
 type EventMargin struct {
