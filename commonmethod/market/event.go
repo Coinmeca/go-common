@@ -117,8 +117,8 @@ type EventClose struct {
 	Owner        common.Address
 	Pay          common.Address
 	Price        *big.Int
-	BeforeAmount *big.Int
-	AfterAmount  *big.Int
+	BeforeAmount *big.Int `abi:"_bAmount" bson:"beforeAmount"`
+	AfterAmount  *big.Int `abi:"_aAmount" bson:"afterAmount"`
 	Leverage     *big.Int
 }
 
