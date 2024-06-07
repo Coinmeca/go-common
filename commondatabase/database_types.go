@@ -1,8 +1,9 @@
 package commondatabase
 
 import (
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"time"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type ContractInfo struct {
@@ -58,23 +59,29 @@ type BatchInfo struct {
 	Description     string             `json:"description" bson:"description"`
 }
 
-type ChainInfo struct {
-	Id        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	ChainId   string             `json:"chainId" bson:"chainId"`
-	ChainName string             `json:"chainName" bson:"chainName"`
-	Currency  string             `json:"currency" bson:"currency"`
-	Base      string             `json:"base" bson:"base"`
-	Type      string             `json:"type" bson:"type"`
-	Rpc       string             `json:"rpc" bson:"rpc"`
+type Currency struct {
+	Name     string `json:"name" bson:"name"`
+	Symbol   string `json:"symbol" bson:"symbol"`
+	Decimals int    `json:"decimals" bson:"decimals"`
+}
+
+type Chain struct {
+	Id             primitive.ObjectID `json:"id" bson:"_id,omitempty"`
+	ChainId        string             `json:"chainId" bson:"chainId"`
+	ChainName      string             `json:"chainName" bson:"chainName"`
+	NativeCurrency Currency           `json:"nativeCurrency" bson:"nativeCurrency"`
+	Base           string             `json:"base" bson:"base"`
+	Type           string             `json:"type" bson:"type"`
+	Rpc            string             `json:"rpc" bson:"rpc"`
 }
 
 type APIKey struct {
 	ID        primitive.ObjectID `json:"id" bson:"_id,omitempty"`
-	Type      string             `json:"type" bson:"type"`
-	Cate      string             `json:"cate" bson:"cate"`
+	Url       string             `json:"url" bson:"url"`
 	Key       string             `json:"key" bson:"key"`
 	Active    bool               `json:"active" bson:"active"`
-	Expired   time.Time          `json:"expired" bson:"expired,omitempty"`
-	Retry     string             `json:"retry" bson:"retry"`
+	Start     int                `json:"start" bson:"start,omitempty"`
+	Expired   int                `json:"expired" bson:"expired,omitempty"`
+	Retry     int                `json:"retry" bson:"retry"`
 	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
 }

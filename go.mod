@@ -11,7 +11,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/shopspring/decimal v1.3.1
 	github.com/stretchr/testify v1.8.4
-	go.mongodb.org/mongo-driver v1.13.1
+	go.mongodb.org/mongo-driver v1.15.0
 	go.uber.org/zap v1.13.0
 	golang.org/x/crypto v0.22.0
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
