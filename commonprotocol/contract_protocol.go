@@ -6,15 +6,14 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type Contracts struct {
-	Id           primitive.ObjectID
-	ServiceId    string
-	ChainName    string
-	ContractName string
-	Address      string
-	Owner        string
-	Abi          *abi.ABI
-	Cate         string
+type Contract struct {
+	Id        primitive.ObjectID
+	ServiceId string
+	Cate      string
+	Name      string
+	Address   string
+	Owner     string
+	Abi       *abi.ABI
 }
 
 type EthBlock struct {

@@ -18,7 +18,7 @@ import (
 type EthRepository struct {
 	ethClient   *ethclient.Client
 	contractABI map[string]abi.ABI
-	//contractInfo map[string]commondatabase.ContractInfo
+	//contractInfo map[string]commondatabase.Contract
 }
 
 func NewEthRepository(alchemyURL string) *EthRepository {

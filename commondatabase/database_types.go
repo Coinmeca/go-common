@@ -6,16 +6,15 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type ContractInfo struct {
-	Id              primitive.ObjectID       `json:"id" bson:"_id"`
-	ServiceId       string                   `json:"serviceId" bson:"serviceId"`
-	ChainId         string                   `json:"chainId" bson:"chainId"`
-	Chain           string                   `json:"chain" bson:"chain"`
-	ContractName    string                   `json:"contractName" bson:"contractName"`
-	ContractAddress string                   `json:"contractAddress" bson:"contractAddress"`
-	Owner           string                   `json:"owner" bson:"owner"`
-	Abi             []map[string]interface{} `json:"abi" bson:"abi"`
-	Cate            string                   `json:"cate" bson:"cate"`
+type Contract struct {
+	Id        primitive.ObjectID        `json:"id" bson:"_id"`
+	ServiceId string                    `json:"serviceId" bson:"serviceId"`
+	Cate      string                    `json:"cate" bson:"cate"`
+	ChainId   string                    `json:"chainId" bson:"chainId"`
+	Name      string                    `json:"name" bson:"name"`
+	Address   string                    `json:"address" bson:"address"`
+	Owner     string                    `json:"owner" bson:"owner"`
+	Abi       *[]map[string]interface{} `json:"abi" bson:"abi"`
 }
 
 type TxData struct {
