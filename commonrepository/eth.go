@@ -76,11 +76,11 @@ func (ec *EthRepository) GetNodeChainID(ctx context.Context) (*big.Int, error) {
 	return chainId, nil
 }
 
-func (ec *EthRepository) LatestBlockByNumber() (*big.Int, error) {
+func (ec *EthRepository) LatestBlockNumber() (*big.Int, error) {
 	header, err := ec.ethClient.HeaderByNumber(context.Background(), nil)
 	if err != nil {
-		log.Fatal(err)
-		return big.NewInt(0), errors.Wrap(err, "LatestBlockByNumber Fail")
+		// log.Fatal(err)
+		return nil, errors.Wrap(err, "LatestBlockNumber Fail")
 	}
 	blockNumber := header.Number
 	return blockNumber, nil

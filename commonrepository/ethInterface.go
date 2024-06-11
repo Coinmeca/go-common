@@ -13,7 +13,7 @@ import (
 
 type EthClientRepository interface {
 	BlockByNumber(number *big.Int) (*types.Block, error)
-	LatestBlockByNumber() (*big.Int, error)
+	LatestBlockNumber() (*big.Int, error)
 	TxByHash(txHash string) (*types.Transaction, bool, error)
 	TxReceipt(txHash string) (*types.Receipt, error)
 	BalanceAt(account common.Address) (*big.Int, error)
