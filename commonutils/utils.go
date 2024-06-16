@@ -376,3 +376,8 @@ func IsDecimal128Zero(d primitive.Decimal128) bool {
 	str, _, _ := d.BigInt()
 	return str.String() == "0"
 }
+
+func ConvertUnixToDayStart(unix int) int {
+	t := time.Unix(int64(unix), 0)
+	return int(time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.UTC).Unix())
+}
