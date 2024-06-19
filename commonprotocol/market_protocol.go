@@ -1,5 +1,5 @@
 package commonprotocol
 
 const (
-	ContractCateMarket = "market"
+	ContractMarket = "market"
 )

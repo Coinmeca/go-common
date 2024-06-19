@@ -1,5 +1,5 @@
 package commonprotocol
 
 const (
-	ContractCateFarm = "farm"
+	ContractFarm = "farm"
 )

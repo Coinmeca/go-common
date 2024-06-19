@@ -7,13 +7,13 @@ import (
 )
 
 type Contract struct {
-	Id        primitive.ObjectID
-	ServiceId string
-	Cate      string
-	Name      string
-	Address   string
-	Owner     string
-	Abi       *abi.ABI
+	Id        primitive.ObjectID `json:"id" bson"id"`
+	ChainId   string             `json:"chainId" bson"chainId"`
+	ServiceId string             `json:"serviceId" bson"serviceId"`
+	Address   string             `json:"address" bson"address"`
+	Cate      string             `json:"cate" bson"cate"`
+	Name      string             `json:"name" bson"name"`
+	Abi       *abi.ABI           `json:"abi" bson"abi"`
 }
 
 type EthBlock struct {

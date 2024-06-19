@@ -1,7 +1,7 @@
 package commonprotocol
 
 const (
-	ContractCateVault = "vault"
+	ContractVault = "vault"
 )
 
 const (

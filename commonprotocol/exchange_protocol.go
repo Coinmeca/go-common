@@ -1,5 +1,5 @@
 package commonprotocol
 
 const (
-	ContractCateExchange = "exchange"
+	ContractExchange = "exchange"
 )
