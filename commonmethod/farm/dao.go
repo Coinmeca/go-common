@@ -75,6 +75,7 @@ type Farm struct {
 	Interest24h  primitive.Decimal128 `json:"interest24h" bson:"interest24h"`
 	ValueStaked  primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
 	Total        primitive.Decimal128 `json:"total" bson:"total"`
+	Apr          primitive.Decimal128 `json:"apr" bson:"apr"`
 	Chart        []Chart              `json:"chart" bson:"chart"`
 	Recents      []Recent             `json:"recents" bson:"recents"`
 	Last         Last                 `json:"last" bson:"bson"`
