@@ -27,10 +27,11 @@ type OutputVault struct {
 	Symbol   string         `abi:"symbol" bson:"symbol"`
 	Decimals uint8          `abi:"decimals" bson:"decimals"` // TODO: abi, DB parsing check
 	Locked   *big.Int       `abi:"locked" bson:"locked"`
-	Exchange *big.Int       `abi:"exchange" bson:"exchange"`
 	Rate     *big.Int       `abi:"rate" bson:"rate"`
+	Ratio    *big.Int       `abi:"ratio" bson:"ratio"`
 	Weight   *big.Int       `abi:"weight" bson:"weight"`
 	Need     *big.Int       `abi:"need" bson:"need"`
+	Require  *big.Int       `abi:"require" bson:"require"`
 }
 
 type OutputVaults struct {

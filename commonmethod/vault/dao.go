@@ -21,7 +21,7 @@ type Recent struct {
 type Last struct {
 	ChainId     string               `json:"chainId" bson:"chainId"`
 	Address     string               `json:"address" bson:"address"`
-	Exchange    primitive.Decimal128 `json:"exchange" bson:"exchange"`
+	Rate        primitive.Decimal128 `json:"rate" bson:"rate"`
 	Deposit     primitive.Decimal128 `json:"deposit" bson:"deposit"`
 	Withdraw    primitive.Decimal128 `json:"withdraw" bson:"withdraw"`
 	Locked      primitive.Decimal128 `json:"locked" bson:"locked"`
@@ -42,18 +42,17 @@ type Vault struct {
 	Name        string               `json:"name" bson:"name"`
 	Symbol      string               `json:"symbol" bson:"symbol"`
 	Decimals    int64                `json:"decimals" bson:"decimals"`
-	Exchange    primitive.Decimal128 `json:"exchange" bson:"exchange"`
 	Rate        primitive.Decimal128 `json:"rate" bson:"rate"`
+	Ratio       primitive.Decimal128 `json:"ratio" bson:"ratio"`
 	Locked      primitive.Decimal128 `json:"locked" bson:"locked"`
 	ValueLocked primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
 	Weight      primitive.Decimal128 `json:"weight" bson:"weight"`
 	Need        primitive.Decimal128 `json:"need" bson:"need"`
+	Require     primitive.Decimal128 `json:"require" bson:"require"`
 	Deposit     primitive.Decimal128 `json:"deposit" bson:"deposit"`
 	Deposit24h  primitive.Decimal128 `json:"deposit24h" bson:"deposit24h"`
 	Withdraw    primitive.Decimal128 `json:"withdraw" bson:"withdraw"`
 	Withdraw24h primitive.Decimal128 `json:"withdraw24h" bson:"withdraw24h"`
-	PerToken    primitive.Decimal128 `json:"perToken" bson:"perToken"`
-	TokenPer    primitive.Decimal128 `json:"tokenPer" bson:"tokenPer"`
 	Mint        primitive.Decimal128 `json:"mint" bson:"mint"`
 	Burn        primitive.Decimal128 `json:"burn" bson:"burn"`
 	Value       primitive.Decimal128 `json:"value" bson:"value"`
