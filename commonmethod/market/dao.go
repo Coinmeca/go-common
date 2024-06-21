@@ -11,7 +11,7 @@ type Recent struct {
 	Type     int64                `json:"type" bson:"type"`
 	User     string               `json:"user" bson:"user"`
 	Sell     string               `json:"sell" bson:"sell"`
-	Price    primitive.Decimal128 `json:"symbol" bson:"symbol"`
+	Price    primitive.Decimal128 `json:"price" bson:"price"`
 	Amount   primitive.Decimal128 `json:"amount" bson:"amount"`
 	Buy      string               `json:"buy" bson:"buy"`
 	Quantity primitive.Decimal128 `json:"quantity" bson:"quantity"`
@@ -62,11 +62,11 @@ type Last struct {
 }
 
 type Token struct {
-	Address		string					`json:"address" bson:"address"`
-	Name		string					`json:"name" bson:"name"`
-	Symbol		string					`json:"symbol" bson:"symbol"`
-	Decimals	int64					`json:"decimals" bson:"decimals"`
-	Liquidity	primitive.Decimal128	`json:"liquidity" bson:"liquidity"`
+	Address   string               `json:"address" bson:"address"`
+	Name      string               `json:"name" bson:"name"`
+	Symbol    string               `json:"symbol" bson:"symbol"`
+	Decimals  int64                `json:"decimals" bson:"decimals"`
+	Liquidity primitive.Decimal128 `json:"liquidity" bson:"liquidity"`
 }
 
 type Market struct {
@@ -74,8 +74,8 @@ type Market struct {
 	Address   string               `json:"address" bson:"address"`
 	Name      string               `json:"name" bson:"name"`
 	Symbol    string               `json:"symbol" bson:"symbol"`
-	Base      Token				   `json:"base" bson:"base"`
-	Quote     Token				   `json:"quote" bson:"quote"`
+	Base      Token                `json:"base" bson:"base"`
+	Quote     Token                `json:"quote" bson:"quote"`
 	Price     primitive.Decimal128 `json:"price" bson:"price"`
 	Tick      primitive.Decimal128 `json:"tick" bson:"tick"`
 	Volume    Volume               `json:"volume" bson:"volume"`
@@ -84,7 +84,7 @@ type Market struct {
 	Threshold int64                `json:"threshold" bson:"threshold"`
 	Fee       int64                `json:"fee" bson:"fee"`
 	Lock      bool                 `json:"lock" bson:"lock"`
-	Chart	  []Chart			   `json:"chart" bson:"chart"`
+	Chart     []Chart              `json:"chart" bson:"chart"`
 	Recents   []Recent             `json:"recents" bson:"recents"`
 	Last      Last                 `json:"last" bson:"last"`
 }
