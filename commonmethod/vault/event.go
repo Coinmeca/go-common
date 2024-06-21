@@ -1,8 +1,9 @@
 package vault
 
 import (
-	"github.com/ethereum/go-ethereum/common"
 	"math/big"
+
+	"github.com/ethereum/go-ethereum/common"
 )
 
 const (
@@ -17,11 +18,11 @@ const (
 	EventNamePermission = "Permission"
 )
 
-type EventWithdraw struct {
-	Owner  common.Address
-	Token  common.Address
-	Amount *big.Int
-	Burn   *big.Int
+type EventListing struct {
+	Owner    common.Address
+	Token    common.Address
+	Quantity *big.Int
+	Proof    *big.Int
 }
 
 type EventDeposit struct {
@@ -29,4 +30,11 @@ type EventDeposit struct {
 	Token  common.Address
 	Amount *big.Int
 	Mint   *big.Int
+}
+
+type EventWithdraw struct {
+	Owner  common.Address
+	Token  common.Address
+	Amount *big.Int
+	Burn   *big.Int
 }
