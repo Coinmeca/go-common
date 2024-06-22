@@ -63,26 +63,13 @@ func FormattedDate(t *int64) *string {
 }
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
-	bigInt := new(big.Int)
-	if decimal == nil {
+	bigInt, _, err := decimal.BigInt()
+	if err != nil {
 		commonlog.Logger.Warn("BigIntFromDecimal128",
-			zap.String("wrong decimal128", decimal.String()),
+			zap.String("wrong decimal:", bigInt.String()),
 		)
 		return nil
 	}
-
-	if *decimal == primitive.NewDecimal128(0, 0) {
-		return bigInt
-	}
-
-	bigInt, ok := new(big.Int).SetString(decimal.String(), 10)
-	if !ok {
-		commonlog.Logger.Warn("BigIntFromDecimal128",
-			zap.String("failed to parse", decimal.String()),
-		)
-		return nil
-	}
-
 	return bigInt
 }
 
@@ -121,9 +108,9 @@ func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 			zap.String("nil decimal2", decimal2.String()),
 		)
 		return nil
-	} else if *decimal1 == zero {
+	} else if *decimal1 == zero || decimal1.String() == "0" {
 		return decimal2
-	} else if *decimal2 == zero {
+	} else if *decimal2 == zero || decimal2.String() == "0" {
 		return decimal1
 	}
 
@@ -166,9 +153,9 @@ func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 			zap.String("nil decimal2", decimal2.String()),
 		)
 		return nil
-	} else if *decimal1 == zero && *decimal2 == zero {
+	} else if (*decimal1 == zero || decimal1.String() == "0") && (*decimal2 == zero || decimal2.String() == "0") {
 		return &zero
-	} else if *decimal2 == zero {
+	} else if *decimal2 == zero || decimal2.String() == "0" {
 		return decimal1
 	}
 
@@ -207,7 +194,7 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 			zap.String("nil decimal2", decimal2.String()),
 		)
 		return nil
-	} else if *decimal1 == zero || *decimal2 == zero {
+	} else if *decimal1 == zero || *decimal2 == zero || decimal1.String() == "0" || decimal2.String() == "0" {
 		return &zero
 	}
 
@@ -253,7 +240,7 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 			zap.String("nil decimal2", decimal2.String()),
 		)
 		return nil
-	} else if *decimal1 == zero || *decimal2 == zero {
+	} else if *decimal1 == zero || *decimal2 == zero || decimal1.String() == "0" || decimal2.String() == "0" {
 		return &zero
 	}
 
@@ -300,7 +287,7 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 		)
 		return nil
 		// return nil, errors.New("arguments are nil")
-	} else if *decimal1 == zero || *decimal2 == zero {
+	} else if *decimal1 == zero || *decimal2 == zero || decimal1.String() == "0" || decimal2.String() == "0" {
 		return &zero
 	}
 
