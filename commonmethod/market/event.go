@@ -64,12 +64,12 @@ type EventAsk struct {
 }
 
 type EventModify struct {
-	Owner        common.Address
-	Sell         common.Address
-	BeforeAmount *big.Int
-	AfterAmount  *big.Int
-	BeforePrice  *big.Int
-	AfterPrice   *big.Int
+	Owner   common.Address
+	Sell    common.Address
+	BAmount *big.Int
+	AAmount *big.Int
+	BPrice  *big.Int
+	aPrice  *big.Int
 }
 
 type EventClaim struct {
@@ -113,30 +113,30 @@ type EventOpen struct {
 }
 
 type EventClose struct {
-	Category     uint8
-	Owner        common.Address
-	Pay          common.Address
-	Price        *big.Int
-	BeforeAmount *big.Int `abi:"_bAmount" bson:"beforeAmount"`
-	AfterAmount  *big.Int `abi:"_aAmount" bson:"afterAmount"`
-	Leverage     *big.Int
+	Category uint8
+	Owner    common.Address
+	Pay      common.Address
+	Price    *big.Int
+	BAmount  *big.Int
+	AAmount  *big.Int
+	Leverage *big.Int
 }
 
 type EventLiquidation struct {
-	Category     uint8
-	Owner        common.Address
-	Pay          common.Address
-	Price        *big.Int
-	BeforeAmount *big.Int
-	AfterAmount  *big.Int
-	Leverage     *big.Int
+	Category uint8
+	Owner    common.Address
+	Pay      common.Address
+	Price    *big.Int
+	BAmount  *big.Int
+	AAmount  *big.Int
+	Leverage *big.Int
 }
 
 type EventMargin struct {
 	Owner        common.Address
 	Pay          common.Address
-	BeforeAmount *big.Int
-	AfterAmount  *big.Int
+	BAmount      *big.Int
+	AAmount      *big.Int
 	BeforeMargin *big.Int
 	AfterMargin  *big.Int
 	Item         common.Address
