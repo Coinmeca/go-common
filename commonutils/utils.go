@@ -324,7 +324,7 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	return result
 }
 
-func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
+func FloatStringFromDecimal128Backup(decimal *primitive.Decimal128) string {
 	// Convert the big.Int to a string
 	var result string
 	if decimal == nil {
@@ -384,6 +384,57 @@ func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
 
 	result = integer + "." + float
 	return result
+}
+
+func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
+	if decimal == nil {
+		return ""
+	}
+
+	var zero primitive.Decimal128
+	if *decimal == zero {
+		return "0"
+	}
+
+	decimalStr := decimal.String()
+	sign := ""
+
+	if decimalStr[0] == '-' {
+		sign = "-"
+		decimalStr = decimalStr[1:]
+	}
+
+	bigInt, _ := new(big.Int).SetString(decimalStr, 10)
+	value := bigInt.String()
+
+	if value == "0" {
+		return value
+	}
+
+	length := len(value)
+	result := ""
+
+	if length <= 18 {
+		prefix := "0."
+		suffix := value
+		for i := 0; i < 18-length; i++ {
+			prefix += "0"
+		}
+		result = prefix + suffix
+	} else {
+		index := length - 18
+		integer := value[:index]
+		float := value[index:]
+		float = strings.TrimRight(float, "0")
+
+		if float == "" {
+			result = integer
+		} else {
+			result = integer + "." + float
+		}
+	}
+
+	return sign + result
 }
 
 func IsDecimal128Zero(d primitive.Decimal128) bool {
