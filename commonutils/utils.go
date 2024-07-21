@@ -324,7 +324,7 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	return result
 }
 
-func FloatStringFromDecimal128Backup(decimal *primitive.Decimal128) string {
+func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
 	// Convert the big.Int to a string
 	var result string
 	if decimal == nil {
@@ -386,7 +386,7 @@ func FloatStringFromDecimal128Backup(decimal *primitive.Decimal128) string {
 	return result
 }
 
-func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
+func FloatStringFromDecimal128V2(decimal *primitive.Decimal128) string {
 	if decimal == nil {
 		return ""
 	}
