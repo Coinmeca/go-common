@@ -10,7 +10,7 @@ type Recent struct {
 	Time     int64                `json:"time" bson:"time"`
 	Type     int64                `json:"type" bson:"type"`
 	User     string               `json:"user" bson:"user"`
-	Amount   primitive.Decimal128 `json:"volume" bson:"volume"`
+	Amount   primitive.Decimal128 `json:"amount" bson:"amount"`
 	Meca     primitive.Decimal128 `json:"meca" bson:"meca"`
 	Share    primitive.Decimal128 `json:"share" bson:"share"`
 	TxHash   string               `json:"txHash" bson:"txHash"`
