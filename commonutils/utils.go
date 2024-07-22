@@ -446,3 +446,22 @@ func ConvertUnixToDayStart(unix int) int {
 	t := time.Unix(int64(unix), 0)
 	return int(time.Date(t.Year(), t.Month(), t.Day(), 0, 0, 0, 0, time.UTC).Unix())
 }
+
+func FloatStringToDecimal128(floatStr string) (primitive.Decimal128, error) {
+	floatStr = strings.Replace(floatStr, ",", "", -1)
+
+	floatVal, err := strconv.ParseFloat(floatStr, 64)
+	if err != nil {
+		return primitive.Decimal128{}, err
+	}
+
+	floatVal = floatVal * math.Pow(10, 18)
+	scaledStr := strconv.FormatFloat(floatVal, 'f', -1, 64)
+
+	decimal128, err := primitive.ParseDecimal128(scaledStr)
+	if err != nil {
+		return primitive.Decimal128{}, err
+	}
+
+	return decimal128, nil
+}
