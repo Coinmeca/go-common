@@ -18,20 +18,22 @@ type Recent struct {
 }
 
 type Last struct {
-	ChainId     string               `json:"chainId" bson:"chainId"`
-	Address     string               `json:"address" bson:"address"`
-	Rate        primitive.Decimal128 `json:"rate" bson:"rate"`
-	Deposit     primitive.Decimal128 `json:"deposit" bson:"deposit"`
-	Withdraw    primitive.Decimal128 `json:"withdraw" bson:"withdraw"`
-	Locked      primitive.Decimal128 `json:"locked" bson:"locked"`
-	ValueLocked primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
-	Value       primitive.Decimal128 `json:"value" bson:"value"`
-	Weight      primitive.Decimal128 `json:"weight" bson:"weight"`
-	Mint        primitive.Decimal128 `json:"mint" bson:"mint"`
-	Burn        primitive.Decimal128 `json:"burn" bson:"burn"`
-	Chart       Chart                `json:"chart" bson:"chart"`
-	ChartSub    ChartSub             `json:"chartSub" bson:"chartSub"`
-	Recent      Recent               `json:"recent" bson:"Recent"`
+	ChainId           string               `json:"chainId" bson:"chainId"`
+	Address           string               `json:"address" bson:"address"`
+	Rate              primitive.Decimal128 `json:"rate" bson:"rate"`
+	Deposit24h        primitive.Decimal128 `json:"deposit24h" bson:"deposit24h"`
+	Deposit24hChange  primitive.Decimal128 `json:"deposit24hChange" bson:"deposit24hChange"`
+	Withdraw24h       primitive.Decimal128 `json:"withdraw24h" bson:"withdraw24h"`
+	Withdraw24hChange primitive.Decimal128 `json:"withdraw24hChange" bson:"withdraw24hChange"`
+	Locked            primitive.Decimal128 `json:"locked" bson:"locked"`
+	ValueLocked       primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
+	Value             primitive.Decimal128 `json:"value" bson:"value"`
+	Weight            primitive.Decimal128 `json:"weight" bson:"weight"`
+	Mint              primitive.Decimal128 `json:"mint" bson:"mint"`
+	Burn              primitive.Decimal128 `json:"burn" bson:"burn"`
+	Chart             Chart                `json:"chart" bson:"chart"`
+	ChartSub          ChartSub             `json:"chartSub" bson:"chartSub"`
+	Recent            Recent               `json:"recent" bson:"Recent"`
 }
 
 type Vault struct {
