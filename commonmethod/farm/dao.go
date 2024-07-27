@@ -50,6 +50,7 @@ type Last struct {
 	UnStaking24h       primitive.Decimal128 `json:"unStaking24h" bson:"unStaking24h"`
 	UnStaking24hChange primitive.Decimal128 `json:"unStaking24hChange" bson:"unStaking24hChange"`
 	Interest24h        primitive.Decimal128 `json:"interest24h" bson:"interest24h"`
+	Interest24hChange  primitive.Decimal128 `json:"interest24hChange" bson:"interest24hChange"`
 	ValueLocked        primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
 	Chart              Chart                `json:"chart" bson:"chart"`
 	Recent             Recent               `json:"recent" bson:"recent"`
