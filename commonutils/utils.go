@@ -393,48 +393,35 @@ func FloatStringFromDecimal128V2(decimal *primitive.Decimal128) string {
 
 	var zero primitive.Decimal128
 	if *decimal == zero {
-		return "0"
+		return "0.000000000000000000"
 	}
 
+	bigFloat := new(big.Float)
 	decimalStr := decimal.String()
-	sign := ""
-
-	if decimalStr[0] == '-' {
-		sign = "-"
-		decimalStr = decimalStr[1:]
+	if _, ok := bigFloat.SetString(decimalStr); !ok {
+		commonlog.Logger.Error("FloatStringFromDecimal128V2",
+			zap.String("error parsing big.Float", decimalStr),
+		)
+		return ""
 	}
 
-	bigInt, _ := new(big.Int).SetString(decimalStr, 10)
-	value := bigInt.String()
+	scale := new(big.Float).SetInt(new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
+	bigFloat.Quo(bigFloat, scale)
 
-	if value == "0" {
-		return value
+	floatStr := bigFloat.Text('f', 18)
+	parts := strings.Split(floatStr, ".")
+
+	if len(parts) == 1 {
+		return parts[0] + ".000000000000000000"
 	}
 
-	length := len(value)
-	result := ""
-
-	if length <= 18 {
-		prefix := "0."
-		suffix := value
-		for i := 0; i < 18-length; i++ {
-			prefix += "0"
-		}
-		result = prefix + suffix
-	} else {
-		index := length - 18
-		integer := value[:index]
-		float := value[index:]
-		float = strings.TrimRight(float, "0")
-
-		if float == "" {
-			result = integer
-		} else {
-			result = integer + "." + float
-		}
+	if len(parts[1]) < 18 {
+		parts[1] += strings.Repeat("0", 18-len(parts[1]))
+	} else if len(parts[1]) > 18 {
+		parts[1] = parts[1][:18]
 	}
 
-	return sign + result
+	return parts[0] + "." + parts[1]
 }
 
 func IsDecimal128Zero(d primitive.Decimal128) bool {
