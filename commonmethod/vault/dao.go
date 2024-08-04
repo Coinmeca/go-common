@@ -83,5 +83,5 @@ type ChartSub struct {
 	Weight      primitive.Decimal128 `json:"weight" bson:"weight"`
 	Locked      primitive.Decimal128 `json:"locked" bson:"locked"`
 	Value       primitive.Decimal128 `json:"value" bson:"value"`
-	ValueLocked primitive.Decimal128 `json:"ValueLocked" bson:"ValueLocked"`
+	ValueLocked primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
 }
