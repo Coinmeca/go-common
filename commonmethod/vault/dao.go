@@ -21,8 +21,10 @@ type Last struct {
 	ChainId           string               `json:"chainId" bson:"chainId"`
 	Address           string               `json:"address" bson:"address"`
 	Rate              primitive.Decimal128 `json:"rate" bson:"rate"`
+	Deposit           primitive.Decimal128 `json:"deposit" bson:"deposit"`
 	Deposit24h        primitive.Decimal128 `json:"deposit24h" bson:"deposit24h"`
 	Deposit24hChange  primitive.Decimal128 `json:"deposit24hChange" bson:"deposit24hChange"`
+	Withdraw          primitive.Decimal128 `json:"withdraw" bson:"withdraw"`
 	Withdraw24h       primitive.Decimal128 `json:"withdraw24h" bson:"withdraw24h"`
 	Withdraw24hChange primitive.Decimal128 `json:"withdraw24hChange" bson:"withdraw24hChange"`
 	Locked            primitive.Decimal128 `json:"locked" bson:"locked"`
@@ -37,32 +39,30 @@ type Last struct {
 }
 
 type Vault struct {
-	ChainId           string               `json:"chainId" bson:"chainId"`
-	Address           string               `json:"address" bson:"address"`
-	Key               bool                 `json:"key" bson:"key"`
-	Name              string               `json:"name" bson:"name"`
-	Symbol            string               `json:"symbol" bson:"symbol"`
-	Decimals          int64                `json:"decimals" bson:"decimals"`
-	Rate              primitive.Decimal128 `json:"rate" bson:"rate"`
-	Ratio             primitive.Decimal128 `json:"ratio" bson:"ratio"`
-	Locked            primitive.Decimal128 `json:"locked" bson:"locked"`
-	ValueLocked       primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
-	Weight            primitive.Decimal128 `json:"weight" bson:"weight"`
-	Need              primitive.Decimal128 `json:"need" bson:"need"`
-	Require           primitive.Decimal128 `json:"require" bson:"require"`
-	Deposit           primitive.Decimal128 `json:"deposit" bson:"deposit"`
-	Deposit24h        primitive.Decimal128 `json:"deposit24h" bson:"deposit24h"`
-	Deposit24hChange  primitive.Decimal128 `json:"deposit24hChange" bson:"deposit24hChange"`
-	Withdraw          primitive.Decimal128 `json:"withdraw" bson:"withdraw"`
-	Withdraw24h       primitive.Decimal128 `json:"withdraw24h" bson:"withdraw24h"`
-	Withdraw24hChange primitive.Decimal128 `json:"withdraw24hChange" bson:"withdraw24hChange"`
-	Mint              primitive.Decimal128 `json:"mint" bson:"mint"`
-	Burn              primitive.Decimal128 `json:"burn" bson:"burn"`
-	Value             primitive.Decimal128 `json:"value" bson:"value"`
-	Chart             []Chart              `json:"chart" bson:"chart"`
-	ChartSub          []ChartSub           `json:"chartSub" bson:"chartSub"`
-	Recents           []Recent             `json:"recents" bson:"recents"`
-	Last              Last                 `json:"last" bson:"last"`
+	ChainId     string               `json:"chainId" bson:"chainId"`
+	Address     string               `json:"address" bson:"address"`
+	Key         bool                 `json:"key" bson:"key"`
+	Name        string               `json:"name" bson:"name"`
+	Symbol      string               `json:"symbol" bson:"symbol"`
+	Decimals    int64                `json:"decimals" bson:"decimals"`
+	Rate        primitive.Decimal128 `json:"rate" bson:"rate"`
+	Ratio       primitive.Decimal128 `json:"ratio" bson:"ratio"`
+	Locked      primitive.Decimal128 `json:"locked" bson:"locked"`
+	ValueLocked primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
+	Weight      primitive.Decimal128 `json:"weight" bson:"weight"`
+	Need        primitive.Decimal128 `json:"need" bson:"need"`
+	Require     primitive.Decimal128 `json:"require" bson:"require"`
+	Deposit     primitive.Decimal128 `json:"deposit" bson:"deposit"`
+	Deposit24h  primitive.Decimal128 `json:"deposit24h" bson:"deposit24h"`
+	Withdraw    primitive.Decimal128 `json:"withdraw" bson:"withdraw"`
+	Withdraw24h primitive.Decimal128 `json:"withdraw24h" bson:"withdraw24h"`
+	Mint        primitive.Decimal128 `json:"mint" bson:"mint"`
+	Burn        primitive.Decimal128 `json:"burn" bson:"burn"`
+	Value       primitive.Decimal128 `json:"value" bson:"value"`
+	Chart       []Chart              `json:"chart" bson:"chart"`
+	ChartSub    []ChartSub           `json:"chartSub" bson:"chartSub"`
+	Recents     []Recent             `json:"recents" bson:"recents"`
+	Last        Last                 `json:"last" bson:"last"`
 }
 
 type Chart struct {
