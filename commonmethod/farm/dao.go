@@ -63,8 +63,8 @@ type Last struct {
 type Farm struct {
 	ChainId            string               `json:"chainId" bson:"chainId"`
 	Address            string               `json:"address" bson:"address"`
-	Type               bool                 `json:"type" bson:"type"`
 	Id                 int64                `json:"id" bson:"id"`
+	Main               string				`json:"main" bson:"main"`
 	Master             string               `json:"master" bson:"master"`
 	Name               string               `json:"name" bson:"name"`
 	Symbol             string               `json:"symbol" bson:"symbol"`

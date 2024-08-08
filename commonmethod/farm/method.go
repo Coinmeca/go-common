@@ -25,8 +25,8 @@ const (
 
 type OutputFarm struct {
 	Address		common.Address		`json:"farm" bson:"farm"`
-	Type		bool				`json:"type" bson:"type"`
 	Id			*big.Int			`json:"id" bson:"id"`
+	Main		common.Address		`json:"main" bson:"main"`
 	Master		common.Address		`json:"master" bson:"master"`
 	Name		string				`json:"name" bson:"name"`
 	Symbol		string				`json:"symbol" bson:"symbol"`
