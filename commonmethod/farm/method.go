@@ -10,9 +10,8 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-
 const (
-	MethodFarmGetAll = "getAll"
+	MethodFarmGetAll      = "getAll"
 	MethodFarmGetAllFarms = "getAllFarms"
 )
 
@@ -24,22 +23,22 @@ const (
 )
 
 type OutputFarm struct {
-	Address		common.Address		`json:"farm" bson:"farm"`
-	Id			*big.Int			`json:"id" bson:"id"`
-	Main		common.Address		`json:"main" bson:"main"`
-	Master		common.Address		`json:"master" bson:"master"`
-	Name		string				`json:"name" bson:"name"`
-	Symbol		string				`json:"symbol" bson:"symbol"`
-	Decimals	uint8				`json:"decimals" bson:"decimals"`
-	Stake		token.OutputToken	`json:"stake" bson:"stake"`
-	Earn		token.OutputToken	`json:"earn" bson:"earn"`
-	Start		*big.Int			`json:"start" bson:"start"`
-	Period		*big.Int			`json:"period" bson:"period"`
-	Duration	*big.Int			`json:"duration" bson:"duration"`
-	Goal		*big.Int			`json:"goal" bson:"goal"`
-	Staked		*big.Int			`json:"staked" bson:"staked"`
-	Interest	*big.Int			`json:"interest" bson:"interest"`
-	Total		*big.Int			`json:"total" bson:"total"`
+	Address  common.Address    `json:"farm" bson:"farm"`
+	Main     common.Address    `json:"main" bson:"main"`
+	Id       *big.Int          `json:"id" bson:"id"`
+	Master   common.Address    `json:"master" bson:"master"`
+	Name     string            `json:"name" bson:"name"`
+	Symbol   string            `json:"symbol" bson:"symbol"`
+	Decimals uint8             `json:"decimals" bson:"decimals"`
+	Stake    token.OutputToken `json:"stake" bson:"stake"`
+	Earn     token.OutputToken `json:"earn" bson:"earn"`
+	Start    *big.Int          `json:"start" bson:"start"`
+	Period   *big.Int          `json:"period" bson:"period"`
+	Duration *big.Int          `json:"duration" bson:"duration"`
+	Goal     *big.Int          `json:"goal" bson:"goal"`
+	Staked   *big.Int          `json:"staked" bson:"staked"`
+	Interest *big.Int          `json:"interest" bson:"interest"`
+	Total    *big.Int          `json:"total" bson:"total"`
 }
 
 type OutputFarms struct {
