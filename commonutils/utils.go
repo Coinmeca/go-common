@@ -452,3 +452,26 @@ func FloatStringToDecimal128(floatStr string) (primitive.Decimal128, error) {
 
 	return decimal128, nil
 }
+
+func ConvertResolutionToSeconds(resolution string) int64 {
+	switch resolution {
+	case "1":
+		return 60
+	case "5":
+		return 300
+	case "15":
+		return 900
+	case "30":
+		return 1800
+	case "60":
+		return 3600
+	case "1D":
+		return 86400
+	case "1W":
+		return 604800
+	case "1M":
+		return 2592000
+	default:
+		return 60
+	}
+}
