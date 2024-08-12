@@ -17,6 +17,11 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
 
+replace (
+	github.com/coinmeca/go-common => ../../libs/go-common
+	github.com/coinmeca/grpc-module => ../../libs/grpc-module
+)
+
 require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/StackExchange/wmi v1.2.1 // indirect
