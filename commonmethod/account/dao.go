@@ -19,6 +19,12 @@ type Position struct {
 	Asset string               `json:"asset" bson:"asset"`
 	Size  primitive.Decimal128 `json:"size" bson:"size"`
 }
+type Order struct {
+	Buy        Volume `json:"buy" bson:"buy"`
+	Sell       Volume `json:"sell" bson:"sell"`
+	Return     Volume `json:"return" bson:"return"`
+	ReturnRate Volume `json:"returnRate" bson:"returnRate"`
+}
 
 type Asset struct {
 	Account           string               `json:"account" bson:"account"`
@@ -37,4 +43,7 @@ type Asset struct {
 	AverageSell       Volume               `json:"averageSell" bson:"averageSell"`
 	AverageReturn     Volume               `json:"averageReturn" bson:"averageReturn"`
 	AverageReturnRate Volume               `json:"averageReturnRate" bson:"averageReturnRate"`
+	// todo: convert fields to structs.
+	// Total             Order                `json:"total" bson:"total`
+	// Average           Order                `json:"average" bson:"average`
 }
