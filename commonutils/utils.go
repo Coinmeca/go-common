@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/big"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -391,37 +392,23 @@ func FloatStringFromDecimal128V2(decimal *primitive.Decimal128) string {
 		return ""
 	}
 
-	var zero primitive.Decimal128
-	if *decimal == zero {
-		return "0.000000000000000000"
+	value := decimal.String()
+
+	if strings.Contains(value, "E") {
+		if matched, _ := regexp.MatchString(`^[-+]?0\.?0*E[-+]?\d+$`, value); matched {
+			return "0"
+		}
+		return value
 	}
 
-	bigFloat := new(big.Float)
-	decimalStr := decimal.String()
-	if _, ok := bigFloat.SetString(decimalStr); !ok {
-		commonlog.Logger.Error("FloatStringFromDecimal128V2",
-			zap.String("error parsing big.Float", decimalStr),
-		)
-		return ""
+	parsedFloat, err := strconv.ParseFloat(value, 64)
+	if err != nil {
+		return value
 	}
 
-	scale := new(big.Float).SetInt(new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
-	bigFloat.Quo(bigFloat, scale)
-
-	floatStr := bigFloat.Text('f', 18)
-	parts := strings.Split(floatStr, ".")
-
-	if len(parts) == 1 {
-		return parts[0] + ".000000000000000000"
-	}
-
-	if len(parts[1]) < 18 {
-		parts[1] += strings.Repeat("0", 18-len(parts[1]))
-	} else if len(parts[1]) > 18 {
-		parts[1] = parts[1][:18]
-	}
-
-	return parts[0] + "." + parts[1]
+	formatted := strconv.FormatFloat(parsedFloat, 'f', -1, 64)
+	re := regexp.MustCompile(`(?<=\.\d*?[1-9])0+$|(?<=\d)0*\.|(?<=^0)0+`)
+	return re.ReplaceAllString(formatted, "")
 }
 
 func IsDecimal128Zero(d primitive.Decimal128) bool {
