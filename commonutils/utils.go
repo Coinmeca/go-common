@@ -339,14 +339,16 @@ func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
 		return value
 	}
 
-	parsedFloat, err := strconv.ParseFloat(value, 64)
+	num := new(big.Float)
+	_, _, err := num.Parse(value, 10)
 	if err != nil {
 		return value
 	}
 
-	formatted := strconv.FormatFloat(parsedFloat, 'f', -1, 64)
+	formatted := num.Text('f', -1)
 	re := regexp.MustCompile(`(?<=\.\d*?[1-9])0+$|(?<=\d)0*\.|(?<=^0)0+`)
 	return re.ReplaceAllString(formatted, "")
+
 }
 
 func IsDecimal128Zero(d primitive.Decimal128) bool {
