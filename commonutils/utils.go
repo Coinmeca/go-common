@@ -326,68 +326,6 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 }
 
 func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
-	// Convert the big.Int to a string
-	var result string
-	if decimal == nil {
-		return ""
-	}
-
-	var zero primitive.Decimal128
-	if *decimal == zero {
-		return "0"
-	}
-
-	bigInt, _ := new(big.Int).SetString(decimal.String(), 10)
-	value := bigInt.String()
-
-	if value == "0" {
-		return value
-	}
-
-	// Determine the length of the string
-	length := len(value)
-
-	// Check if the length is less than the number of decimal places
-	if length <= 18 {
-		// Pad the string with leading zeros if necessary
-		prefix := "0."
-		suffix := value
-		for i := 0; i < 18-length; i++ {
-			prefix += "0"
-		}
-		result = prefix + suffix
-		return result
-	}
-
-	// Insert the decimal point at the appropriate position
-	index := length - 18
-	integer := value[:index]
-	float := value[index:]
-
-	// Remove trailing zeros from the decimal part
-	float = strings.TrimRight(float, "0")
-
-	// If the decimal part is empty after removing trailing zeros,
-	// return only the integer part
-	if float == "" {
-		return integer
-	}
-
-	// Pad the decimal part with trailing zeros if necessary
-	for len(float) < 18 {
-		float += "0"
-	}
-
-	// Remove any trailing decimal point
-	if float[len(float)-1] == '.' {
-		float = float[:len(float)-1]
-	}
-
-	result = integer + "." + float
-	return result
-}
-
-func FloatStringFromDecimal128V2(decimal *primitive.Decimal128) string {
 	if decimal == nil {
 		return ""
 	}
