@@ -5,7 +5,6 @@ import (
 	"math"
 	"math/big"
 	"reflect"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -53,14 +52,14 @@ func JoinFromStructs(slice interface{}, fieldName, sep string) string {
 
 func GetCurrentDate() *string {
 	currentTime := time.Now()
-	formattedDate := currentTime.Format("2006-01-02 15:04:05")
-	return &formattedDate
+	resultDate := currentTime.Format("2006-01-02 15:04:05")
+	return &resultDate
 }
 
-func FormattedDate(t *int64) *string {
+func resultDate(t *int64) *string {
 	unixTime := time.Unix(*t, 0)
-	formattedDate := unixTime.Format("2006-01-02 15:04:05")
-	return &formattedDate
+	resultDate := unixTime.Format("2006-01-02 15:04:05")
+	return &resultDate
 }
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
@@ -325,38 +324,55 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	return result
 }
 
-func FloatStringFromDecimal128(decimal *primitive.Decimal128) string {
-	if decimal == nil {
+func FloatStringFromDecimal128(input *primitive.Decimal128) string {
+	if input == nil {
 		return ""
 	}
 
-	value := decimal.String()
+	value := input.String()
+	if value == "0" || value == "-0" || value == "0E-6176" || value == "-0E-6176" || strings.TrimLeft(value, "0.-") == "" {
+		return "0"
+	}
 
-	if strings.Contains(value, "E") {
-		if matched, _ := regexp.MatchString(`^[-+]?0\.?0*E[-+]?\d+$`, value); matched {
-			return "0"
+	isNegative := strings.HasPrefix(value, "-")
+	if isNegative {
+		value = value[1:]
+	}
+
+	// Remove leading zeros from the integer part
+	numbers := strings.TrimLeft(value, "0")
+
+	if len(numbers) <= 18 {
+		// Case where the number has 18 or fewer digits, we treat it as a small number
+		zeros := 18 - len(numbers)
+		result := fmt.Sprintf("0.%s%s", strings.Repeat("0", zeros), numbers)
+		result = strings.TrimRight(result, "0") // Trim trailing zeros
+		if strings.HasSuffix(result, ".") {
+			result = result[:len(result)-1] // Remove trailing dot if no decimals
 		}
-		return value
-	}
-
-	num := new(big.Float)
-	_, _, err := num.Parse(value, 10)
-	if err != nil {
-		return value
-	}
-
-	formatted := num.Text('f', -1)
-
-	parts := strings.Split(formatted, ".")
-	if len(parts) == 2 {
-		parts[1] = strings.TrimRight(parts[1], "0")
-		if parts[1] == "" {
-			return parts[0]
+		if isNegative {
+			return "-" + result
 		}
-		return parts[0] + "." + parts[1]
+		return result
 	}
 
-	return strings.TrimLeft(formatted, "0")
+	// Handle large numbers with more than 18 digits
+	integer := numbers[:10]
+	decimal := numbers[10:]
+	decimal = strings.TrimRight(decimal, "0")
+
+	if decimal == "" {
+		if isNegative {
+			return "-" + integer
+		}
+		return integer
+	}
+
+	result := fmt.Sprintf("%s.%s", integer, decimal)
+	if isNegative {
+		return "-" + result
+	}
+	return result
 }
 
 func IsDecimal128Zero(d primitive.Decimal128) bool {
