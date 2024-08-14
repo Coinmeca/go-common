@@ -55,7 +55,6 @@ func GetCurrentDate() *string {
 	formattedDate := currentTime.Format("2006-01-02 15:04:05")
 	return &formattedDate
 }
-
 func FormattedDate(t *int64) *string {
 	unixTime := time.Unix(*t, 0)
 	formattedDate := unixTime.Format("2006-01-02 15:04:05")
@@ -364,18 +363,19 @@ func FloatStringFromDecimal128(input *primitive.Decimal128) string {
 	}
 
 	// Handle large numbers with more than 18 digits
-	integer := numbers[:10]
-	decimal := numbers[10:]
-	decimal = strings.TrimRight(decimal, "0")
+	// For large numbers, place the decimal point after the 10th digit
+	integer := numbers[:len(numbers)-18]
+	decimal := numbers[len(numbers)-18:]
 
-	if decimal == "" {
-		if isNegative {
-			return "-" + integer
-		}
-		return integer
+	// Combine integer and decimal parts
+	result := fmt.Sprintf("%s.%s", integer, decimal)
+
+	// Remove trailing zeros from the decimal part
+	result = strings.TrimRight(result, "0")
+	if strings.HasSuffix(result, ".") {
+		result = result[:len(result)-1] // Remove trailing dot if no decimals
 	}
 
-	result := fmt.Sprintf("%s.%s", integer, decimal)
 	if isNegative {
 		return "-" + result
 	}
