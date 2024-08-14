@@ -52,14 +52,14 @@ func JoinFromStructs(slice interface{}, fieldName, sep string) string {
 
 func GetCurrentDate() *string {
 	currentTime := time.Now()
-	resultDate := currentTime.Format("2006-01-02 15:04:05")
-	return &resultDate
+	formattedDate := currentTime.Format("2006-01-02 15:04:05")
+	return &formattedDate
 }
 
-func resultDate(t *int64) *string {
+func FormattedDate(t *int64) *string {
 	unixTime := time.Unix(*t, 0)
-	resultDate := unixTime.Format("2006-01-02 15:04:05")
-	return &resultDate
+	formattedDate := unixTime.Format("2006-01-02 15:04:05")
+	return &formattedDate
 }
 
 func BigIntFromDecimal128(decimal *primitive.Decimal128) *big.Int {
