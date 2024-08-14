@@ -339,6 +339,13 @@ func FloatStringFromDecimal128(input *primitive.Decimal128) string {
 		value = value[1:]
 	}
 
+	// Handle special case where the value is a small number in scientific notation
+	if strings.Contains(value, "E") {
+		if strings.HasPrefix(value, "0E") || strings.HasPrefix(value, "-0E") {
+			return "0"
+		}
+	}
+
 	// Remove leading zeros from the integer part
 	numbers := strings.TrimLeft(value, "0")
 
