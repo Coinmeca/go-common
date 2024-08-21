@@ -24,8 +24,8 @@ const (
 
 type OutputFarm struct {
 	Address  common.Address    `json:"farm" bson:"farm"`
-	Main     common.Address    `json:"main" bson:"main"`
 	Id       *big.Int          `json:"id" bson:"id"`
+	Main     common.Address    `json:"main" bson:"main"`
 	Master   common.Address    `json:"master" bson:"master"`
 	Name     string            `json:"name" bson:"name"`
 	Symbol   string            `json:"symbol" bson:"symbol"`
@@ -39,6 +39,7 @@ type OutputFarm struct {
 	Staked   *big.Int          `json:"staked" bson:"staked"`
 	Interest *big.Int          `json:"interest" bson:"interest"`
 	Total    *big.Int          `json:"total" bson:"total"`
+	Claimable *big.Int          `json:"claimable" bson:"claimable"`
 }
 
 type OutputFarms struct {

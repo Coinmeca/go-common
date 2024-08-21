@@ -64,7 +64,7 @@ type Farm struct {
 	ChainId            string               `json:"chainId" bson:"chainId"`
 	Address            string               `json:"address" bson:"address"`
 	Id                 int64                `json:"id" bson:"id"`
-	Main               string				`json:"main" bson:"main"`
+	Main               string               `json:"main" bson:"main"`
 	Master             string               `json:"master" bson:"master"`
 	Name               string               `json:"name" bson:"name"`
 	Symbol             string               `json:"symbol" bson:"symbol"`
@@ -90,6 +90,7 @@ type Farm struct {
 	ValueLocked        primitive.Decimal128 `json:"valueLocked" bson:"valueLocked"`
 	Total              primitive.Decimal128 `json:"total" bson:"total"`
 	Apr                primitive.Decimal128 `json:"apr" bson:"apr"`
+	Claimable          primitive.Decimal128 `json:"claimable" bson:"claimable"`
 	Chart              []Chart              `json:"chart" bson:"chart"`
 	Recents            []Recent             `json:"recents" bson:"recents"`
 	Last               Last                 `json:"last" bson:"bson"`
