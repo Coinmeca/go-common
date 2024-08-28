@@ -5,7 +5,6 @@ import (
 	"math"
 	"math/big"
 	"reflect"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -100,7 +99,6 @@ func Decimal128FromFloat64(float float64) (*primitive.Decimal128, error) {
 
 func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
 	var zero primitive.Decimal128
-	max, _ := new(big.Int).SetString("9999999999999999999999999999999999", 10)
 
 	if decimal1 == nil || decimal2 == nil {
 		commonlog.Logger.Warn("AddDecimal128",
@@ -126,10 +124,6 @@ func AddDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	}
 
 	value2 = new(big.Int).Add(value1, value2)
-
-	if value2.Cmp(max) > 0 {
-		value2 = max
-	}
 
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(value2)
@@ -186,7 +180,6 @@ func SubDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 
 func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
 	var zero primitive.Decimal128
-	max, _ := new(big.Int).SetString("9999999999999999999999999999999999", 10)
 
 	if decimal1 == nil || decimal2 == nil {
 		commonlog.Logger.Warn("MulDecimal128",
@@ -213,9 +206,6 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	value1 = value1.Mul(value1, value2)
 	value2 = new(big.Int).Div(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 
-	if value2.Cmp(max) > 0 {
-		value2 = max
-	}
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(value2)
 	if err != nil {
@@ -232,7 +222,6 @@ func MulDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 
 func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
 	var zero primitive.Decimal128
-	max, _ := new(big.Int).SetString("9999999999999999999999999999999999", 10)
 
 	if decimal1 == nil || decimal2 == nil {
 		commonlog.Logger.Warn("DivDecimal128",
@@ -258,10 +247,6 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 	value2 = new(big.Int).Div(value1, value2)
 
-	if value2.Cmp(max) > 0 {
-		value2 = max
-	}
-
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(value2)
 	if err != nil {
@@ -278,7 +263,6 @@ func DivDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 
 func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal128 {
 	var zero primitive.Decimal128
-	max, _ := new(big.Int).SetString("9999999999999999999999999999999999", 10)
 
 	if decimal1 == nil || decimal2 == nil {
 		commonlog.Logger.Warn("QuoDecimal128",
@@ -306,10 +290,6 @@ func QuoDecimal128(decimal1, decimal2 *primitive.Decimal128) *primitive.Decimal1
 	value1 = new(big.Int).Mul(value1, new(big.Int).Exp(big.NewInt(10), big.NewInt(18), nil))
 	value2 = new(big.Int).Quo(value1, value2)
 
-	if value2.Cmp(max) > 0 {
-		value2 = max
-	}
-
 	// Convert the result back to primitive.Decimal128
 	result, err := Decimal128FromBigInt(value2)
 	if err != nil {
@@ -331,9 +311,9 @@ func FloatStringFromDecimal128(input *primitive.Decimal128) string {
 
 	value := input.String()
 
-	// Use a regular expression to remove the decimal point and anything after it
-	re := regexp.MustCompile(`\.\d*`)
-	value = re.ReplaceAllString(value, "")
+	// // Use a regular expression to remove the decimal point and anything after it
+	// re := regexp.MustCompile(`\.\d*`)
+	// value = re.ReplaceAllString(value, "")
 
 	if value == "0" || value == "-0" || value == "0E-6176" || value == "-0E-6176" || strings.TrimLeft(value, "0.-") == "" {
 		return "0"

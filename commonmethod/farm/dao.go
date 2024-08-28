@@ -91,6 +91,7 @@ type Farm struct {
 	Total              primitive.Decimal128 `json:"total" bson:"total"`
 	Claimable          primitive.Decimal128 `json:"claimable" bson:"claimable"`
 	Apr                primitive.Decimal128 `json:"apr" bson:"apr"`
+	AprChange          primitive.Decimal128 `json:"aprChange" bson:"aprChange"`
 	Chart              []Chart              `json:"chart" bson:"chart"`
 	Recents            []Recent             `json:"recents" bson:"recents"`
 	Last               Last                 `json:"last" bson:"bson"`

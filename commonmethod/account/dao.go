@@ -27,23 +27,14 @@ type Order struct {
 }
 
 type Asset struct {
-	Account           string               `json:"account" bson:"account"`
-	ChainId           string               `json:"chainId" bson:"chainId"`
-	Asset             string               `json:"asset" bson:"asset"`
-	Count             Count                `json:"count" bson:"count"`
-	Order             primitive.Decimal128 `json:"order" bson:"order"`
-	Position          []Position           `json:"position" bson:"position"`
-	Leverage          primitive.Decimal128 `json:"leverage" bson:"leverage"`
-	Pnl               primitive.Decimal128 `json:"pnl" bson:"pnl"`
-	TotalBuy          Volume               `json:"totalBuy" bson:"totalBuy"`
-	TotalSell         Volume               `json:"totalSell" bson:"totalSell"`
-	TotalReturn       Volume               `json:"totalReturn" bson:"totalReturn"`
-	TotalReturnRate   Volume               `json:"totalReturnRate" bson:"totalReturnRate"`
-	AverageBuy        Volume               `json:"averageBuy" bson:"averageBuy"`
-	AverageSell       Volume               `json:"averageSell" bson:"averageSell"`
-	AverageReturn     Volume               `json:"averageReturn" bson:"averageReturn"`
-	AverageReturnRate Volume               `json:"averageReturnRate" bson:"averageReturnRate"`
-	// todo: convert fields to structs.
-	// Total             Order                `json:"total" bson:"total`
-	// Average           Order                `json:"average" bson:"average`
+	Account  string               `json:"account" bson:"account"`
+	ChainId  string               `json:"chainId" bson:"chainId"`
+	Asset    string               `json:"asset" bson:"asset"`
+	Count    Count                `json:"count" bson:"count"`
+	Order    primitive.Decimal128 `json:"order" bson:"order"`
+	Position []Position           `json:"position" bson:"position"`
+	Leverage primitive.Decimal128 `json:"leverage" bson:"leverage"`
+	Pnl      primitive.Decimal128 `json:"pnl" bson:"pnl"`
+	Total    Order                `json:"total" bson:"total"`
+	Average  Order                `json:"average" bson:"average"`
 }
