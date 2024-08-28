@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/big"
 	"reflect"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -312,8 +313,8 @@ func FloatStringFromDecimal128(input *primitive.Decimal128) string {
 	value := input.String()
 
 	// // Use a regular expression to remove the decimal point and anything after it
-	// re := regexp.MustCompile(`\.\d*`)
-	// value = re.ReplaceAllString(value, "")
+	re := regexp.MustCompile(`\.\d*`)
+	value = re.ReplaceAllString(value, "")
 
 	if value == "0" || value == "-0" || value == "0E-6176" || value == "-0E-6176" || strings.TrimLeft(value, "0.-") == "" {
 		return "0"
