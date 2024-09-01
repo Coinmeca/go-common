@@ -2,6 +2,53 @@ package account
 
 import "go.mongodb.org/mongo-driver/bson/primitive"
 
+type TradeType int
+
+const (
+	TradeTypeOrder TradeType = iota
+	TradeTypeBid
+	TradeTypeAsk
+	TradeTypeBuy
+	TradeTypeSell
+	TradeTypeLong
+	TradeTypeShort
+	TradeTypeOpen
+	TradeTypeClose
+	TradeTypeDeposit
+	TradeTypeWithdraw
+	TradeTypeStake
+	TradeTypeUnstake
+	TradeTypeHarvest
+	TradeTypeClaim
+)
+
+func (t TradeType) String() string {
+	return [...]string{
+		"Order",
+		"Bid",
+		"Ask",
+		"Buy",
+		"Sell",
+		"Long",
+		"Short",
+		"Open",
+		"Close",
+		"Deposit",
+		"Withdraw",
+		"Stake",
+		"Unstake",
+		"Harvest",
+		"Claim",
+	}[t]
+}
+
+type Trade struct {
+	Type    bool
+	Address *string
+	Amount  *primitive.Decimal128
+	Value   *primitive.Decimal128
+}
+
 type OpenPosition struct {
 	Account   string               `json:"account" bson:"account"`
 	ToAccount string               `json:"toAccount" bson:"toAccount"`
