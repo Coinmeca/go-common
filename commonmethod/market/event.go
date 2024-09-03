@@ -133,15 +133,15 @@ type EventLiquidation struct {
 }
 
 type EventMargin struct {
-	Owner        common.Address
-	Pay          common.Address
-	BAmount      *big.Int
-	AAmount      *big.Int
-	BeforeMargin *big.Int
-	AfterMargin  *big.Int
-	Item         common.Address
-	BeforeSize   *big.Int
-	AfterSize    *big.Int
+	Owner   common.Address
+	Pay     common.Address
+	BAmount *big.Int
+	AAmount *big.Int
+	BMargin *big.Int
+	AMargin *big.Int
+	Item    common.Address
+	BSize   *big.Int
+	ASize   *big.Int
 }
 
 type EventCancel struct {
