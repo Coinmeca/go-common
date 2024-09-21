@@ -69,7 +69,7 @@ type EventModify struct {
 	BAmount *big.Int
 	AAmount *big.Int
 	BPrice  *big.Int
-	aPrice  *big.Int
+	APrice  *big.Int
 }
 
 type EventClaim struct {
