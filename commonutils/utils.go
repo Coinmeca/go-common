@@ -398,18 +398,22 @@ func FloatStringToDecimal128(floatStr string) (primitive.Decimal128, error) {
 	return decimal128, nil
 }
 
-func ConvertResolutionToSeconds(resolution string) int64 {
-	switch resolution {
+func ParseInterval(interval string) int64 {
+	switch interval {
 	case "1":
-		return 60
+		return 1
 	case "5":
-		return 300
+		return 5
 	case "15":
-		return 900
+		return 15
 	case "30":
-		return 1800
+		return 30
 	case "60":
-		return 3600
+		return 60
+	case "120":
+		return 120
+	case "240":
+		return 240
 	case "1D":
 		return 86400
 	case "1W":
@@ -417,6 +421,10 @@ func ConvertResolutionToSeconds(resolution string) int64 {
 	case "1M":
 		return 2592000
 	default:
-		return 60
+		return 1
 	}
+}
+
+func TruncateUnix(now int64, interval int64) int64 {
+	return time.Unix(now, 0).Truncate(time.Duration(interval) * time.Minute).UTC().Unix()
 }
