@@ -3,7 +3,9 @@ package task
 import (
 	"context"
 	//cv "dex-server/internal/configs"
+	rep "github.com/coinmeca/go-common/repository"
 	cv "github.com/coinmeca/go-common/utils"
+
 	//"dex-server/internal/model"
 	"github.com/coinmeca/go-common/model"
 	//repo "dex-server/repository"
@@ -12,17 +14,15 @@ import (
 	"testing"
 	"time"
 
-	repo "github.com/coinmeca/go-common/repository"
-
 	"github.com/shopspring/decimal"
 )
 
 func TestRandomMarketVolume(t *testing.T) {
 	ctx := context.Background()
-	repo.InitDB(ctx, "arbitgo")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "arbitgo")
+	defer rep.CloseDB()
 
-	tokens, err := repo.MarketTokenInfo(CTX)
+	tokens, err := rep.MarketTokenInfo(CTX)
 	if err != nil {
 		panic(err)
 	}
@@ -56,7 +56,7 @@ func TestRandomMarketVolume(t *testing.T) {
 
 		row.Price, row.EventType, row.Amount = decimal.NewFromInt(price), event, decimal.NewFromInt32(seed*100)
 		row.TxIndex, row.BlockNo, row.Quantity = uint32(seed), row.BlockNo+uint64(i), decimal.NewFromInt32(int32(r.Intn(20)))
-		repo.SetMarketVolume(ctx, row)
+		rep.SetMarketVolume(ctx, row)
 		//fmt.Println(row.Address, row.EventType, row.Price, row.Amount)
 	}
 
@@ -67,10 +67,10 @@ func TestRandomMarketVolume(t *testing.T) {
 
 func TestRandomMarketPrice(t *testing.T) {
 	ctx := context.Background()
-	repo.InitDB(ctx, "arbitgo")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "arbitgo")
+	defer rep.CloseDB()
 
-	tokens, err := repo.MarketTokenInfo(CTX)
+	tokens, err := rep.MarketTokenInfo(CTX)
 	if err != nil {
 		panic(err)
 	}
@@ -98,16 +98,16 @@ func TestRandomMarketPrice(t *testing.T) {
 			row.Address = tokens[idx].Address
 		}
 
-		repo.SetMarketPrice(ctx, row)
+		rep.SetMarketPrice(ctx, row)
 		//fmt.Println(row.Address, row.Price, row.Time)
 	}
 }
 
 func TestMarketDashboard(t *testing.T) {
 	ctx := context.Background()
-	repo.InitDB(ctx, "arbitgo")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "arbitgo")
+	defer rep.CloseDB()
 
 	address := cv.ETHxDAIMumbai
-	repo.MarketDashboard(ctx, address)
+	rep.MarketDashboard(ctx, address)
 }

@@ -1,19 +1,20 @@
 package task
 
 import (
-	ABI "github.com/coinmeca/go-common/abi"
-	"github.com/coinmeca/go-common/logger"
-	"github.com/coinmeca/go-common/model"
-	repo "github.com/coinmeca/go-common/repository"
 	"context"
 	"fmt"
-	"github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/shopspring/decimal"
 	"math/big"
 	"strings"
 	"sync"
 	"time"
+
+	ABI "github.com/coinmeca/go-common/abi"
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
+	rep "github.com/coinmeca/go-common/repository"
+	"github.com/ethereum/go-ethereum"
+	"github.com/ethereum/go-ethereum/common"
+	"github.com/shopspring/decimal"
 )
 
 func FetchOrderbook() {
@@ -69,7 +70,7 @@ func setMarketOrderbook(orderbookAddress common.Address) {
 		wg.Add(1)
 		go func(c context.Context, r model.MarketOrderbook) {
 			defer wg.Done()
-			repo.SetMarketOrderbook(c, r)
+			rep.SetMarketOrderbook(c, r)
 		}(CTX, row)
 	}
 	for i, item := range orderList.Bids {
@@ -79,7 +80,7 @@ func setMarketOrderbook(orderbookAddress common.Address) {
 		wg.Add(1)
 		go func(c context.Context, r model.MarketOrderbook) {
 			defer wg.Done()
-			repo.SetMarketOrderbook(c, r)
+			rep.SetMarketOrderbook(c, r)
 		}(CTX, row)
 	}
 	wg.Wait()

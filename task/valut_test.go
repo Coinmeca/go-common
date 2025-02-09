@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	repo "github.com/coinmeca/go-common/repository"
+	rep "github.com/coinmeca/go-common/repository"
 	"github.com/shopspring/decimal"
 )
 
@@ -28,10 +28,10 @@ func TestRandIndex(t *testing.T) {
 // stats
 func TestRandomVaultPrice(t *testing.T) {
 	ctx := context.Background()
-	repo.InitDB(ctx, "arbitgo")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "arbitgo")
+	defer rep.CloseDB()
 
-	tokens, err := repo.MarketTokenInfo(CTX)
+	tokens, err := rep.MarketTokenInfo(CTX)
 	if err != nil {
 		panic(err)
 	}
@@ -71,7 +71,7 @@ func TestRandomVaultPrice(t *testing.T) {
 			Weight:   weight,
 			Time:     fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", ts.Year(), ts.Month(), ts.Day(), hour, minute),
 		}
-		repo.SetVaultPrice(ctx, row)
+		rep.SetVaultPrice(ctx, row)
 		//fmt.Println(row.Symbol, row.Price, row.Weight, row.Treasury)
 	}
 }
@@ -79,10 +79,10 @@ func TestRandomVaultPrice(t *testing.T) {
 // volume
 func TestRandomVaultVolume(t *testing.T) {
 	ctx := context.Background()
-	repo.InitDB(ctx, "arbitgo")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "arbitgo")
+	defer rep.CloseDB()
 
-	tokens, err := repo.MarketTokenInfo(CTX)
+	tokens, err := rep.MarketTokenInfo(CTX)
 	if err != nil {
 		panic(err)
 	}
@@ -145,7 +145,7 @@ func TestRandomVaultVolume(t *testing.T) {
 
 		row.EventType, row.TxIndex, row.BlockNo = event, uint32(seed), row.BlockNo+uint64(i)
 		row.Token = tokens[idx].Address
-		repo.SetVaultVolume(ctx, row)
+		rep.SetVaultVolume(ctx, row)
 		//fmt.Println(row.Symbol, row.EventType, row.Amount, row.MecaQuantity)
 	}
 }

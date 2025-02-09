@@ -2,10 +2,11 @@ package units
 
 import (
 	//"dex-server/internal/logger"
-	"github.com/coinmeca/go-common/logger"
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+
+	"github.com/coinmeca/go-common/logger"
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"

@@ -10,8 +10,9 @@ import (
 
 	ABI "github.com/coinmeca/go-common/abi"
 	cv "github.com/coinmeca/go-common/chain"
+	rep "github.com/coinmeca/go-common/repository"
+
 	"github.com/coinmeca/go-common/logger"
-	repo "github.com/coinmeca/go-common/repository"
 
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
@@ -20,13 +21,13 @@ import (
 func FetchEvents() {
 	t := time.Now()
 
-	VaultBlockNo, _ := repo.LastBlockNoFromVaultVolume(CTX)
+	VaultBlockNo, _ := rep.LastBlockNoFromVaultVolume(CTX)
 	if VaultBlockNo == 0 {
 		fmt.Println("no last volume block")
 	} else {
 		VaultBlockNo += 1
 	}
-	MarketBlockNo, _ := repo.LastBlockNoFromMarketVolume(CTX)
+	MarketBlockNo, _ := rep.LastBlockNoFromMarketVolume(CTX)
 	if MarketBlockNo == 0 {
 		fmt.Println("no last market block")
 	} else {
@@ -81,7 +82,7 @@ func LogEvents() {
 }
 
 func marketEventsLog() {
-	blockNo, err := repo.LastBlockNoFromMarketVolume(CTX)
+	blockNo, err := rep.LastBlockNoFromMarketVolume(CTX)
 	if err != nil {
 		fmt.Println("last block error")
 		currentBlock, _ := EthHttpsClient.BlockNumber(context.Background())
@@ -108,7 +109,7 @@ func marketEventsLog() {
 }
 
 func vaultEventsLog() {
-	blockNo, err := repo.LastBlockNoFromVaultVolume(CTX)
+	blockNo, err := rep.LastBlockNoFromVaultVolume(CTX)
 	if err != nil {
 		fmt.Println("last block error")
 		currentBlock, _ := EthHttpsClient.BlockNumber(context.Background())
@@ -168,6 +169,6 @@ func transferEventsLog() {
 			value, _ = strconv.ParseInt(hex.EncodeToString(log.Data), 16, 64)
 			fmt.Printf("Data Value: %v\n", value)
 		}
-		//repo.SetTransferEventLog(CTX, &log, value)
+		//rep.SetTransferEventLog(CTX, &log, value)
 	}
 }

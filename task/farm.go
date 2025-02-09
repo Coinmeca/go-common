@@ -1,18 +1,20 @@
 package task
 
 import (
-	ABI "github.com/coinmeca/go-common/abi"
-	cv "github.com/coinmeca/go-common/chain"
-	"github.com/coinmeca/go-common/logger"
-	"github.com/coinmeca/go-common/model"
-	repo "github.com/coinmeca/go-common/repository"
 	"context"
 	"fmt"
+	"strings"
+	"time"
+
+	ABI "github.com/coinmeca/go-common/abi"
+	cv "github.com/coinmeca/go-common/chain"
+	rep "github.com/coinmeca/go-common/repository"
+
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/shopspring/decimal"
-	"strings"
-	"time"
 )
 
 func LoadFarmData() {
@@ -58,6 +60,6 @@ func LoadFarmData() {
 			Locked:      decimal.NewFromBigInt(pack.Locked, -1*decimals),
 		}
 		//fmt.Printf("(farm data) %+v\n", farmRow)
-		repo.SetFarmData(CTX, farmRow)
+		rep.SetFarmData(CTX, farmRow)
 	}
 }

@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	repo "github.com/coinmeca/go-common/repository"
+	rep "github.com/coinmeca/go-common/repository"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 )
@@ -23,15 +23,15 @@ func TestVaultTask(t *testing.T) {
 	assert := assert.New(t)
 
 	ctx := context.Background()
-	repo.InitDB(ctx, "test")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "test")
+	defer rep.CloseDB()
 
 	ts := time.Now().UTC()
 	t.Run("Dashboard", func(t *testing.T) {
-		repo.Truncate(ctx, "vault_price_24h")
-		repo.Truncate(ctx, "vault_price_daily")
-		repo.Truncate(ctx, "vault_volume_24h")
-		repo.Truncate(ctx, "vault_volume_daily")
+		rep.Truncate(ctx, "vault_price_24h")
+		rep.Truncate(ctx, "vault_price_daily")
+		rep.Truncate(ctx, "vault_volume_24h")
+		rep.Truncate(ctx, "vault_volume_daily")
 
 		vpr := model.VaultPriceRow{
 			Symbol:  tokenSymbol,
@@ -43,14 +43,14 @@ func TestVaultTask(t *testing.T) {
 		vpr.Treasury = decimal.NewFromInt(7500000)
 		vpr.Weight = decimal.NewFromInt(400000)
 		vpr.ValueLocked = vpr.Treasury.Mul(decimal.NewFromFloat32(0.9998))
-		repo.SetVaultPrice(ctx, vpr)
+		rep.SetVaultPrice(ctx, vpr)
 
 		vpr.Time = fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", ts.Year(), ts.Month(), ts.Day(), ts.Hour(), 31)
 		vpr.Price = decimal.NewFromInt(2100)
 		vpr.Treasury = decimal.NewFromInt(7600000)
 		vpr.Weight = decimal.NewFromInt(420000)
 		vpr.ValueLocked = vpr.Treasury.Mul(decimal.NewFromFloat32(0.9997))
-		repo.SetVaultPrice(ctx, vpr)
+		rep.SetVaultPrice(ctx, vpr)
 
 		vvr := model.VaultVolumeRow{
 			Symbol:    tokenSymbol,
@@ -64,20 +64,20 @@ func TestVaultTask(t *testing.T) {
 		vvr.EventType = "DEPOSIT"
 		vvr.Amount = decimal.NewFromInt(5000)
 		vvr.MecaQuantity = decimal.NewFromInt(770000)
-		repo.SetVaultVolume(ctx, vvr)
+		rep.SetVaultVolume(ctx, vvr)
 		vvr.Amount = decimal.NewFromInt(4500)
 		vvr.MecaQuantity = decimal.NewFromInt(690000)
-		repo.SetVaultVolume(ctx, vvr)
+		rep.SetVaultVolume(ctx, vvr)
 
 		vvr.EventType = "WITHDRAW"
 		vvr.Amount = decimal.NewFromInt(2000)
 		vvr.MecaQuantity = decimal.NewFromInt(560000)
-		repo.SetVaultVolume(ctx, vvr)
+		rep.SetVaultVolume(ctx, vvr)
 		vvr.Amount = decimal.NewFromInt(2500)
 		vvr.MecaQuantity = decimal.NewFromInt(600000)
-		repo.SetVaultVolume(ctx, vvr)
+		rep.SetVaultVolume(ctx, vvr)
 
-		d, err := repo.VaultDashboard(ctx, tokenAddress)
+		d, err := rep.VaultDashboard(ctx, tokenAddress)
 		assert.NoError(err)
 		//fmt.Printf("%+v\n", d)
 		assert.Equal(float64(2100), d.Exchange, "Exchange")
@@ -100,26 +100,26 @@ func TestMarketTask(t *testing.T) {
 	assert := assert.New(t)
 
 	ctx := context.Background()
-	repo.InitDB(ctx, "test")
-	defer repo.CloseDB()
+	rep.InitDB(ctx, "test")
+	defer rep.CloseDB()
 
 	ts := time.Now().UTC()
 	t.Run("Dashboard", func(t *testing.T) {
-		repo.Truncate(ctx, "market_price_24h")
-		repo.Truncate(ctx, "market_price_daily")
-		repo.Truncate(ctx, "market_volume_24h")
-		repo.Truncate(ctx, "market_volume_daily")
+		rep.Truncate(ctx, "market_price_24h")
+		rep.Truncate(ctx, "market_price_daily")
+		rep.Truncate(ctx, "market_volume_24h")
+		rep.Truncate(ctx, "market_volume_daily")
 
 		mpr := model.MarketPriceRow{
 			Address: tokenAddress,
 			Time:    fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", ts.Year(), ts.Month(), ts.Day(), ts.Hour(), 40),
 		}
 		mpr.Price = decimal.NewFromInt(1800)
-		repo.SetMarketPrice(ctx, mpr)
+		rep.SetMarketPrice(ctx, mpr)
 
 		mpr.Time = fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", ts.Year(), ts.Month(), ts.Day(), ts.Hour(), 42)
 		mpr.Price = decimal.NewFromInt(2200)
-		repo.SetMarketPrice(ctx, mpr)
+		rep.SetMarketPrice(ctx, mpr)
 
 		mvr := model.MarketVolumeRow{
 			Address:   tokenAddress,
@@ -133,27 +133,27 @@ func TestMarketTask(t *testing.T) {
 		mvr.Price = decimal.NewFromInt(1300)
 		mvr.Quantity = decimal.NewFromInt(4)
 		mvr.Amount = mvr.Price.Mul(mvr.Quantity)
-		repo.SetMarketVolume(ctx, mvr)
+		rep.SetMarketVolume(ctx, mvr)
 
 		mvr.EventType = "BUY"
 		mvr.Price = decimal.NewFromInt(1500)
 		mvr.Quantity = decimal.NewFromInt(6)
 		mvr.Amount = mvr.Price.Mul(mvr.Quantity)
-		repo.SetMarketVolume(ctx, mvr)
+		rep.SetMarketVolume(ctx, mvr)
 
 		mvr.EventType = "SELL"
 		mvr.Price = decimal.NewFromInt(1400)
 		mvr.Quantity = decimal.NewFromInt(2)
 		mvr.Amount = mvr.Price.Mul(mvr.Quantity)
-		repo.SetMarketVolume(ctx, mvr)
+		rep.SetMarketVolume(ctx, mvr)
 
 		mvr.EventType = "SELL"
 		mvr.Price = decimal.NewFromInt(1600)
 		mvr.Quantity = decimal.NewFromInt(3)
 		mvr.Amount = mvr.Price.Mul(mvr.Quantity)
-		repo.SetMarketVolume(ctx, mvr)
+		rep.SetMarketVolume(ctx, mvr)
 
-		d, err := repo.MarketDashboard(ctx, tokenAddress)
+		d, err := rep.MarketDashboard(ctx, tokenAddress)
 		assert.NoError(err)
 		//fmt.Printf("%+v\n", d)
 		assert.Equal(float64(1600), d.Price, "Price")
@@ -166,7 +166,7 @@ func TestMarketTask(t *testing.T) {
 	})
 
 	t.Run("Chart", func(t *testing.T) {
-		d, err := repo.MarketChartData(ctx, tokenAddress, "")
+		d, err := rep.MarketChartData(ctx, tokenAddress, "")
 		assert.NoError(err)
 		//fmt.Printf("%+v\n", d)
 		assert.Equal(float64(1800), d.Price[0].Open, "Price.Open")

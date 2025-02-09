@@ -1,14 +1,15 @@
 package task
 
 import (
-	"github.com/coinmeca/go-common/logger"
-	"github.com/coinmeca/go-common/model"
-	repo "github.com/coinmeca/go-common/repository"
 	"context"
-	"github.com/shopspring/decimal"
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/coinmeca/go-common/logger"
+	"github.com/coinmeca/go-common/model"
+	rep "github.com/coinmeca/go-common/repository"
+	"github.com/shopspring/decimal"
 )
 
 func AddDailyVolume() {
@@ -17,7 +18,7 @@ func AddDailyVolume() {
 	wg := sync.WaitGroup{}
 
 	// vault
-	tokens, err := repo.VaultInfo(CTX)
+	tokens, err := rep.VaultInfo(CTX)
 	if err == nil {
 		vr := model.VaultVolumeRow{
 			Amount: decimal.Zero, MecaQuantity: decimal.Zero,
@@ -27,7 +28,7 @@ func AddDailyVolume() {
 				wg.Add(1)
 				vr.Symbol, vr.Token, vr.EventType = t.Symbol, t.Address, event
 				go func(c context.Context, v model.VaultVolumeRow, t string) {
-					repo.AddDailyVaultVolume(c, v, t)
+					rep.AddDailyVaultVolume(c, v, t)
 					defer wg.Done()
 				}(CTX, vr, today)
 			}
@@ -43,7 +44,7 @@ func AddDailyVolume() {
 			wg.Add(1)
 			vm.EventType, vm.Address = event, strings.ToLower(address.Hex())
 			go func(c context.Context, v model.MarketVolumeRow, t string) {
-				repo.AddDailyMarketVolume(c, v, t)
+				rep.AddDailyMarketVolume(c, v, t)
 				defer wg.Done()
 			}(CTX, vm, today)
 		}
@@ -52,7 +53,7 @@ func AddDailyVolume() {
 	// overview
 	wg.Add(1)
 	go func(c context.Context, t string) {
-		repo.AddOverviewVolume(c, t)
+		rep.AddOverviewVolume(c, t)
 		defer wg.Done()
 	}(CTX, today)
 
@@ -68,14 +69,14 @@ func SetMinutelyMarketData() {
 		wg.Add(1)
 		mv := model.MarketVolumeRow{Address: strings.ToLower(address.Hex()), Quantity: decimal.Zero}
 		go func(c context.Context, v model.MarketVolumeRow) {
-			repo.SetMinutelyMarketVolume(c, v)
+			rep.SetMinutelyMarketVolume(c, v)
 			defer wg.Done()
 		}(CTX, mv)
 
 		wg.Add(1)
 		mp := model.MarketPriceRow{Address: strings.ToLower(address.Hex())}
 		go func(c context.Context, v model.MarketPriceRow) {
-			repo.SetMinutelyMarketPrice(c, v)
+			rep.SetMinutelyMarketPrice(c, v)
 			defer wg.Done()
 		}(CTX, mp)
 	}

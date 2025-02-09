@@ -12,7 +12,8 @@ import (
 	cv "github.com/coinmeca/go-common/chain"
 	"github.com/coinmeca/go-common/logger"
 	"github.com/coinmeca/go-common/model"
-	repo "github.com/coinmeca/go-common/repository"
+	rep "github.com/coinmeca/go-common/repository"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -20,7 +21,7 @@ import (
 )
 
 func LoadVaultVolume() {
-	blockNo, err := repo.LastBlockNoFromVaultVolume(CTX)
+	blockNo, err := rep.LastBlockNoFromVaultVolume(CTX)
 	if err != nil {
 		fmt.Println("last block error")
 		currentBlock, _ := EthHttpsClient.BlockNumber(context.Background())
@@ -144,14 +145,14 @@ func setVaultVolume(log types.Log) {
 		}
 	}
 	//fmt.Printf("(vault volume) %+v\n", r)
-	repo.SetVaultVolume(CTX, r)
+	rep.SetVaultVolume(CTX, r)
 }
 
 func setVaultPrice(ctx context.Context, v model.VaultAbiInfo) {
 	t := time.Now().UTC()
 	dc := -1 * int32(v.Decimals)
 
-	usdPrice, _ := repo.LatestUsdPrice(ctx, v.Symbol)
+	usdPrice, _ := rep.LatestUsdPrice(ctx, v.Symbol)
 	treasury := decimal.NewFromBigInt(v.Treasury, dc)
 	priceRow := model.VaultPriceRow{
 		Time:     fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", t.Year(), t.Month(), t.Day(), t.Hour(), (t.Minute()/5)*5),
@@ -164,7 +165,7 @@ func setVaultPrice(ctx context.Context, v model.VaultAbiInfo) {
 		Need:     decimal.NewFromBigInt(v.Need, dc),
 	}
 	//fmt.Printf("(vault price) %+v\n", priceRow)
-	repo.SetVaultPrice(ctx, priceRow)
+	rep.SetVaultPrice(ctx, priceRow)
 }
 
 func setVaultInfo(ctx context.Context, t model.VaultAbiInfo) {
@@ -176,5 +177,5 @@ func setVaultInfo(ctx context.Context, t model.VaultAbiInfo) {
 		Decimals: t.Decimals,
 	}
 	//fmt.Printf("(vault token) %+v\n", tokenRow)
-	repo.SetVaultInfo(ctx, tokenRow)
+	rep.SetVaultInfo(ctx, tokenRow)
 }

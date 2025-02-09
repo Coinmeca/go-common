@@ -12,7 +12,8 @@ import (
 	cv "github.com/coinmeca/go-common/chain"
 	"github.com/coinmeca/go-common/logger"
 	"github.com/coinmeca/go-common/model"
-	repo "github.com/coinmeca/go-common/repository"
+	rep "github.com/coinmeca/go-common/repository"
+
 	"github.com/ethereum/go-ethereum"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/core/types"
@@ -28,7 +29,7 @@ func LoadMarketPrice() {
 }
 
 func LoadMarketVolume() {
-	blockNo, err := repo.LastBlockNoFromMarketVolume(CTX)
+	blockNo, err := rep.LastBlockNoFromMarketVolume(CTX)
 	if err != nil {
 		fmt.Println("last block error")
 		currentBlock, _ := EthHttpsClient.BlockNumber(context.Background())
@@ -115,7 +116,7 @@ func setMarketPrice(m model.MarketAbiInfo) {
 		Time:    fmt.Sprintf("%d-%02d-%02d %02d:%02d:00", t.Year(), t.Month(), t.Day(), t.Hour(), (t.Minute()/5)*5),
 	}
 
-	repo.SetMarketPrice(CTX, priceRow)
+	rep.SetMarketPrice(CTX, priceRow)
 }
 
 func setMarketToken(m model.MarketAbiInfo) {
@@ -132,7 +133,7 @@ func setMarketToken(m model.MarketAbiInfo) {
 	}
 
 	//fmt.Printf("[%v] market token %+v\n", CHAINxID, tokenRow)
-	repo.SetMarketToken(CTX, tokenRow)
+	rep.SetMarketToken(CTX, tokenRow)
 }
 
 func setMarketVolume(log types.Log) {
@@ -175,7 +176,7 @@ func setMarketVolume(log types.Log) {
 		}
 		//fmt.Printf("(MV) %v %v %v\n", r.EventType, r.Quantity, r.Amount)
 	}
-	repo.SetMarketVolume(CTX, r)
+	rep.SetMarketVolume(CTX, r)
 }
 
 ///////////////////////////////////

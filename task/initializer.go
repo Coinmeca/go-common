@@ -1,18 +1,21 @@
 package task
 
 import (
-	ABI "github.com/coinmeca/go-common/abi"
 	"context"
+
+	ABI "github.com/coinmeca/go-common/abi"
+	rep "github.com/coinmeca/go-common/repository"
+
 	//ABI "dex-server/internal/abi"
 	etherchain "github.com/coinmeca/go-common/chain"
-	repo "github.com/coinmeca/go-common/repository"
 	etherrpc "github.com/coinmeca/go-common/rpc"
 
 	"fmt"
+	"strings"
+
 	"github.com/ethereum/go-ethereum/accounts/abi"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
-	"strings"
 )
 
 var (
@@ -54,7 +57,7 @@ func NewTaskInstance(chain string) {
 	}
 
 	CTX = context.Background()
-	repo.InitDB(CTX, chain)
+	rep.InitDB(CTX, chain)
 
 	loadContractAddresses(id)
 
@@ -79,7 +82,7 @@ func NewTaskInstance(chain string) {
 func loadContractAddresses(id int) {
 	CHAINxID = id
 
-	books, err := repo.MarketTokenInfo(CTX)
+	books, err := rep.MarketTokenInfo(CTX)
 	if err != nil {
 		panic(err)
 	}
@@ -91,7 +94,7 @@ func loadContractAddresses(id int) {
 		CAxBOOKS = append(CAxBOOKS, common.HexToAddress(b.Address))
 	}
 
-	tokens, err := repo.VaultInfo(CTX)
+	tokens, err := rep.VaultInfo(CTX)
 	if err != nil {
 		panic(err)
 	}
@@ -106,5 +109,5 @@ func loadContractAddresses(id int) {
 }
 
 func CloseTaskInstance() {
-	repo.CloseDB()
+	rep.CloseDB()
 }

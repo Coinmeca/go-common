@@ -1,16 +1,17 @@
 package task
 
 import (
+	"encoding/json"
+	"fmt"
+	"strings"
+	"time"
+
 	"github.com/coinmeca/go-common/chain"
 	"github.com/coinmeca/go-common/logger"
 	"github.com/coinmeca/go-common/model"
-	repo "github.com/coinmeca/go-common/repository"
+	rep "github.com/coinmeca/go-common/repository"
 	"github.com/coinmeca/go-common/utils"
-	"encoding/json"
-	"fmt"
 	"github.com/shopspring/decimal"
-	"strings"
-	"time"
 )
 
 func FetchCurrencyRate() {
@@ -18,11 +19,11 @@ func FetchCurrencyRate() {
 
 	rate, err := USDCurrencyRate()
 	if err != nil {
-		rate, _ = repo.LastCurrencyRate(CTX)
+		rate, _ = rep.LastCurrencyRate(CTX)
 	}
 
-	repo.Add24hCurrencyRate(CTX, rate)
-	repo.SetDailyCurrencyRate(CTX, rate)
+	rep.Add24hCurrencyRate(CTX, rate)
+	rep.SetDailyCurrencyRate(CTX, rate)
 
 	logger.Debug("FetchCurrencyRate", "time", time.Since(t).Milliseconds())
 }
@@ -37,7 +38,7 @@ func FetchCMCQuote() {
 	}
 
 	fmt.Printf("CMC quotes %v\n", len(quotes))
-	repo.SetCMCQuote(CTX, quotes)
+	rep.SetCMCQuote(CTX, quotes)
 
 	logger.Debug("FetchCMCQuote", "time", time.Since(t).Milliseconds())
 }

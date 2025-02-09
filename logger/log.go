@@ -17,27 +17,26 @@ type Config struct {
 }
 
 func InitLog(config Config) {
+    var handlers []log.Handler
 
-	hs := func() []log.Handler {
-		h := []log.Handler{}
-		if config.UseTerminal == true {
-			handler := log.LvlFilterHandler(log.Lvl(config.VerbosityTerminal),
-				log.StreamHandler(os.Stdout, log.TerminalFormat(true)))
-			h = append(h, handler)
-		}
-		if config.UseFile == true {
-			handler := log.LvlFilterHandler(log.Lvl(config.VerbosityFile), log.StreamHandler(&lumberjack.Logger{
-				Filename:   config.FilePath,
-				MaxSize:    64,
-				MaxBackups: 3,
-				MaxAge:     28,   //days
-				Compress:   true, // disabled by default
-			}, log.JSONFormatOrderedEx(false, true)))
-			h = append(h, handler)
-		}
-		return h
-	}()
-	log.Root().SetHandler(log.MultiHandler(hs...))
+    if config.UseTerminal {
+        handler := log.LvlFilterHandler(config.VerbosityTerminal,
+            log.StreamHandler(os.Stdout, log.TerminalFormat(true)))
+        handlers = append(handlers, handler)
+    }
+
+    if config.UseFile {
+        handler := log.LvlFilterHandler(config.VerbosityFile, log.StreamHandler(&lumberjack.Logger{
+            Filename:   config.FilePath,
+            MaxSize:    64,
+            MaxBackups: 3,
+            MaxAge:     28,   // days
+            Compress:   true, // disabled by default
+        }, log.JSONFormat()))
+        handlers = append(handlers, handler)
+    }
+
+    log.Root().SetHandler(log.MultiHandler(handlers...))
 }
 
 // Trace is a convenient alias for Root().Trace

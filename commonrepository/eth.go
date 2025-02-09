@@ -144,12 +144,12 @@ func (ec *EthRepository) BalanceAt(account common.Address) (*big.Int, error) {
 func GetEthRepositories(ethRepos map[string]EthClientRepository, keys ...string) (map[string]*EthRepository, error) {
 	result := make(map[string]*EthRepository)
 	for _, key := range keys {
-		repo, exists := ethRepos[key]
+		rep, exists := ethRepos[key]
 		if !exists {
 			return nil, fmt.Errorf("repository not found for key: %s", key)
 		}
 
-		ethRepo, ok := repo.(*EthRepository)
+		ethRepo, ok := rep.(*EthRepository)
 		if !ok {
 			return nil, fmt.Errorf("could not cast to EthRepository for key: %s", key)
 		}
@@ -161,8 +161,8 @@ func GetEthRepositories(ethRepos map[string]EthClientRepository, keys ...string)
 
 func GetAllEthRepositories(ethRepos map[string]EthClientRepository) (map[string]*EthRepository, error) {
 	result := make(map[string]*EthRepository)
-	for key, repo := range ethRepos {
-		ethRepo, ok := repo.(*EthRepository)
+	for key, rep := range ethRepos {
+		ethRepo, ok := rep.(*EthRepository)
 		if !ok {
 			return nil, fmt.Errorf("could not cast to EthRepository for key: %s", key)
 		}
