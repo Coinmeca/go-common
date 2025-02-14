@@ -1,6 +1,7 @@
 package commonutils
 
 import (
+	"encoding/json"
 	"fmt"
 	"math"
 	"math/big"
@@ -427,4 +428,13 @@ func ParseInterval(interval string) int64 {
 
 func TruncateUnix(now int64, interval int64) int64 {
 	return time.Unix(now, 0).Truncate(time.Duration(interval) * time.Minute).UTC().Unix()
+}
+
+func Prettify(value any) []byte {
+	pretty, err := json.MarshalIndent(value, "", "  ")
+	if err != nil {
+		fmt.Println("Error formatting JSON:", err)
+		return []byte{}
+	}
+	return pretty
 }
