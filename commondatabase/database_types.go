@@ -72,6 +72,7 @@ type Chain struct {
 	Base           string             `json:"base" bson:"base"`
 	Type           string             `json:"type" bson:"type"`
 	Rpc            string             `json:"rpc" bson:"rpc"`
+	Checkpoint     int                `json:"checkpoint" bson:"checkpoint"`
 }
 
 type APIKey struct {
